@@ -3,11 +3,11 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe "script/spec_server file", :shared => true do
   attr_accessor :tmbundle_install_directory
 
-  after do
+  after(:each) do
     system "kill -9 #{@pid}"
   end
 
-  it "runs a spec" do
+  xit "runs a spec" do
     dir = File.dirname(__FILE__)
     output = ""
     Timeout.timeout(10) do
@@ -57,14 +57,14 @@ end
 
 describe "script/spec_server file without TextMate bundle" do
   it_should_behave_like "script/spec_server file"
-  before do
+  before(:each) do
     start_spec_server
   end
 end
 
 describe "script/spec_server file with TextMate bundle" do
   it_should_behave_like "script/spec_server file"
-  before do
+  before(:each) do
     dir = File.dirname(__FILE__)
     @tmbundle_install_directory = File.expand_path("#{Dir.tmpdir}/Library/Application Support/TextMate/Bundles")
     @bundle_name = "RSpec.tmbundle"
@@ -77,7 +77,7 @@ describe "script/spec_server file with TextMate bundle" do
     start_spec_server
   end
 
-  after do
+  after(:each) do
     bundle_file_to_remove = "#{tmbundle_install_directory}/#{@bundle_name}"
     if bundle_file_to_remove == "/"
       raise "bundle file path resolved to '/' - could not call rm"

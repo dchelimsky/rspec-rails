@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/../../rspec/lib' # For svn
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/plugins/rspec/lib' # For rspec installed as plugin
 require 'rubygems'
 require 'drb/drb'
