@@ -25,6 +25,15 @@ describe "mock_model", :type => :view do
   end
 end
 
+describe "mock_model with stubbed id", :type => :view do
+  before(:each) do
+    @model = mock_model(MockableModel, :id => 1)
+  end
+  it "should be named using the stubbed id value" do
+    @model.instance_variable_get(:@name).should == "MockableModel_1"
+  end
+end
+
 describe "mock_model with null_object", :type => :view do
   before(:each) do
     @model = mock_model(MockableModel, :null_object => true, :mocked_method => "mocked")
