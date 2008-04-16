@@ -1,7 +1,7 @@
 module Spec
   module Rails
     module VERSION #:nodoc:
-      BUILD_TIME_UTC = 20080416075942
+      BUILD_TIME_UTC = 20080416234108
     end
   end
 end
