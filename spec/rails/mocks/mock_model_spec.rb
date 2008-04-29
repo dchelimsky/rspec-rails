@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 require File.dirname(__FILE__) + '/ar_classes'
 
-describe "mock_model", :type => :view do
+describe "mock_model" do
   before(:each) do
     @model = mock_model(SubMockableModel)
   end
