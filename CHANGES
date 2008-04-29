@@ -2,6 +2,7 @@
 
 Maintenance release.
 
+* Moved mock_model and stub_model to their own module: Spec::Rails::Mocks
 * Setting mock_model object id with stubs hash - patch from Adam Meehan
 * Added as_new_record to stub_model e.g. stub_model(Foo).as_new_record
 * Improved stub_model such that new_record? does "the right thing"
