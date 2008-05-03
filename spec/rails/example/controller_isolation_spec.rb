@@ -32,7 +32,8 @@ describe "a controller spec running in integration mode", :type => :controller d
   end
 
   it "should choke if the template doesn't exist" do
-    lambda { get 'some_action' }.should raise_error(ActionController::MissingTemplate)
+    error = defined?(ActionController::MissingTemplate) ? ActionController::MissingTemplate : ActionView::MissingTemplate    
+    lambda { get 'some_action' }.should raise_error(error)
     response.should_not be_success
   end
 
