@@ -120,6 +120,7 @@ require 'controller_spec_controller'
     end
 
     it "should complain when calling stub!(:render) on the controller" do
+      controller.extend Spec::Mocks::Methods
       lambda {
         controller.stub!(:render)
       }.should raise_error(RuntimeError, /stub!\(:render\) has been disabled/)
