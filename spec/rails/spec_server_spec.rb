@@ -2,9 +2,21 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe "script/spec_server file", :shared => true do
   attr_accessor :tmbundle_install_directory
+  attr_reader :animals_yml_path, :original_animals_content
+
+  before do
+    @animals_yml_path = File.expand_path("#{RAILS_ROOT}/spec/fixtures/animals.yml")
+    @original_animals_content = File.read(animals_yml_path)
+  end
+
+  after do
+    File.open(animals_yml_path, "w") do |f|
+      f.write original_animals_content
+    end
+  end
 
   after(:each) do
-    system "kill -9 #{@pid}"
+    system "lsof -i tcp:8989 | sed /COMMAND/d | awk '{print $2}' | xargs kill"
   end
 
   it "runs a spec" do
@@ -17,41 +29,36 @@ describe "script/spec_server file", :shared => true do
       end
     end
 
-    unless $?.exitstatus == 0
+    if $?.exitstatus != 0 || output !~ /0 failures/
       flunk "command 'script/spec spec/sample_spec' failed\n#{output}"
+    end
+
+    fixtures = YAML.load(@original_animals_content)
+    fixtures['pig']['name'] = "Piggy"
+
+    File.open(animals_yml_path, "w") do |f|
+      f.write YAML.dump(fixtures)
+    end
+
+    Timeout.timeout(10) do
+      loop do
+        output = `#{RAILS_ROOT}/script/spec #{dir}/sample_modified_fixture.rb --drb 2>&1`
+        break unless output.include?("No server is running")
+      end
+    end
+
+    if $?.exitstatus != 0 || output !~ /0 failures/
+      flunk "command 'script/spec spec/sample_modified_fixture' failed\n#{output}"
     end
   end
 
   def start_spec_server
-    create_spec_server_pid_file
-    start_spec_server_process
-  end
-
-  def create_spec_server_pid_file
-    current_dir = File.dirname(__FILE__)
-    pid_dir = "#{Dir.tmpdir}/#{Time.now.to_i}"
-    @spec_server_pid_file = "#{pid_dir}/spec_server.pid"
-    FileUtils.mkdir_p pid_dir
-    system "touch #{@spec_server_pid_file}"
-    @rspec_path = File.expand_path("#{current_dir}/../../../rspec/lib")
-  end
-
-  def start_spec_server_process
     dir = File.dirname(__FILE__)
-    spec_server_cmd =  %Q|export HOME=#{Dir.tmpdir}; |
-    spec_server_cmd << %Q|ruby -e 'system("echo " + Process.pid.to_s + " > #{@spec_server_pid_file}"); |
-    spec_server_cmd << %Q|$LOAD_PATH.unshift("#{@rspec_path}"); require "spec"; |
-    spec_server_cmd << %Q|load "#{RAILS_ROOT}/script/spec_server"' &|
-    system spec_server_cmd
+    Thread.start do
+      system "cd #{RAILS_ROOT}; script/spec_server"
+    end
 
     file_content = ""
-    Timeout.timeout(5) do
-      loop do
-        file_content = File.read(@spec_server_pid_file)
-        break unless file_content.blank?
-      end
-    end
-    @pid = Integer(File.read(@spec_server_pid_file))
   end
 end
 
