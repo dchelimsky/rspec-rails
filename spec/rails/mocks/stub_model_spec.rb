@@ -40,7 +40,8 @@ describe "stub_model" do
   
   it "should raise when hitting the db" do
     lambda do
-      stub_model(MockableModel).save
+      model = stub_model(MockableModel, :changed => true, :attributes_with_quotes => {'this' => 'that'})
+      model.save
     end.should raise_error(Spec::Rails::IllegalDataAccessException, /stubbed models are not allowed to access the database/)
   end
   

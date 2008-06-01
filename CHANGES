@@ -1,3 +1,7 @@
+== Version 1.1.5
+
+* Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the spec needed patching)
+
 == Version 1.1.4
 
 Maintenance release.
