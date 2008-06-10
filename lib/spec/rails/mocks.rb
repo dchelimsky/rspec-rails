@@ -34,6 +34,19 @@ module Spec
         yield m if block_given?
         m
       end
+      
+      module ModelStubber
+        def connection
+          raise Spec::Rails::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
+        end
+        def new_record?
+          id.nil?
+        end
+        def as_new_record
+          self.id = nil
+          self
+        end
+      end
 
       # :call-seq:
       #   stub_model(Model)
@@ -70,18 +83,7 @@ module Spec
         stubs = {:id => next_id}.merge(stubs)
         returning model_class.new do |model|
           model.id = stubs.delete(:id)
-          (class << model; self; end).class_eval do
-            def connection
-              raise Spec::Rails::IllegalDataAccessException.new("stubbed models are not allowed to access the database")
-            end
-            def new_record?
-              id.nil?
-            end
-            def as_new_record
-              self.id = nil
-              self
-            end
-          end
+          model.extend ModelStubber
           stubs.each do |k,v|
             if model.has_attribute?(k)
               model[k] = stubs.delete(k)
