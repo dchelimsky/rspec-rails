@@ -15,4 +15,20 @@ module ExplicitHelper
   def named_path
     rspec_on_rails_specs_path
   end
+  
+  def params_foo
+    params[:foo]
+  end
+  
+  def session_foo
+    session[:foo]
+  end
+  
+  def request_thing
+    request.thing
+  end
+  
+  def flash_thing
+    flash[:thing]
+  end
 end

@@ -30,6 +30,29 @@ module Spec
           def protect_against_forgery?
             false
           end
+          
+          def session=(session)
+            @session = session
+          end
+          
+          def request=(request)
+            @request = request
+          end
+          
+          def flash=(flash)
+            @flash = flash
+          end
+          
+          def params=(params)
+            @params = params
+          end
+          
+          def controller=(controller)
+            @controller = controller
+          end
+          
+          private
+            attr_reader :session, :request, :flash, :params, :controller
         end
         
         class << self
@@ -81,7 +104,7 @@ module Spec
         end
 
         before(:all) do
-          @controller_class_name = 'Spec::Rails::Example::HelperBehaviourController'
+          @controller_class_name = 'Spec::Rails::Example::HelperExampleGroupController'
         end
 
         before(:each) do
@@ -93,8 +116,11 @@ module Spec
 
           ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
           
-          helper_controller = @controller
-          helper.instance_eval { @controller = helper_controller }
+          helper.session = session
+          helper.request = @request
+          helper.flash = flash
+          helper.params = params
+          helper.controller = @controller
         end
 
         def flash
@@ -122,7 +148,7 @@ module Spec
 
       end
 
-      class HelperBehaviourController < ApplicationController #:nodoc:
+      class HelperExampleGroupController < ApplicationController #:nodoc:
         attr_accessor :request, :url
 
         # Re-raise errors

@@ -25,7 +25,7 @@ module Spec
         end
 
         def session
-          @response.session
+          response.session
         end
 
         # :call-seq:

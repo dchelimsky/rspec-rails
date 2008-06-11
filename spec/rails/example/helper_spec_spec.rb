@@ -36,6 +36,30 @@ module Spec
           lambda { non_existent_helper_method }.should raise_error(NameError)
           lambda { helper.non_existent_helper_method }.should raise_error(NameError)
         end
+
+        it "should have access to session" do
+          session[:foo] = 'bar'
+          session_foo.should == 'bar'
+          helper.session_foo.should == 'bar'
+        end
+        
+        it "should have access to params" do
+          params[:foo] = 'bar'
+          params_foo.should == 'bar'
+          helper.params_foo.should == 'bar'
+        end
+        
+        it "should have access to request" do
+          request.stub!(:thing).and_return('bar')
+          request_thing.should == 'bar'
+          helper.request_thing.should == 'bar'
+        end
+        
+        it "should have access to flash" do
+          flash[:thing] = 'camera'
+          flash_thing.should == 'camera'
+          helper.flash_thing.should == 'camera'
+        end
       end
 
 
