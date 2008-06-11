@@ -27,6 +27,9 @@ module Spec
         it "should have access to named routes" do
           rspec_on_rails_specs_url.should == "http://test.host/rspec_on_rails_specs"
           rspec_on_rails_specs_path.should == "/rspec_on_rails_specs"
+
+          helper.named_url.should == "http://test.host/rspec_on_rails_specs"
+          helper.named_path.should == "/rspec_on_rails_specs"
         end
 
         it "should fail if the helper method deson't exist" do
@@ -89,10 +92,10 @@ module Spec
         helpers << ActionView::Helpers::PaginationHelper rescue nil       #removed for 2.0
         helpers << ActionView::Helpers::JavaScriptMacrosHelper rescue nil #removed for 2.0
         helpers.each do |helper_module|
-          # it "should include #{helper_module}" do
-          #   self.class.ancestors.should include(helper_module)
-          #   helper.class.ancestors.should include(helper_module)
-          # end
+          it "should include #{helper_module}" do
+            self.class.ancestors.should include(helper_module)
+            helper.class.ancestors.should include(helper_module)
+          end
         end
       end
       

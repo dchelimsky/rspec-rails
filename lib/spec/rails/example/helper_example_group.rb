@@ -92,6 +92,9 @@ module Spec
           session['flash'] = @flash
 
           ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
+          
+          helper_controller = @controller
+          helper.instance_eval { @controller = helper_controller }
         end
 
         def flash

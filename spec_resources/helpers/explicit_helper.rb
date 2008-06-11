@@ -7,4 +7,12 @@ module ExplicitHelper
   def prepend(arg, &block)
     concat(arg, block.binding) + block.call
   end
+  
+  def named_url
+    rspec_on_rails_specs_url
+  end
+  
+  def named_path
+    rspec_on_rails_specs_path
+  end
 end
