@@ -62,7 +62,6 @@ module Spec
         end
       end
 
-
       describe HelperExampleGroup, "#eval_erb", :type => :helper do
         helper_name :explicit
 

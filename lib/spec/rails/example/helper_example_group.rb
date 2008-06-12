@@ -128,8 +128,13 @@ module Spec
         end
 
         def eval_erb(text)
+          erb_args = [text]
+          if helper.respond_to?(:output_buffer)
+            erb_args += [nil, nil, '@output_buffer']
+          end
+          
           helper.instance_eval do
-            ERB.new(text).result(binding)
+            ERB.new(*erb_args).result(binding)
           end
         end
 
