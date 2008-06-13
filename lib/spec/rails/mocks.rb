@@ -10,7 +10,7 @@ module Spec
       # add_stubs) if +stubs+ is passed.
       def mock_model(model_class, options_and_stubs = {})
         id = options_and_stubs[:id] || next_id
-        options_and_stubs.reverse_merge!({
+        options_and_stubs = options_and_stubs.reverse_merge({
           :id => id,
           :to_param => id.to_s,
           :new_record? => false,

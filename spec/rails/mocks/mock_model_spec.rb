@@ -25,6 +25,14 @@ describe "mock_model" do
   end
 end
 
+describe "mock_mode with params" do
+  it "should not mutate its parameters" do
+    params = {:a => 'b'}
+    model = mock_model(MockableModel, params)
+    params.should == {:a => 'b'}
+  end
+end
+
 describe "mock_model with stubbed id", :type => :view do
   before(:each) do
     @model = mock_model(MockableModel, :id => 1)
