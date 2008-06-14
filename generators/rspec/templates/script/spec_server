@@ -105,7 +105,7 @@ opts.parse!(ARGV)
 puts "Ready"
 exec_server = lambda {
   trap("USR2") { restart_test_server } if Signal.list.has_key?("USR2")
-  DRb.start_service("druby://localhost:8989", Spec::Runner::RailsSpecServer.new)
+  DRb.start_service("druby://127.0.0.1:8989", Spec::Runner::RailsSpecServer.new)
   DRb.thread.join
 }
 

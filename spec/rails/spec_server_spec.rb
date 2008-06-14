@@ -19,7 +19,7 @@ describe "script/spec_server file", :shared => true do
     system "lsof -i tcp:8989 | sed /COMMAND/d | awk '{print $2}' | xargs kill"
   end
 
-  xit "runs a spec" do
+  it "runs a spec" do
     dir = File.dirname(__FILE__)
     output = ""
     Timeout.timeout(10) do
