@@ -32,6 +32,9 @@ describe "mock_model with stubbed id", :type => :view do
   it "should be named using the stubbed id value" do
     @model.instance_variable_get(:@name).should == "MockableModel_1"
   end
+  it "should return string of id value for to_param" do
+    @model.to_param.should == "1"
+  end
 end
 
 describe "mock_model with null_object", :type => :view do
