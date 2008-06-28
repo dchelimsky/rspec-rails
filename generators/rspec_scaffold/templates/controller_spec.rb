@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../spec_helper')
 
 describe <%= controller_class_name %>Controller do
-  describe "handling GET /<%= table_name %>" do
+  describe "responding to GET /<%= table_name %>" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>)
+      @<%= file_name %> = stub_model(<%= class_name %>)
       <%= class_name %>.stub!(:find).and_return([@<%= file_name %>])
     end
   
@@ -12,12 +12,12 @@ describe <%= controller_class_name %>Controller do
       get :index
     end
   
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
 
-    it "should render index template" do
+    it "should render the 'index' template" do
       do_get
       response.should render_template('index')
     end
@@ -33,7 +33,7 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling GET /<%= table_name %>.xml" do
+  describe "responding to GET /<%= table_name %>.xml" do
 
     before(:each) do
       @<%= file_name.pluralize %> = mock("Array of <%= class_name.pluralize %>", :to_xml => "XML")
@@ -45,7 +45,7 @@ describe <%= controller_class_name %>Controller do
       get :index
     end
   
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
@@ -62,10 +62,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling GET /<%= table_name %>/1" do
+  describe "responding to GET /<%= table_name %>/1" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>)
+      @<%= file_name %> = stub_model(<%= class_name %>)
       <%= class_name %>.stub!(:find).and_return(@<%= file_name %>)
     end
   
@@ -73,12 +73,12 @@ describe <%= controller_class_name %>Controller do
       get :show, :id => "1"
     end
 
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
   
-    it "should render show template" do
+    it "should render the 'show' template" do
       do_get
       response.should render_template('show')
     end
@@ -94,10 +94,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling GET /<%= table_name %>/1.xml" do
+  describe "responding to GET /<%= table_name %>/1.xml" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>, :to_xml => "XML")
+      @<%= file_name %> = stub_model(<%= class_name %>, :to_xml => "XML")
       <%= class_name %>.stub!(:find).and_return(@<%= file_name %>)
     end
   
@@ -106,7 +106,7 @@ describe <%= controller_class_name %>Controller do
       get :show, :id => "1"
     end
 
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
@@ -123,10 +123,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling GET /<%= table_name %>/new" do
+  describe "responding to GET /<%= table_name %>/new" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>)
+      @<%= file_name %> = stub_model(<%= class_name %>)
       <%= class_name %>.stub!(:new).and_return(@<%= file_name %>)
     end
   
@@ -134,12 +134,12 @@ describe <%= controller_class_name %>Controller do
       get :new
     end
 
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
   
-    it "should render new template" do
+    it "should render the 'new' template" do
       do_get
       response.should render_template('new')
     end
@@ -160,10 +160,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling GET /<%= table_name %>/1/edit" do
+  describe "responding to GET /<%= table_name %>/1/edit" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>)
+      @<%= file_name %> = stub_model(<%= class_name %>)
       <%= class_name %>.stub!(:find).and_return(@<%= file_name %>)
     end
   
@@ -171,12 +171,12 @@ describe <%= controller_class_name %>Controller do
       get :edit, :id => "1"
     end
 
-    it "should be successful" do
+    it "should succeed" do
       do_get
       response.should be_success
     end
   
-    it "should render edit template" do
+    it "should render the 'edit' template" do
       do_get
       response.should render_template('edit')
     end
@@ -192,10 +192,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling POST /<%= table_name %>" do
+  describe "responding to POST /<%= table_name %>" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>, :to_param => "1")
+      @<%= file_name %> = stub_model(<%= class_name %>, :to_param => "1")
       <%= class_name %>.stub!(:new).and_return(@<%= file_name %>)
     end
     
@@ -211,7 +211,12 @@ describe <%= controller_class_name %>Controller do
         do_post
       end
 
-      it "should redirect to the new <%= file_name %>" do
+      it "should assign the created <%= file_name %> for the view" do
+        do_post
+        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+      end
+
+      it "should redirect to the created <%= file_name %>" do
         do_post
         response.should redirect_to(<%= table_name.singularize %>_url("1"))
       end
@@ -225,7 +230,12 @@ describe <%= controller_class_name %>Controller do
         post :create, :<%= file_name %> => {}
       end
   
-      it "should re-render 'new'" do
+      it "should assign the invalid <%= file_name %> for the view" do
+        do_post
+        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+      end
+
+      it "should re-render the 'new' template" do
         do_post
         response.should render_template('new')
       end
@@ -233,10 +243,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling PUT /<%= table_name %>/1" do
+  describe "responding to PUT /<%= table_name %>/1" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>, :to_param => "1")
+      @<%= file_name %> = stub_model(<%= class_name %>, :to_param => "1")
       <%= class_name %>.stub!(:find).and_return(@<%= file_name %>)
     end
     
@@ -276,7 +286,12 @@ describe <%= controller_class_name %>Controller do
         put :update, :id => "1"
       end
 
-      it "should re-render 'edit'" do
+      it "should assign the found <%= file_name %> for the view" do
+        do_put
+        assigns(:<%= file_name %>).should equal(@<%= file_name %>)
+      end
+
+      it "should re-render the 'edit' template" do
         do_put
         response.should render_template('edit')
       end
@@ -284,10 +299,10 @@ describe <%= controller_class_name %>Controller do
     end
   end
 
-  describe "handling DELETE /<%= table_name %>/1" do
+  describe "responding to DELETE /<%= table_name %>/1" do
 
     before(:each) do
-      @<%= file_name %> = mock_model(<%= class_name %>, :destroy => true)
+      @<%= file_name %> = stub_model(<%= class_name %>, :destroy => true)
       <%= class_name %>.stub!(:find).and_return(@<%= file_name %>)
     end
   
