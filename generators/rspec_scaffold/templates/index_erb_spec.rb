@@ -8,7 +8,7 @@ describe "/<%= table_name %>/index.<%= default_file_extension %>" do
 <% [1,2].each_with_index do |id, model_index| -%>
       stub_model(<%= class_name %><%= attributes.empty? ? (model_index == 1 ? ')' : '),') : ',' %>
 <% attributes.each_with_index do |attribute, attribute_index| -%>
-        :<%= attribute.name %> => <%= attribute.default_value %><%= attribute_index == attribute_index.length = 1 ? '' : ','%>
+        :<%= attribute.name %> => <%= attribute.default_value %><%= attribute_index == attributes.length - 1 ? '' : ','%>
 <% end -%>
 <% if !attributes.empty? -%>
       <%= model_index == 1 ? ')' : '),' %>
