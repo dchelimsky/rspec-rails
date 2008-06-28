@@ -6,9 +6,9 @@ describe "/<%= table_name %>/edit.<%= default_file_extension %>" do
   before(:each) do
     assigns[:<%= file_name %>] = @<%= file_name %> = stub_model(<%= class_name %>,
       :new_record? => false<%= attributes.empty? ? '' : ',' %>
-<% attributes.each_with_index do |attribute, attribute_index| -%>
+<% attributes.each_with_index do |attribute, attribute_index| -%><% unless attribute.name =~ /_id/ || [:datetime, :timestamp, :time, :date].index(attribute.type) -%>
       :<%= attribute.name %> => <%= attribute.default_value %><%= attribute_index == attributes.length - 1 ? '' : ','%>
-<% end -%>
+<% end -%><% end -%>
     )
   end
 

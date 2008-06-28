@@ -7,9 +7,9 @@ describe "/<%= table_name %>/index.<%= default_file_extension %>" do
     assigns[:<%= table_name %>] = [
 <% [1,2].each_with_index do |id, model_index| -%>
       stub_model(<%= class_name %><%= attributes.empty? ? (model_index == 1 ? ')' : '),') : ',' %>
-<% attributes.each_with_index do |attribute, attribute_index| -%>
+<% attributes.each_with_index do |attribute, attribute_index| -%><% unless attribute.name =~ /_id/ || [:datetime, :timestamp, :time, :date].index(attribute.type) -%>
         :<%= attribute.name %> => <%= attribute.default_value %><%= attribute_index == attributes.length - 1 ? '' : ','%>
-<% end -%>
+<% end -%><% end -%>
 <% if !attributes.empty? -%>
       <%= model_index == 1 ? ')' : '),' %>
 <% end -%>
