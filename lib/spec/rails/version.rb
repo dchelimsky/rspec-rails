@@ -1,7 +1,23 @@
 module Spec
   module Rails
     module VERSION #:nodoc:
-      BUILD_TIME_UTC = 20080615141040
+      unless defined? MAJOR
+        MAJOR  = 1
+        MINOR  = 1
+        TINY   = 4
+        RELEASE_CANDIDATE = nil
+
+        BUILD_TIME_UTC = 20080615141040
+
+        STRING = [MAJOR, MINOR, TINY].join('.')
+        TAG = "REL_#{[MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join('_')}".upcase.gsub(/\.|-/, '_')
+        FULL_VERSION = "#{[MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join('.')} (build #{BUILD_TIME_UTC})"
+
+        NAME   = "RSpec-Rails"
+        URL    = "http://github.com/dchelimsky/rspec-rails"  
+
+        DESCRIPTION = "#{NAME}-#{FULL_VERSION} - BDD for Ruby on Rails\n#{URL}"
+      end
     end
   end
 end
