@@ -1,4 +1,5 @@
 require 'rails_generator/generators/components/model/model_generator'
+require File.dirname(__FILE__) + '/../rspec_default_values'
 
 class RspecModelGenerator < ModelGenerator
 
