@@ -2,14 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '<%= '/..' * class_nesting_dep
 
 describe <%= controller_class_name %>Controller do
 
-  def mock_<%= file_name %>(opts={})
-    opts = {
+  def mock_<%= file_name %>(stubs={})
+    stubs = {
       :save => true,
       :update_attributes => true,
       :destroy => true,
       :to_xml => ''
-    }.merge(opts)
-    @mock_<%= file_name %> ||= mock_model(<%= class_name %>, opts)
+    }.merge(stubs)
+    @mock_<%= file_name %> ||= mock_model(<%= class_name %>, stubs)
   end
 
   describe "responding to GET /<%= table_name %>" do
