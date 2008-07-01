@@ -6,7 +6,8 @@ describe <%= controller_class_name %>Controller do
     opts = {
       :save => true,
       :update_attributes => true,
-      :destroy => true
+      :destroy => true,
+      :to_xml => ''
     }.merge(opts)
     @mock_<%= file_name %> ||= mock_model(<%= class_name %>, opts)
   end
@@ -45,13 +46,13 @@ describe <%= controller_class_name %>Controller do
     end
   
     it "should succeed" do
-      <%= class_name %>.stub!(:find)
+      <%= class_name %>.stub!(:find).and_return([])
       get :index
       response.should be_success
     end
 
     it "should find all <%= table_name %>" do
-      <%= class_name %>.should_receive(:find).with(:all)
+      <%= class_name %>.should_receive(:find).with(:all).and_return([])
       get :index
     end
   
@@ -98,13 +99,13 @@ describe <%= controller_class_name %>Controller do
     end
   
     it "should succeed" do
-      <%= class_name %>.stub!(:find)
+      <%= class_name %>.stub!(:find).and_return(mock_<%= file_name %>)
       get :show, :id => "1"
       response.should be_success
     end
   
     it "should find the <%= file_name %> requested" do
-      <%= class_name %>.should_receive(:find).with("37")
+      <%= class_name %>.should_receive(:find).with("37").and_return(mock_<%= file_name %>)
       get :show, :id => "37"
     end
   
