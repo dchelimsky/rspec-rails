@@ -28,7 +28,7 @@ class ControllerSpecController < ActionController::Base
   end
       
   def action_which_gets_cookie
-    raise "expected #{params[:expected].inspect}\ngot #{cookies[:cookie_key].first}" unless (request.cookies[:cookie_key].first == params[:expected])
+    raise "expected #{params[:expected].inspect}, got #{cookies[:cookie_key].inspect}" unless (cookies[:cookie_key] == params[:expected])
     render :text => ""
   end
       

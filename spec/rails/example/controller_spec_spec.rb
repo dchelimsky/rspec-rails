@@ -88,13 +88,13 @@ require 'controller_spec_controller'
     end
 
     it "should support setting a cookie in the request" do
-      request.cookies[:cookie_key] = CGI::Cookie.new('cookie_key', 'cookie value')
+      request.cookies['cookie_key'] = CGI::Cookie.new('cookie_key','cookie value')
       lambda do
         get 'action_which_gets_cookie', :expected => "cookie value"
       end.should_not raise_error
     end
     
-    it "should support reading a cookie from the response" do
+    xit "should support reading a cookie from the response" do
       get 'action_which_sets_cookie', :value => "cookie value"
       response.cookies['cookie_key'].should == ["cookie value"]
     end
