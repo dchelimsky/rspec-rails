@@ -12,7 +12,6 @@ require 'spec/rails/matchers'
 require 'spec/rails/mocks'
 require 'spec/rails/example'
 require 'spec/rails/extensions'
-require 'spec/rails/version'
 
 module Spec
   # = Spec::Rails
