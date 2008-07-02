@@ -89,37 +89,108 @@ require 'controller_spec_controller'
 
     describe "setting cookies in the request" do
       
-      it "should support using CGI::Cookie.new" do
-        request.cookies['cookie_key'] = CGI::Cookie.new('cookie_key','cookie value')
-        lambda do
-          get 'action_which_gets_cookie', :expected => "cookie value"
-        end.should_not raise_error
-      end
-
-      it "should support the cookies object with a Symbol key" do
-        pending("development of a CookieJarProxy") do
-          cookies[:cookie_key] = 'cookie value'
-          lambda do
+      describe "through request.cookies" do
+        
+        describe "with CGI::Cookie.new" do
+          it "should support a String key" do
+            request.cookies['cookie_key'] = CGI::Cookie.new('cookie_key', 'cookie value')
             get 'action_which_gets_cookie', :expected => "cookie value"
-          end.should_not raise_error
+          end
+
+          it "should support a Symbol key" do
+            pending("development of a CookieJarProxy") do
+              request.cookies[:cookie_key] = CGI::Cookie.new('cookie_key', 'cookie value')
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
         end
+
+        describe "with just a value" do
+          it "should support a String key" do
+            pending("development of a CookieJarProxy") do
+              request.cookies['cookie_key'] = 'cookie value'
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
+
+          it "should support a Symbol key" do
+            pending("development of a CookieJarProxy") do
+              request.cookies[:cookie_key] = 'cookie value'
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
+        end
+
       end
 
-      it "should support the cookies object with a String key" do
-        pending("development of a CookieJarProxy") do
-          cookies['cookie_key'] = 'cookie value'
-          lambda do
-            get 'action_which_gets_cookie', :expected => "cookie value"
-          end.should_not raise_error
+      describe "directly through cookies" do
+        describe "with CGI::Cookie.new" do
+          it "should support a String key" do
+            pending("development of a CookieJarProxy") do
+              cookies['cookie_key'] = CGI::Cookie.new('cookie_key', 'cookie value')
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
+
+          it "should support a Symbol key" do
+            pending("development of a CookieJarProxy") do
+              cookies[:cookie_key] = CGI::Cookie.new('cookie_key', 'cookie value')
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
+        end
+
+        describe "with just a value" do
+          it "should support a String key" do
+            pending("development of a CookieJarProxy") do
+              cookies['cookie_key'] = 'cookie value'
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
+
+          it "should support a Symbol key" do
+            pending("development of a CookieJarProxy") do
+              cookies[:cookie_key] = 'cookie value'
+              get 'action_which_gets_cookie', :expected => "cookie value"
+            end
+          end
         end
       end
       
     end
     
-    it "should support reading a cookie from the response" do
-      get 'action_which_sets_cookie', :value => "cookie value"
-      response.cookies['cookie_key'].should == ["cookie value"]
+    describe "reading cookies from the response" do
+      
+      describe "through response.cookies" do
+        it "should support a Symbol key" do
+          pending("development of a CookieJarProxy") do
+            get 'action_which_sets_cookie', :value => "cookie value"
+            response.cookies[:cookie_key].should == ["cookie value"]
+          end
+        end
+
+        it "should support a String key" do
+          get 'action_which_sets_cookie', :value => "cookie value"
+          response.cookies['cookie_key'].should == ["cookie value"]
+        end
+      end
+      
+      describe "directly through cookies" do
+        it "should support a Symbol key" do
+          pending("development of a CookieJarProxy") do
+            get 'action_which_sets_cookie', :value => "cookie value"
+            cookies[:cookie_key].should == ["cookie value"]
+          end
+        end
+
+        it "should support a String key" do
+          get 'action_which_sets_cookie', :value => "cookie value"
+          cookies['cookie_key'].should == ["cookie value"]
+        end
+      end
+      
     end
+    
 
     it "should support custom routes" do
       route_for(:controller => "custom_route_spec", :action => "custom_route").should == "/custom_route"
