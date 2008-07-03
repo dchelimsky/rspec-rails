@@ -1,7 +1,7 @@
-== Version 1.1.5
+== In Development (git clone git://github.com/dchelimsky/rspec-rails.git)
 
 * Add conditional so Rails 2.1.0 doesn't warn about cache_template_extensions (patch from James Herdman)
-* Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the spec needed patching)
+* Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the examples needed patching)
 
 == Version 1.1.4
 
