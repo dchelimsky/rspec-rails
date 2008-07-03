@@ -10,6 +10,7 @@ generators/rspec/rspec_generator.rb
 generators/rspec/templates/all_stories.rb
 generators/rspec/templates/previous_failures.txt
 generators/rspec/templates/rcov.opts
+generators/rspec/templates/rspec.rake
 generators/rspec/templates/script/spec
 generators/rspec/templates/script/spec_server
 generators/rspec/templates/spec.opts
@@ -143,4 +144,3 @@ stories/helper.rb
 stories/steps/people.rb
 stories/transactions_should_rollback
 stories/transactions_should_rollback.rb
-tasks/rspec.rake

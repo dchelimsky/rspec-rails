@@ -19,6 +19,7 @@ class RspecGenerator < Rails::Generator::Base
       m.file      'rcov.opts',                     'spec/rcov.opts'
       m.file      'script/spec_server',            'script/spec_server', script_options
       m.file      'script/spec',                   'script/spec',        script_options
+      m.file      'rspec.rake',                    'lib/tasks/rspec.rake'
 
       m.directory 'stories'
       m.file      'all_stories.rb',                'stories/all.rb'
