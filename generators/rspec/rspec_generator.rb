@@ -6,7 +6,7 @@ class RspecGenerator < Rails::Generator::Base
                               Config::CONFIG['ruby_install_name'])
 
   def initialize(runtime_args, runtime_options = {})
-    File.mkdir('lib/tasks') unless File.directory?('lib/tasks')
+    Dir.mkdir('lib/tasks') unless File.directory?('lib/tasks')
     super
   end
 
