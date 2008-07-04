@@ -7,7 +7,6 @@ raise "To avoid rake task loading problems: run 'rake clobber' in vendor/plugins
 rspec_base = File.expand_path(File.dirname(__FILE__) + '/../../rspec/lib')
 $LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base)
 require 'spec/rake/spectask'
-require 'spec/translator'
 
 spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db:test:prepare" : :noop
 task :noop do
@@ -65,13 +64,6 @@ namespace :spec do
       t.spec_opts = ['--options', "\"#{RAILS_ROOT}/spec/spec.opts\""]
       t.spec_files = FileList['vendor/plugins/rspec-rails/spec/**/*_spec.rb']
     end
-  end
-
-  desc "Translate/upgrade specs using the built-in translator"
-  task :translate do
-    translator = ::Spec::Translator.new
-    dir = RAILS_ROOT + '/spec'
-    translator.translate(dir, dir)
   end
 
   # Setup specs for stats
