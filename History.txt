@@ -4,6 +4,7 @@
 * Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the examples needed patching)
 * use hoe for build/release
 * reworked generated examples for rspec_scaffold - thanks to Mikel Lindsaar and Dan Manges for their feedback
+* bye, bye translator
 
 === Version 1.1.4
 
