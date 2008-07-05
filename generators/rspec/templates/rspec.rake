@@ -4,7 +4,7 @@ raise "To avoid rake task loading problems: run 'rake clobber' in vendor/plugins
 # In rails 1.2, plugins aren't available in the path until they're loaded.
 # Check to see if the rspec plugin is installed first and require
 # it if it is.  If not, use the gem version.
-rspec_base = File.expand_path(File.dirname(__FILE__) + '/../../rspec/lib')
+rspec_base = File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/rspec/lib')
 $LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base)
 require 'spec/rake/spectask'
 
