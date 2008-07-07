@@ -33,7 +33,7 @@ class ControllerSpecController < ActionController::Base
   end
       
   def action_which_sets_cookie
-    cookies[:cookie_key] = params[:value]
+    cookies['cookie_key'] = params[:value]
     render :text => ""
   end
       
