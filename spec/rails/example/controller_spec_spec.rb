@@ -167,6 +167,12 @@ require 'controller_spec_controller'
         controller.rspec_verify
       }.should raise_error(Exception, /expected :anything_besides_render/)
     end
+    
+    it "should not run a skipped before_filter" do
+      lambda {
+        get 'action_with_skipped_before_filter'
+      }.should_not raise_error
+    end
   end
 
   describe "Given a controller spec for RedirectSpecController running in #{mode} mode", :type => :controller do
