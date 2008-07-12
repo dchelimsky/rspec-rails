@@ -16,7 +16,9 @@ class RspecModelGenerator < ModelGenerator
 
       # Model class, spec and fixtures.
       m.template 'model:model.rb',      File.join('app/models', class_path, "#{file_name}.rb")
-      m.template 'model:fixtures.yml',  File.join('spec/fixtures', class_path, "#{table_name}.yml")
+      unless options[:skip_fixture]
+        m.template 'model:fixtures.yml',  File.join('spec/fixtures', "#{table_name}.yml")
+      end
       m.template 'model_spec.rb',       File.join('spec/models', class_path, "#{file_name}_spec.rb")
 
       unless options[:skip_migration]
