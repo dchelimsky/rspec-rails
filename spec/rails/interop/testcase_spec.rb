@@ -13,6 +13,11 @@ if ActiveSupport.const_defined?(:Callbacks) && Test::Unit::TestCase.include?(Act
     setup :do_some_setup
     teardown :do_some_teardown
     
+    @@has_been_run = false
+    def self.run?
+      @@has_been_run
+    end
+    
     def do_some_setup
       @@setup_callback_count += 1
     end
@@ -23,6 +28,7 @@ if ActiveSupport.const_defined?(:Callbacks) && Test::Unit::TestCase.include?(Act
     
     def test_something
       assert_equal true, true
+      @@has_been_run = true
     end
     
     def teardown
@@ -38,7 +44,7 @@ if ActiveSupport.const_defined?(:Callbacks) && Test::Unit::TestCase.include?(Act
     module Unit
       describe "Running TestCase tests" do
         before(:all) do
-          TestUnitTesting.run
+          TestUnitTesting.run unless TestUnitTesting.run?
         end
         
         it "should call the setup callbacks" do
