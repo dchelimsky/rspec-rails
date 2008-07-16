@@ -88,3 +88,8 @@ class ControllerSpecController < ActionController::Base
   end
 end
 
+class ControllerInheritingFromApplicationControllerController < ApplicationController
+  def action_with_ac_base_before_filter_checking_multi_require_bug
+    render :text => ""
+  end
+end

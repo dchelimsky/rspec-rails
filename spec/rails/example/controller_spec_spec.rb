@@ -5,7 +5,7 @@ require 'controller_spec_controller'
   describe "A controller example running in #{mode} mode", :type => :controller do
     controller_name :controller_spec
     integrate_views if mode == 'integration'
-  
+    
     it "should provide controller.session as session" do
       get 'action_with_template'
       session.should equal(controller.session)
@@ -212,6 +212,21 @@ require 'controller_spec_controller'
   end
   
 end
+
+['integration', 'isolation'].each do |mode|
+  describe "A controller example running in #{mode} mode", :type => :controller do
+    controller_name :controller_inheriting_from_application_controller
+    integrate_views if mode == 'integration'
+    
+    it "should only have a before filter inherited from ApplicationController run once..." do
+      pending("fix to http://rspec.lighthouseapp.com/projects/5645/tickets/440")
+      
+      controller.should_receive(:i_should_only_be_run_once).once
+      get :action_with_inherited_before_filter
+    end
+  end
+end
+
 
 describe ControllerSpecController, :type => :controller do
   it "should not require naming the controller if describe is passed a type" do
