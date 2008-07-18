@@ -219,8 +219,6 @@ end
     integrate_views if mode == 'integration'
     
     it "should only have a before filter inherited from ApplicationController run once..." do
-      pending("fix to http://rspec.lighthouseapp.com/projects/5645/tickets/440")
-      
       controller.should_receive(:i_should_only_be_run_once).once
       get :action_with_inherited_before_filter
     end
