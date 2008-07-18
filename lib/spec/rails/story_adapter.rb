@@ -40,22 +40,22 @@ class ActiveRecordSafetyListener
   include Singleton
   def scenario_started(*args)
     if defined?(ActiveRecord::Base)
-      if ActiveRecord::Base.respond_to?(:increment_open_transactions)
+      if ActiveRecord::Base.connection.respond_to?(:increment_open_transactions)
+        ActiveRecord::Base.connection.increment_open_transactions
+      else
         ActiveRecord::Base.send :increment_open_transactions
-      elsif ActiveRecord::Base.connection.respond_to?(:increment_open_transactions)
-        ActiveRecord::Base.connection.send :increment_open_transactions
       end
-      ActiveRecord::Base.connection.begin_db_transaction
     end
+    ActiveRecord::Base.connection.begin_db_transaction
   end
 
   def scenario_succeeded(*args)
     if defined?(ActiveRecord::Base)
       ActiveRecord::Base.connection.rollback_db_transaction
-      if ActiveRecord::Base.respond_to?(:decrement_open_transactions)
+      if ActiveRecord::Base.connection.respond_to?(:decrement_open_transactions)
+        ActiveRecord::Base.connection.decrement_open_transactions
+      else
         ActiveRecord::Base.send :decrement_open_transactions
-      elsif ActiveRecord::Base.connection.respond_to?(:decrement_open_transactions)
-        ActiveRecord::Base.connection.send :decrement_open_transactions
       end
     end
   end
