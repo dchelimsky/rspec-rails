@@ -196,7 +196,8 @@ module Spec
                 end
                 (class << @template; self; end).class_eval do
                   define_method :render_file do |*args|
-                    @first_render ||= args[0]
+                    @first_render ||= args[0] # rails up 2.1.0
+                    @_first_render ||= args[0] # rails edge > 2.1.0
                   end
                 end
               end
