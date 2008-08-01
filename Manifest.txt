@@ -1,6 +1,5 @@
 .gitignore
 History.txt
-MIT-LICENSE
 Manifest.txt
 README.txt
 Rakefile
@@ -11,6 +10,7 @@ generators/rspec/templates/all_stories.rb
 generators/rspec/templates/previous_failures.txt
 generators/rspec/templates/rcov.opts
 generators/rspec/templates/rspec.rake
+generators/rspec/templates/script/autospec
 generators/rspec/templates/script/spec
 generators/rspec/templates/script/spec_server
 generators/rspec/templates/spec.opts
@@ -21,6 +21,7 @@ generators/rspec_controller/rspec_controller_generator.rb
 generators/rspec_controller/templates/controller_spec.rb
 generators/rspec_controller/templates/helper_spec.rb
 generators/rspec_controller/templates/view_spec.rb
+generators/rspec_default_values.rb
 generators/rspec_model/USAGE
 generators/rspec_model/rspec_model_generator.rb
 generators/rspec_model/templates/model_spec.rb
@@ -40,6 +41,7 @@ lib/spec/rails/example.rb
 lib/spec/rails/example/assigns_hash_proxy.rb
 lib/spec/rails/example/controller_example_group.rb
 lib/spec/rails/example/functional_example_group.rb
+lib/spec/rails/example/cookies_proxy.rb
 lib/spec/rails/example/helper_example_group.rb
 lib/spec/rails/example/model_example_group.rb
 lib/spec/rails/example/rails_example_group.rb
@@ -54,6 +56,7 @@ lib/spec/rails/extensions/active_record/base.rb
 lib/spec/rails/extensions/object.rb
 lib/spec/rails/extensions/spec/example/configuration.rb
 lib/spec/rails/extensions/spec/matchers/have.rb
+lib/spec/rails/interop/testcase.rb
 lib/spec/rails/matchers.rb
 lib/spec/rails/matchers/assert_select.rb
 lib/spec/rails/matchers/have_text.rb
@@ -64,11 +67,11 @@ lib/spec/rails/mocks.rb
 lib/spec/rails/story_adapter.rb
 lib/spec/rails/version.rb
 spec/rails/autotest/mappings_spec.rb
-spec/rails/autotest/rails_rspec_spec.rb
 spec/rails/example/assigns_hash_proxy_spec.rb
 spec/rails/example/configuration_spec.rb
 spec/rails/example/controller_isolation_spec.rb
 spec/rails/example/controller_spec_spec.rb
+spec/rails/example/cookies_proxy_spec.rb
 spec/rails/example/example_group_factory_spec.rb
 spec/rails/example/helper_spec_spec.rb
 spec/rails/example/model_spec_spec.rb
@@ -79,6 +82,7 @@ spec/rails/extensions/action_controller_rescue_action_spec.rb
 spec/rails/extensions/action_view_base_spec.rb
 spec/rails/extensions/active_record_spec.rb
 spec/rails/matchers/assert_select_spec.rb
+spec/rails/interop/testcase_spec.rb
 spec/rails/matchers/description_generation_spec.rb
 spec/rails/matchers/errors_on_spec.rb
 spec/rails/matchers/have_text_spec.rb
@@ -140,6 +144,7 @@ spec_resources/views/view_spec/template_with_partial.rhtml
 spec_resources/views/view_spec/template_with_partial_using_collection.rhtml
 spec_resources/views/view_spec/template_with_partial_with_array.rhtml
 stories/all.rb
+stories/configuration/stories.rb
 stories/helper.rb
 stories/steps/people.rb
 stories/transactions_should_rollback
