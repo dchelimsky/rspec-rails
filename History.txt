@@ -6,6 +6,7 @@ so the autotest executable won't automatically load rspec anymore. This allows
 rspec to live side by side other spec frameworks without always co-opting
 autotest through autotest's discovery mechanism.
 
+* Generated route specs have shorter names, making it less painful to modify their implementation
 * Add conditional so Rails 2.1.0 doesn't warn about cache_template_extensions (patch from James Herdman)
 * Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the examples needed patching)
 * use hoe for build/release
