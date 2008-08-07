@@ -249,6 +249,15 @@ describe "render 'view_spec/foo/show.rhtml'", :type => :view do
   end
 end
 
+describe "setting special parameters" do
+  it "should not clobber path_parameters so customer path variables can be set" do
+    # hmm, no request object here?
+    request.path_parameters = {:required_parameter => 'foo'}
+    render "view_spec/entry_form"
+    request.path_parameters[:required_parameter].should == 'foo'
+  end
+end
+
 module Spec
   module Rails
     module Example
