@@ -65,3 +65,18 @@ describe "mock_model as association", :type => :view do
       @real.mockable_model.should == @mock_model
   end
 end
+
+describe "mock_model #as_new_record" do
+  it "should say it is a new record" do
+    mock_model(MockableModel).as_new_record.should be_new_record
+  end
+
+  it "should have a nil id" do
+    mock_model(MockableModel).as_new_record.id.should be(nil)
+  end
+
+  it "should have a nil to_param" do
+    mock_model(MockableModel).as_new_record.to_param.should be(nil)
+  end
+end
+

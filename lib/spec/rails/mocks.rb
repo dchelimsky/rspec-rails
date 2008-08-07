@@ -18,6 +18,12 @@ module Spec
         })
         m = mock("#{model_class.name}_#{id}", options_and_stubs)
         m.send(:__mock_proxy).instance_eval <<-CODE
+          def @target.as_new_record
+            self.stub!(:id).and_return nil
+            self.stub!(:to_param).and_return nil
+            self.stub!(:new_record?).and_return true
+            self
+          end
           def @target.is_a?(other)
             #{model_class}.ancestors.include?(other)
           end
