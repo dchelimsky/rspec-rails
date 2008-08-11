@@ -15,6 +15,7 @@ autotest through autotest's discovery mechanism.
 * Added proxy to cookies so you can set them in examples the same way you set them in controllers
 * Added script/autospec so you can run autospec without installing the gem
 * Support --skip-fixture in the rspec_model generator (patches from Alex Tomlins and Niels Ganser)
+* Add mock_model#as_new_record (patch from Zach Dennis)
 
 === Version 1.1.4
 
