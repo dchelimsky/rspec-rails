@@ -239,6 +239,20 @@ describe "An instantiated ViewExampleGroupController", :type => :view do
   end
 end
 
+describe "a block helper", :type => :view do
+  it "should not yield when not told to in the example" do
+    template.should_receive(:if_allowed)
+    render "view_spec/block_helper"
+    response.should_not have_tag("div","block helper was rendered")
+  end
+
+  it "should yield when told to in the example" do
+    template.should_receive(:if_allowed).and_yield
+    render "view_spec/block_helper"
+    response.should have_tag("div","block helper was rendered")
+  end
+end
+
 describe "render :inline => ...", :type => :view do
   it "should render ERB right in the spec" do
     render :inline => %|<%= text_field_tag('field_name', 'Value') %>|
