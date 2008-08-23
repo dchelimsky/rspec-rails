@@ -10,7 +10,11 @@ module ActionView #:nodoc:
           end
         end
       end
-      super(partial_path, local_assigns, deprecated_local_assigns)
+      begin
+        super(partial_path, local_assigns, deprecated_local_assigns)
+      rescue ArgumentError # edge rails > 2.1 changed render_partial to accept only one arg
+        super(partial_path)
+      end
     end
 
     alias_method :orig_render, :render
