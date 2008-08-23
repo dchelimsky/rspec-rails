@@ -195,9 +195,15 @@ module Spec
                   end
                 end
                 (class << @template; self; end).class_eval do
+                  # rails <= 2.1.0
                   define_method :render_file do |*args|
-                    @first_render ||= args[0] # rails up 2.1.0
-                    @_first_render ||= args[0] # rails edge > 2.1.0
+                    @first_render ||= args[0] 
+                  end
+                  
+                  # rails > 2.1.0
+                  define_method :render do |options|
+                    puts options.inspect
+                    @_first_render ||= options[:file] || options[:partial]
                   end
                 end
               end
@@ -207,10 +213,10 @@ module Spec
               expect_render_mock_proxy.render(options, &block)
               @performed_render = true
             else
-              if integrate_views?
-                unless matching_stub_exists(options)
-                  super(options, deprecated_status_or_extra_options, &block)
-                end
+              if matching_stub_exists(options)
+                @performed_render = true
+              else
+                super(options, deprecated_status_or_extra_options, &block)
               end
             end
           end

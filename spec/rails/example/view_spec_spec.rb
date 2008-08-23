@@ -156,7 +156,11 @@ describe "A view that includes a partial using an array as partial_path", :type 
         if partial_path.is_a?(Array)
           "Array Partial"
         else
-          render_partial_without_array_support(partial_path, local_assigns, deprecated_local_assigns)
+          begin
+            render_partial_without_array_support(partial_path, local_assigns, deprecated_local_assigns)
+          rescue ArgumentError
+            render_partial_without_array_support(partial_path)
+          end
         end
       end
 
