@@ -207,8 +207,10 @@ module Spec
               expect_render_mock_proxy.render(options, &block)
               @performed_render = true
             else
-              unless matching_stub_exists(options)
-                super(options, deprecated_status_or_extra_options, &block)
+              if integrate_views?
+                unless matching_stub_exists(options)
+                  super(options, deprecated_status_or_extra_options, &block)
+                end
               end
             end
           end
