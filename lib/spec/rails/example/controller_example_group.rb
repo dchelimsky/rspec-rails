@@ -195,15 +195,18 @@ module Spec
                   end
                 end
                 (class << @template; self; end).class_eval do
-                  # rails <= 2.1.0
                   define_method :render_file do |*args|
                     @first_render ||= args[0] 
                   end
                   
-                  # rails > 2.1.0
-                  define_method :render do |options|
-                    puts options.inspect
-                    @_first_render ||= options[:file] || options[:partial]
+                  define_method :pick_template do |*args|
+                    @_first_render = args[0]
+                    Class.new do
+                      def render_template(*ignore_args)
+                      end
+                      def render_partial(*ignore_args)
+                      end
+                    end.new
                   end
                 end
               end
