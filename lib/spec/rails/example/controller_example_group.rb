@@ -183,30 +183,21 @@ module Spec
               unless integrate_views?
                 if @template.respond_to?(:finder)
                   (class << @template.finder; self; end).class_eval do
-                    define_method :file_exists? do
-                      true
-                    end
+                    define_method :file_exists? do; true; end
                   end
                 else
                   (class << @template; self; end).class_eval do
-                    define_method :file_exists? do
-                      true
-                    end
+                    define_method :file_exists? do; true; end
                   end
                 end
                 (class << @template; self; end).class_eval do
                   define_method :render_file do |*args|
-                    @first_render ||= args[0] 
+                    @first_render ||= args[0] unless args[0] =~ /^layouts/
                   end
                   
                   define_method :pick_template do |*args|
-                    @_first_render = args[0]
-                    Class.new do
-                      def render_template(*ignore_args)
-                      end
-                      def render_partial(*ignore_args)
-                      end
-                    end.new
+                    @_first_render ||= args[0] unless args[0] =~ /^layouts/
+                    PickedTemplate.new
                   end
                 end
               end
@@ -277,6 +268,11 @@ module Spec
         end
 
         Spec::Example::ExampleGroupFactory.register(:controller, self)
+      end
+      
+      class PickedTemplate
+        def render_template(*ignore_args); end
+        def render_partial(*ignore_args);  end
       end
     end
   end
