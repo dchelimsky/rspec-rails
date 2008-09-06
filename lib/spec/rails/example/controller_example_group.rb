@@ -193,9 +193,10 @@ module Spec
                 (class << @template; self; end).class_eval do
                   define_method :render_file do |*args|
                     @first_render ||= args[0] unless args[0] =~ /^layouts/
+                    @_first_render ||= args[0] unless args[0] =~ /^layouts/
                   end
                   
-                  define_method :pick_template do |*args|
+                  define_method :_pick_template do |*args|
                     @_first_render ||= args[0] unless args[0] =~ /^layouts/
                     PickedTemplate.new
                   end
