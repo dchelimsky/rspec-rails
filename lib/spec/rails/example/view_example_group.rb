@@ -150,7 +150,9 @@ module Spec
 
         protected
         def _assigns_hash_proxy
-          @_assigns_hash_proxy ||= AssignsHashProxy.new @controller
+          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
+            @response.template
+          end
         end
       end
 
@@ -171,6 +173,9 @@ module Spec
           (class << template; self; end).class_eval do
             include helper_module
           end
+        end
+        
+        def forget_variables_added_to_assigns
         end
       end
     end

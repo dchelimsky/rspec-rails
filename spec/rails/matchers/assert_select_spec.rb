@@ -628,7 +628,7 @@ describe "have_rjs behaviour_type", :type => :controller do
   end
   
   it "should find rjs using :insert (positioned)" do
-    pending("await fix for http://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/982") if ENV['RSPEC_RAILS_VERSION'] == '2.1.1'
+    pending("await fix for http://rails.lighthouseapp.com/projects/8994-ruby-on-rails/tickets/982")
     render_rjs do |page|
       page.insert_html :top, "test1", "<div id=\"1\">foo</div>"
       page.insert_html :bottom, "test2", "<div id=\"2\">bar</div>"

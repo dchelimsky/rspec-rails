@@ -62,7 +62,6 @@ class ControllerSpecController < ActionController::Base
   end
 
   def action_setting_the_assigns_hash
-    assigns['direct_assigns_key'] = :direct_assigns_key_value
     @indirect_assigns_key = :indirect_assigns_key_value
   end
   

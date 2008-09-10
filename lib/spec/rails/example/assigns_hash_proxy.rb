@@ -2,8 +2,9 @@ module Spec
   module Rails
     module Example
       class AssignsHashProxy #:nodoc:
-        def initialize(object)
-          @object = object
+        def initialize(example_group, &block)
+          @block = block
+          @example_group = example_group
         end
 
         def [](ivar)
@@ -17,8 +18,7 @@ module Spec
         end
 
         def []=(ivar, val)
-          @object.instance_variable_set "@#{ivar}", val
-          assigns[ivar.to_s] = val
+          @block.call.instance_variable_set("@#{ivar}", val)
         end
 
         def delete(name)
@@ -35,7 +35,7 @@ module Spec
 
         protected
         def assigns
-          @object.assigns
+          @example_group.orig_assigns
         end
       end
     end
