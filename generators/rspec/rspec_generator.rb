@@ -14,9 +14,7 @@ class RspecGenerator < Rails::Generator::Base
     record do |m|
       script_options     = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }
 
-      if Rails::VERSION::STRING < "2.1.0"
-        m.file      'rspec.rake',                    'lib/tasks/rspec.rake'
-      end
+      m.file      'rspec.rake',                    'lib/tasks/rspec.rake'
 
       m.file      'script/autospec',               'script/autospec',    script_options
       m.file      'script/spec',                   'script/spec',        script_options
