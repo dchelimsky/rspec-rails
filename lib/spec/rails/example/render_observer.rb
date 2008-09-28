@@ -76,6 +76,15 @@ module Spec
           end
         end
         
+        def should_not_receive(*args)
+          if args[0] == :render
+            register_verify_after_each
+            render_proxy.should_not_receive(:render)
+          else
+            super
+          end
+        end
+        
         def stub!(*args)
           if args[0] == :render
             register_verify_after_each

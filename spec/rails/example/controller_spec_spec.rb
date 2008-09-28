@@ -87,6 +87,20 @@ require 'controller_spec_controller'
       end.should_not raise_error
     end
 
+    describe "handling should_receive(:render)" do
+      it "should warn" do
+        controller.should_receive(:render).with(:template => "controller_spec/action_with_template")
+        get :action_with_template
+      end
+    end
+    
+    describe "handling should_not_receive(:render)" do
+      it "should warn" do
+        controller.should_not_receive(:render).with(:template => "the/wrong/template")
+        get :action_with_template
+      end
+    end
+    
     describe "handling deprecated expect_render" do
       it "should warn" do
         Kernel.should_receive(:warn).with(/expect_render is deprecated/)

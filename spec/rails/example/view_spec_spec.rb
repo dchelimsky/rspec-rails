@@ -270,9 +270,8 @@ end
 describe "bug http://rspec.lighthouseapp.com/projects/5645/tickets/510", :type => :view do
   describe "a view example with should_not_receive" do
     it "should render the view" do
-      pending("add support for should_not_receive to render observer")
       obj = mock('model')
-      obj.should_receive(:render_partial?).and_return true
+      obj.should_receive(:render_partial?).and_return false
       assigns[:obj] = obj
       template.should_not_receive(:render).with(:partial => 'some_partial')
       render "view_spec/should_not_receive"
