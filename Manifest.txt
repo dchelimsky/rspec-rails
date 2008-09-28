@@ -58,6 +58,7 @@ lib/spec/rails/extensions/spec/matchers/have.rb
 lib/spec/rails/interop/testcase.rb
 lib/spec/rails/matchers.rb
 lib/spec/rails/matchers/assert_select.rb
+lib/spec/rails/matchers/change.rb
 lib/spec/rails/matchers/have_text.rb
 lib/spec/rails/matchers/include_text.rb
 lib/spec/rails/matchers/redirect_to.rb
@@ -88,6 +89,7 @@ spec/rails/matchers/have_text_spec.rb
 spec/rails/matchers/include_text_spec.rb
 spec/rails/matchers/redirect_to_spec.rb
 spec/rails/matchers/render_template_spec.rb
+spec/rails/matchers/should_change_spec.rb
 spec/rails/mocks/ar_classes.rb
 spec/rails/mocks/mock_model_spec.rb
 spec/rails/mocks/stub_model_spec.rb
@@ -144,6 +146,7 @@ spec_resources/views/view_spec/explicit_helper.rhtml
 spec_resources/views/view_spec/foo/show.rhtml
 spec_resources/views/view_spec/implicit_helper.rhtml
 spec_resources/views/view_spec/multiple_helpers.rhtml
+spec_resources/views/view_spec/should_not_receive.rhtml
 spec_resources/views/view_spec/template_with_partial.rhtml
 spec_resources/views/view_spec/template_with_partial_using_collection.rhtml
 spec_resources/views/view_spec/template_with_partial_with_array.rhtml
