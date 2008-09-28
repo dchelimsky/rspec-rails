@@ -44,20 +44,22 @@ module Spec
         #   template.stub_render(:partial => 'thing', :collection => things)
         #
         def expect_render(opts={})
+          Kernel.warn("expect_render is deprecated")
           register_verify_after_each
-          expect_render_mock_proxy.should_receive(:render, :expected_from => caller(1)[0]).with(opts)
+          render_proxy.should_receive(:render, :expected_from => caller(1)[0]).with(opts)
         end
 
         # This is exactly like expect_render, with the exception that the call to render will not
         # be verified. Use this if you are trying to isolate your example from a complicated render
         # operation but don't care whether it is called or not.
         def stub_render(opts={})
+          Kernel.warn("stub_render is deprecated")
           register_verify_after_each
-          expect_render_mock_proxy.stub!(:render, :expected_from => caller(1)[0]).with(opts)
+          render_proxy.stub!(:render, :expected_from => caller(1)[0]).with(opts)
         end
   
         def verify_rendered # :nodoc:
-          expect_render_mock_proxy.rspec_verify
+          render_proxy.rspec_verify
         end
   
         def unregister_verify_after_each #:nodoc:
@@ -65,7 +67,23 @@ module Spec
           Spec::Example::ExampleGroup.remove_after(:each, &proc)
         end
 
-        protected
+        def should_receive(*args)
+          if args[0] == :render
+            register_verify_after_each
+            render_proxy.should_receive(:render, :expected_from => caller(1)[0])
+          else
+            super
+          end
+        end
+        
+        def stub!(*args)
+          if args[0] == :render
+            register_verify_after_each
+            render_proxy.stub!(:render, :expected_from => caller(1)[0])
+          else
+            super
+          end
+        end
 
         def verify_rendered_proc #:nodoc:
           template = self
@@ -80,8 +98,8 @@ module Spec
           Spec::Example::ExampleGroup.after(:each, &proc)
         end
   
-        def expect_render_mock_proxy #:nodoc:
-          @expect_render_mock_proxy ||= Spec::Mocks::Mock.new("expect_render_mock_proxy")
+        def render_proxy #:nodoc:
+          @render_proxy ||= Spec::Mocks::Mock.new("render_proxy")
         end
   
       end

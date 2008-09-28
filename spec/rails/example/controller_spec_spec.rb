@@ -38,24 +38,24 @@ require 'controller_spec_controller'
       response.should render_template("_partial")
     end
     
-    it "should allow specifying a partial with expect_render" do
-      controller.expect_render(:partial => "controller_spec/partial")
+    it "should allow specifying a partial with should_receive(:render)" do
+      controller.should_receive(:render).with(:partial => "controller_spec/partial")
       get 'action_with_partial'
     end
     
-    it "should allow specifying a partial with expect_render with object" do
-      controller.expect_render(:partial => "controller_spec/partial", :object => "something")
+    it "should allow specifying a partial with should_receive(:render) with object" do
+      controller.should_receive(:render).with(:partial => "controller_spec/partial", :object => "something")
       get 'action_with_partial_with_object', :thing => "something"
     end
     
-    it "should allow specifying a partial with expect_render with locals" do
-      controller.expect_render(:partial => "controller_spec/partial", :locals => {:thing => "something"})
+    it "should allow specifying a partial with should_receive(:render) with locals" do
+      controller.should_receive(:render).with(:partial => "controller_spec/partial", :locals => {:thing => "something"})
       get 'action_with_partial_with_locals', :thing => "something"
     end
     
     it "should yield to render :update" do
       template = stub("template")
-      controller.expect_render(:update).and_yield(template)
+      controller.should_receive(:render).with(:update).and_yield(template)
       template.should_receive(:replace).with(:bottom, "replace_me", :partial => "non_existent_partial")
       get 'action_with_render_update'
     end
@@ -85,6 +85,22 @@ require 'controller_spec_controller'
       lambda do
         get 'action_which_gets_session', :expected => "session value"
       end.should_not raise_error
+    end
+
+    describe "handling deprecated expect_render" do
+      it "should warn" do
+        Kernel.should_receive(:warn).with(/expect_render is deprecated/)
+        controller.expect_render(:template => "controller_spec/action_with_template")
+        get :action_with_template
+      end
+    end
+    
+    describe "handling deprecated stub_render" do
+      it "should warn" do
+        Kernel.should_receive(:warn).with(/stub_render is deprecated/)
+        controller.stub_render(:template => "controller_spec/action_with_template")
+        get :action_with_template
+      end
     end
     
     describe "setting cookies in the request" do
@@ -141,19 +157,6 @@ require 'controller_spec_controller'
     it "should expose instance vars through the assigns hash" do
       get 'action_setting_the_assigns_hash'
       assigns[:indirect_assigns_key].should == :indirect_assigns_key_value
-    end
-    
-    it "should complain when calling should_receive(:render) on the controller" do
-      lambda {
-        controller.should_receive(:render)
-      }.should raise_error(RuntimeError, /should_receive\(:render\) has been disabled/)
-    end
-
-    it "should complain when calling stub!(:render) on the controller" do
-      controller.extend Spec::Mocks::Methods
-      lambda {
-        controller.stub!(:render)
-      }.should raise_error(RuntimeError, /stub!\(:render\) has been disabled/)
     end
     
     it "should NOT complain when calling should_receive with arguments other than :render" do
