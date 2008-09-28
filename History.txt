@@ -1,4 +1,4 @@
-=== In Development (git clone git://github.com/dchelimsky/rspec-rails.git)
+=== Version 1.1.5
 
 IMPORTANT: use 'script/autospec' (or just 'autospec' if you have the rspec gem
 installed) instead of 'autotest'. We changed the way autotest discovers rspec
