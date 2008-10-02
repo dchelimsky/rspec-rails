@@ -1,8 +1,10 @@
 === Development
 
-* fixed regression where values assigned to the assigns hash were not accessible from the example (#549)
+* 1 bug fix
 
-=== Version 1.1.5
+	* fixed regression where values assigned to the assigns hash were not accessible from the example (#549)
+
+=== Version 1.1.5 / 2008-09-28
 
 IMPORTANT: use 'script/autospec' (or just 'autospec' if you have the rspec gem
 installed) instead of 'autotest'. We changed the way autotest discovers rspec
