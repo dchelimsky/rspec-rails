@@ -8,7 +8,7 @@ module Spec
 
         STRING = [MAJOR, MINOR, TINY].join('.')
 
-        SUMMARY = "rspec-rails version #{STRING}"
+        SUMMARY = "rspec-rails #{STRING}"
       end
     end
   end
