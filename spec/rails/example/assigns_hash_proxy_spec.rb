@@ -62,4 +62,9 @@ describe "AssignsHashProxy" do
     @proxy.has_key?('foo').should == true
     @proxy.has_key?('bar').should == false
   end
+  
+  it "should expose values set in example" do
+    @proxy[:foo] = 'bar'
+    @proxy[:foo].should == 'bar'
+  end
 end
