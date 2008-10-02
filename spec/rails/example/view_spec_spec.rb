@@ -242,6 +242,13 @@ describe "render :inline => ...", :type => :view do
   end
 end
 
+describe "render 'view_spec/foo/show.rhtml'", :type => :view do
+  it "should derive action name using the first part of the template name" do
+    render 'view_spec/foo/show.rhtml'
+    request.path_parameters[:action].should == 'show'
+  end
+end
+
 module Spec
   module Rails
     module Example

@@ -63,7 +63,7 @@ module Spec
 
         def derived_action_name(options) #:nodoc:
           parts = subject_of_render(options).split('/').reject { |part| part.empty? }
-          "#{parts.last}"
+          "#{parts.last}".split('.').first
         end
 
         def subject_of_render(options) #:nodoc:
