@@ -7,16 +7,16 @@ module Spec
           @example_group = example_group
         end
 
-        def [](ivar)
-          assigns[ivar] || assigns[ivar.to_s] || @target.instance_variable_get("@#{ivar}")
+        def [](key)
+          assigns[key] || assigns[key.to_s] || @target.instance_variable_get("@#{key}")
         end
 
-        def []=(ivar, val)
-          @target.instance_variable_set("@#{ivar}", val)
+        def []=(key, val)
+          @target.instance_variable_set("@#{key}", val)
         end
 
-        def delete(name)
-          assigns.delete(name.to_s)
+        def delete(key)
+          assigns.delete(key.to_s)
         end
 
         def each(&block)
