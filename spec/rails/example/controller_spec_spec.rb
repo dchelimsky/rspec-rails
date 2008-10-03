@@ -173,6 +173,11 @@ require 'controller_spec_controller'
       assigns[:indirect_assigns_key].should == :indirect_assigns_key_value
     end
     
+    it "should expose instance vars through the assigns hash that are set to false" do
+      get 'action_that_assigns_false_to_a_variable'
+      assigns[:a_variable].should be_false
+    end
+    
     it "should NOT complain when calling should_receive with arguments other than :render" do
       controller.should_receive(:anything_besides_render)
       lambda {

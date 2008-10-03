@@ -8,6 +8,8 @@ module Spec
         end
 
         def [](key)
+          return false if assigns[key] == false
+          return false if assigns[key.to_s] == false
           assigns[key] || assigns[key.to_s] || @target.instance_variable_get("@#{key}")
         end
 
@@ -17,6 +19,7 @@ module Spec
 
         def delete(key)
           assigns.delete(key.to_s)
+          @target.instance_variable_set("@#{key}", nil)
         end
 
         def each(&block)
