@@ -1,8 +1,9 @@
 === Development
 
-* 1 bug fix
+* 2 bug fixes
 
   * correctly handle assigns that are false. Fixes #552.
+  * ensure that NotYetImplemented examples report as pending (fixed in rspec, not rspec-rails). Fixes #553.
   
 === Version 1.1.7 / 2008-10-02
 
