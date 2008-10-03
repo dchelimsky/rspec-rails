@@ -6,6 +6,8 @@ require 'controller_spec_controller'
     controller_name :controller_spec
     integrate_views if mode == 'integration'
     
+    specify "this example should be pending, not an error"
+    
     it "should provide controller.session as session" do
       get 'action_with_template'
       session.should equal(controller.session)
