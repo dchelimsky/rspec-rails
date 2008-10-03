@@ -15,7 +15,7 @@
 
 * 1 bug fix
 
-	* fixed regression where values assigned to the assigns hash were not accessible from the example (#549)
+  * fixed regression where values assigned to the assigns hash were not accessible from the example (#549)
 
 === Version 1.1.5 / 2008-09-28
 
