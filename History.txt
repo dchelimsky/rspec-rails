@@ -1,11 +1,15 @@
+=== Maintenance
+
+* 1 bug fix
+
+  * require 'rubygems' in script/spec
+
 === Version 1.1.8 / 2008-10-03
 
-* 3 bug fixes
+* 2 bug fixes
 
   * correctly handle assigns that are false. Fixes #552.
   * ensure that NotYetImplemented examples report as pending (fixed in rspec, not rspec-rails). Fixes #553.
-  * require 'rubygems' in script/spec
-  
   
 === Version 1.1.7 / 2008-10-02
 
