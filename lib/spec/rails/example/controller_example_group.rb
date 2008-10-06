@@ -125,7 +125,7 @@ module Spec
 
         attr_reader :response, :request, :controller
 
-        def initialize(defined_description, &implementation) #:nodoc:
+        def initialize(defined_description, options={}, &implementation) #:nodoc:
           super
           controller_class_name = self.class.controller_class_name
           if controller_class_name
