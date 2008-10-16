@@ -1,9 +1,10 @@
 === Maintenance
 
-* 2 bug fixes
+* 3 bug fixes
 
   * require 'rubygems' in script/spec
 	* fix failure message for error_on and errors_on (Patch from Mike Vincent). Fixes #566.
+	* fix issues that arise in view spec if passing actual template name to render (Patch from Mike Vincent). Fixes #551.
 
 === Version 1.1.8 / 2008-10-03
 
