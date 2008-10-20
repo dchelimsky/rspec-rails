@@ -53,18 +53,23 @@ module Spec
           end
         
       end
-
+      
       # :call-seq:
-      #   response.should render_template(path)
-      #   response.should_not render_template(path)
+      #   response.should render_template(template)
+      #   response.should_not render_template(template)
       #
-      # Passes if the specified template is rendered by the response.
+      # Passes if the specified template (view file) is rendered by the response.
+      # This file can be any view file or partial. However if it is a partial it
+      # must be rendered directly i.e. you can't detect that a partial has been
+      # rendered as part of a view.
       # Useful in controller specs (integration or isolation mode).
       #
-      # <code>path</code> can include the controller path or not. It
-      # can also include an optional extension (no extension assumes .rhtml).
+      # <code>template</code> can include the controller path. It
+      # can also include an optional extension, which you only need to use when
+      # there is ambiguity.
       #
       # Note that partials must be spelled with the preceding underscore.
+      #
       #
       # == Examples
       #
@@ -72,8 +77,9 @@ module Spec
       #   response.should render_template('same_controller/list')
       #   response.should render_template('other_controller/list')
       #
-      #   #rjs
+      #   #extensions
       #   response.should render_template('list.rjs')
+      #   response.should render_template('list.haml')
       #   response.should render_template('same_controller/list.rjs')
       #   response.should render_template('other_controller/list.rjs')
       #
