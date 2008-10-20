@@ -130,6 +130,19 @@ module Spec
           helper.protect_against_forgery?.should be_false
         end
       end
+      
+      describe HelperExampleGroup, "#assigns", :type => :helper do
+        helper_name :addition
+        it "should expose variables to helper" do
+          assigns[:addend] = 3
+          helper.plus(4).should == 7
+        end
+
+        it "should make helper ivars available in example" do
+          assigns[:addend] = 3
+          assigns[:addend].should == 3
+        end
+      end
     end
   end
 end

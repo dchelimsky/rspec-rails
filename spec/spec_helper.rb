@@ -7,6 +7,7 @@ require File.expand_path("#{dir}/../spec_resources/controllers/render_spec_contr
 require File.expand_path("#{dir}/../spec_resources/controllers/rjs_spec_controller")
 require File.expand_path("#{dir}/../spec_resources/controllers/redirect_spec_controller")
 require File.expand_path("#{dir}/../spec_resources/controllers/action_view_base_spec_controller")
+require File.expand_path("#{dir}/../spec_resources/helpers/addition_helper")
 require File.expand_path("#{dir}/../spec_resources/helpers/explicit_helper")
 require File.expand_path("#{dir}/../spec_resources/helpers/more_explicit_helper")
 require File.expand_path("#{dir}/../spec_resources/helpers/view_spec_helper")

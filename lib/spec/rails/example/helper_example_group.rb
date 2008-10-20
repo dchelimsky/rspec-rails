@@ -96,7 +96,11 @@ module Spec
         def helper
           self.class.helper
         end
-
+        
+        def orig_assigns
+          helper.assigns
+        end
+        
         # Reverse the load order so that custom helpers which are defined last
         # are also loaded last.
         ActionView::Base.included_modules.reverse.each do |mod|
