@@ -87,6 +87,16 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       response.should redirect_to("http://test.host/nonexistant/none")
     end
 
+    it "redirected to a URL with a specific status code" do
+      get "action_with_redirect_to_somewhere_with_status"
+      response.should redirect_to(:action => 'somewhere').with(:status => 301)
+    end
+    
+    it "redirected to a URL with a specific status code (using names)" do
+      get "action_with_redirect_to_somewhere_with_status"
+      response.should redirect_to(:action => 'somewhere').with(:status => :moved_permanently)
+    end
+
   end
 
   
@@ -146,6 +156,20 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       lambda {
         response.should redirect_to(:action => 'somewhere_else')
       }.should fail_with("expected redirect to {:action=>\"somewhere_else\"}, got redirect to \"http://test.host/redirect_spec/somewhere\"")
+    end
+
+    it "redirected with wrong status code" do
+      get 'action_with_redirect_to_somewhere_with_status'
+      lambda {
+        response.should redirect_to(:action => 'somewhere').with(:status => 302)
+      }.should fail_with("expected redirect to {:action=>\"somewhere\"} with status 302 Found, got 301 Moved Permanently")
+    end
+    
+    it "redirected with wrong status code (using names)" do
+      get 'action_with_redirect_to_somewhere_with_status'
+      lambda {
+        response.should redirect_to(:action => 'somewhere').with(:status => :found)
+      }.should fail_with("expected redirect to {:action=>\"somewhere\"} with status 302 Found, got 301 Moved Permanently")
     end
     
     it "redirected to incorrect path with leading /" do
