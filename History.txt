@@ -1,4 +1,4 @@
-=== Maintenance
+=== Version 1.1.9 / 2008-10-20
 
 * 4 bug fixes
 
