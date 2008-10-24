@@ -67,6 +67,7 @@ lib/spec/rails/matchers/render_template.rb
 lib/spec/rails/mocks.rb
 lib/spec/rails/story_adapter.rb
 lib/spec/rails/version.rb
+rspec-rails.gemspec
 spec/rails/autotest/mappings_spec.rb
 spec/rails/example/assigns_hash_proxy_spec.rb
 spec/rails/example/configuration_spec.rb
@@ -105,6 +106,7 @@ spec_resources/controllers/controller_spec_controller.rb
 spec_resources/controllers/redirect_spec_controller.rb
 spec_resources/controllers/render_spec_controller.rb
 spec_resources/controllers/rjs_spec_controller.rb
+spec_resources/helpers/addition_helper.rb
 spec_resources/helpers/explicit_helper.rb
 spec_resources/helpers/more_explicit_helper.rb
 spec_resources/helpers/plugin_application_helper.rb
