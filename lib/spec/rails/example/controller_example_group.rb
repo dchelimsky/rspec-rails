@@ -247,8 +247,11 @@ module Spec
         Spec::Example::ExampleGroupFactory.register(:controller, self)
       end
       
-      class PickedTemplate
+      # Returned by _pick_template when running controller examples in isolation mode.
+      class PickedTemplate 
+        # Do nothing when running controller examples in isolation mode.
         def render_template(*ignore_args); end
+        # Do nothing when running controller examples in isolation mode.
         def render_partial(*ignore_args);  end
       end
     end
