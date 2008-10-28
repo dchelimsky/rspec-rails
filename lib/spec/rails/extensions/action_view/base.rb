@@ -2,6 +2,8 @@ module ActionView #:nodoc:
   class Base #:nodoc:
     include Spec::Rails::Example::RenderObserver
     cattr_accessor :base_view_path
+
+    alias_method :orig_render_partial, :render_partial
     def render_partial(partial_path, local_assigns = nil, deprecated_local_assigns = nil) #:nodoc:
       if partial_path.is_a?(String)
         unless partial_path.include?("/")
@@ -11,9 +13,9 @@ module ActionView #:nodoc:
         end
       end
       begin
-        super(partial_path, local_assigns, deprecated_local_assigns)
+        orig_render_partial(partial_path, local_assigns, deprecated_local_assigns)
       rescue ArgumentError # edge rails > 2.1 changed render_partial to accept only one arg
-        super(partial_path)
+        orig_render_partial(partial_path)
       end
     end
 
