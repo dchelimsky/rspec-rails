@@ -1,5 +1,9 @@
 === Maintenance
 
+* 1 major enhancement
+
+  * support controller and action path params in view specs (Mike Vincent).
+
 * 1 minor enhancement
 
   * improve rdoc for render_template (Patch from Andrew Premdas). Fixes #571.
