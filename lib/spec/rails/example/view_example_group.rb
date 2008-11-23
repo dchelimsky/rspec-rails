@@ -57,13 +57,21 @@ module Spec
         end
 
         def derived_controller_name(options) #:nodoc:
-          parts = subject_of_render(options).split('/').reject { |part| part.empty? }
-          "#{parts[0..-2].join('/')}"
+          if options[:path_parameters] && options[:path_parameters][:controller]
+            return options[:path_parameters][:controller]
+          else
+            parts = subject_of_render(options).split('/').reject { |part| part.empty? }
+            "#{parts[0..-2].join('/')}"
+          end
         end
 
         def derived_action_name(options) #:nodoc:
-          parts = subject_of_render(options).split('/').reject { |part| part.empty? }
-          "#{parts.last}".split('.').first
+          if options[:path_parameters] && options[:path_parameters][:action]
+            return options[:path_parameters][:action]
+          else
+            parts = subject_of_render(options).split('/').reject { |part| part.empty? }
+            "#{parts.last}".split('.').first
+          end
         end
 
         def subject_of_render(options) #:nodoc:
@@ -103,10 +111,10 @@ module Spec
           add_helpers(options)
 
           assigns[:action_name] = @action_name
-
+          
           @request.path_parameters = @request.path_parameters.update(
-            :controller => options[:controller] || derived_controller_name(options),
-            :action => options[:action] || derived_action_name(options)
+            :controller => derived_controller_name(options),
+            :action => derived_action_name(options)
           )
 
           defaults = { :layout => false }
