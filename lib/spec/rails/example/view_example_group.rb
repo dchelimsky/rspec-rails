@@ -57,21 +57,13 @@ module Spec
         end
 
         def derived_controller_name(options) #:nodoc:
-          if options[:path_parameters] && options[:path_parameters][:controller]
-            return options[:path_parameters][:controller]
-          else
-            parts = subject_of_render(options).split('/').reject { |part| part.empty? }
-            "#{parts[0..-2].join('/')}"
-          end
+          parts = subject_of_render(options).split('/').reject { |part| part.empty? }
+          "#{parts[0..-2].join('/')}"
         end
 
         def derived_action_name(options) #:nodoc:
-          if options[:path_parameters] && options[:path_parameters][:action]
-            return options[:path_parameters][:action]
-          else
-            parts = subject_of_render(options).split('/').reject { |part| part.empty? }
-            "#{parts.last}".split('.').first
-          end
+          parts = subject_of_render(options).split('/').reject { |part| part.empty? }
+          "#{parts.last}".split('.').first
         end
 
         def subject_of_render(options) #:nodoc:
@@ -112,10 +104,10 @@ module Spec
 
           assigns[:action_name] = @action_name
           
-          @request.path_parameters = @request.path_parameters.update(
+          @request.path_parameters = @request.path_parameters.merge(
             :controller => derived_controller_name(options),
             :action => derived_action_name(options)
-          )
+          ).merge(options[:path_parameters] || {})
 
           defaults = { :layout => false }
           options = defaults.merge options

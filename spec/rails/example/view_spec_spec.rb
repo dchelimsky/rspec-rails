@@ -262,6 +262,12 @@ describe "setting path parameters", :type => :view do
       request.path_parameters[:action].should == 'foo'
     end
   end
+  describe "(something arbitrary)" do
+    it "should supercede the default path parameters" do
+      render "view_spec/entry_form", :path_parameters => {:foo => 'bar'}
+      request.path_parameters[:foo].should == 'bar'
+    end
+  end
 end
 
 module Spec
