@@ -5,6 +5,9 @@ begin
 module Spec
   module Example
     class Configuration
+      
+      TEST_CASE = ActiveSupport.const_defined?(:TestCase) ? ActiveSupport::TestCase : Test::Unit::TestCase
+      
       # Rails 1.2.3 does a copy of the @inheritable_attributes to the subclass when the subclass is
       # created. This causes an ordering issue when setting state on Configuration because the data is
       # already copied.
@@ -12,7 +15,7 @@ module Spec
       # @inheritable_attributes updated.
       # TODO: BT - When we no longer support Rails 1.2.3, we can remove this functionality
       EXAMPLE_GROUP_CLASSES = [
-        ::ActiveSupport::TestCase,
+        TEST_CASE,
         ::Spec::Rails::Example::RailsExampleGroup,
         ::Spec::Rails::Example::FunctionalExampleGroup,
         ::Spec::Rails::Example::ControllerExampleGroup,
@@ -28,7 +31,7 @@ module Spec
         end
 
         def use_transactional_fixtures
-          ActiveSupport::TestCase.use_transactional_fixtures
+          TEST_CASE.use_transactional_fixtures
         end
         def use_transactional_fixtures=(value)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -37,7 +40,7 @@ module Spec
         end
 
         def use_instantiated_fixtures
-          ActiveSupport::TestCase.use_instantiated_fixtures
+          TEST_CASE.use_instantiated_fixtures
         end
         def use_instantiated_fixtures=(value)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -46,7 +49,7 @@ module Spec
         end
 
         def fixture_path
-          ActiveSupport::TestCase.fixture_path
+          TEST_CASE.fixture_path
         end
         def fixture_path=(path)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -55,7 +58,7 @@ module Spec
         end
 
         def global_fixtures
-          ActiveSupport::TestCase.fixture_table_names
+          TEST_CASE.fixture_table_names
         end
         def global_fixtures=(fixtures)
           EXAMPLE_GROUP_CLASSES.each do |example_group|

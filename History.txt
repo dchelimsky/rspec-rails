@@ -1,8 +1,9 @@
 === Maintenance
 
-* 1 major enhancement
+* 2 major enhancements
 
   * support controller and action path params in view specs (Mike Vincent).
+  * use ActiveSupport::TestCase when available, else Test::Unit::TestCase - supports Rails 1.2.6 (Brandon Keepers). Closes #620.
 
 * 2 minor enhancements
 
