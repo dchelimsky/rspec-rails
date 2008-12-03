@@ -9,18 +9,18 @@ module Spec
       end
 
       describe "#use_transactional_fixtures" do
-        it "should return Test::Unit::TestCase.use_transactional_fixtures" do
-          config.use_transactional_fixtures.should == Test::Unit::TestCase.use_transactional_fixtures
+        it "should return ActiveSupport::TestCase.use_transactional_fixtures" do
+          config.use_transactional_fixtures.should == ActiveSupport::TestCase.use_transactional_fixtures
         end
 
-        it "should set Test::Unit::TestCase.use_transactional_fixtures to false" do
+        it "should set ActiveSupport::TestCase.use_transactional_fixtures to false" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_transactional_fixtures=).with(false)
           end
           config.use_transactional_fixtures = false
         end
 
-        it "should set Test::Unit::TestCase.use_transactional_fixtures to true" do
+        it "should set ActiveSupport::TestCase.use_transactional_fixtures to true" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_transactional_fixtures=).with(true)
           end
@@ -29,18 +29,18 @@ module Spec
       end
 
       describe "#use_instantiated_fixtures" do
-        it "should return Test::Unit::TestCase.use_transactional_fixtures" do
-          config.use_instantiated_fixtures.should == Test::Unit::TestCase.use_instantiated_fixtures
+        it "should return ActiveSupport::TestCase.use_transactional_fixtures" do
+          config.use_instantiated_fixtures.should == ActiveSupport::TestCase.use_instantiated_fixtures
         end
 
-        it "should set Test::Unit::TestCase.use_instantiated_fixtures to false" do
+        it "should set ActiveSupport::TestCase.use_instantiated_fixtures to false" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_instantiated_fixtures=).with(false)
           end
           config.use_instantiated_fixtures = false
         end
 
-        it "should set Test::Unit::TestCase.use_instantiated_fixtures to true" do
+        it "should set ActiveSupport::TestCase.use_instantiated_fixtures to true" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_instantiated_fixtures=).with(true)
           end

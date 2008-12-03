@@ -8,7 +8,7 @@ module Spec
   module Rails
 
     module Example
-      class RailsExampleGroup < Test::Unit::TestCase
+      class RailsExampleGroup < ActiveSupport::TestCase
         
         # Rails >= r8570 uses setup/teardown_fixtures explicitly
         # However, Rails >= r8664 extracted these out to use ActiveSupport::Callbacks.
@@ -24,6 +24,7 @@ module Spec
         
         include Spec::Rails::Matchers
         include Spec::Rails::Mocks
+        include ActionController::Assertions::SelectorAssertions
         
         Spec::Example::ExampleGroupFactory.default(self)
         

@@ -1,4 +1,6 @@
 require 'spec/example/configuration'
+require 'test_help'
+
 begin
 module Spec
   module Example
@@ -10,7 +12,7 @@ module Spec
       # @inheritable_attributes updated.
       # TODO: BT - When we no longer support Rails 1.2.3, we can remove this functionality
       EXAMPLE_GROUP_CLASSES = [
-        ::Test::Unit::TestCase,
+        ::ActiveSupport::TestCase,
         ::Spec::Rails::Example::RailsExampleGroup,
         ::Spec::Rails::Example::FunctionalExampleGroup,
         ::Spec::Rails::Example::ControllerExampleGroup,
@@ -26,7 +28,7 @@ module Spec
         end
 
         def use_transactional_fixtures
-          Test::Unit::TestCase.use_transactional_fixtures
+          ActiveSupport::TestCase.use_transactional_fixtures
         end
         def use_transactional_fixtures=(value)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -35,7 +37,7 @@ module Spec
         end
 
         def use_instantiated_fixtures
-          Test::Unit::TestCase.use_instantiated_fixtures
+          ActiveSupport::TestCase.use_instantiated_fixtures
         end
         def use_instantiated_fixtures=(value)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -44,7 +46,7 @@ module Spec
         end
 
         def fixture_path
-          Test::Unit::TestCase.fixture_path
+          ActiveSupport::TestCase.fixture_path
         end
         def fixture_path=(path)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
@@ -53,7 +55,7 @@ module Spec
         end
 
         def global_fixtures
-          ::Test::Unit::TestCase.fixture_table_names
+          ActiveSupport::TestCase.fixture_table_names
         end
         def global_fixtures=(fixtures)
           EXAMPLE_GROUP_CLASSES.each do |example_group|
