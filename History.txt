@@ -10,9 +10,10 @@
   * improve rdoc for render_template (Patch from Andrew Premdas). Fixes #571.
   * use more liberal globs to allow for specs in symlinked dirs (Martin Luder). Closes #361.
   
-* 1 bug fix
+* 2 bug fixex
 
   * Attempt to load application_controller before falling back to application (Geoff Garside). Closes #626.
+  * Include _id and reduce quoting of default values in view specs (Steen Lehmann). Closes #598.
 
 === Version 1.1.11 / 2008-10-24
 
