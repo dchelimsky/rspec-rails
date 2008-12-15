@@ -3,7 +3,6 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
-UPGRADE
 generators/rspec/CHANGES
 generators/rspec/rspec_generator.rb
 generators/rspec/templates/all_stories.rb
