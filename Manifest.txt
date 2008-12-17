@@ -147,6 +147,7 @@ spec/resources/views/view_spec/explicit_helper.rhtml
 spec/resources/views/view_spec/foo/show.rhtml
 spec/resources/views/view_spec/implicit_helper.rhtml
 spec/resources/views/view_spec/multiple_helpers.rhtml
+spec/resources/views/view_spec/path_params.html.erb
 spec/resources/views/view_spec/should_not_receive.rhtml
 spec/resources/views/view_spec/template_with_partial.rhtml
 spec/resources/views/view_spec/template_with_partial_using_collection.rhtml
