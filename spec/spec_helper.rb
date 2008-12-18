@@ -50,6 +50,7 @@ Spec::Runner.configure do |config|
 end
 
 
+ActionController::Routing::Routes.clear! # only since we're drawing routes here
 ActionController::Routing::Routes.draw do |map|
   map.resources :rspec_on_rails_specs
   map.connect 'custom_route', :controller => 'custom_route_spec', :action => 'custom_route'
