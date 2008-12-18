@@ -5,10 +5,11 @@
   * support controller and action path params in view specs (Mike Vincent).
   * use ActiveSupport::TestCase when available, else Test::Unit::TestCase - supports Rails 1.2.6 (Brandon Keepers). Closes #620.
 
-* 2 minor enhancements
+* 3 minor enhancements
 
   * improve rdoc for render_template (Patch from Andrew Premdas). Fixes #571.
   * use more liberal globs to allow for specs in symlinked dirs (Martin Luder). Closes #361.
+  * Enable loading fixtures from arbitrary locations (Jacek Becela). Closes #464.
   
 * 3 bug fixes
 
