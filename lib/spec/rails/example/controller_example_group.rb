@@ -202,6 +202,16 @@ module Spec
                     @_first_render ||= args[0] unless args[0] =~ /^layouts/
                     PickedTemplate.new
                   end
+                  
+                  define_method :render do |*args|
+                    if @_rendered
+                      opts = args[0]
+                      (@_rendered[:template] ||= opts[:file]) if opts[:file]
+                      (@_rendered[:partials][opts[:partial]] += 1) if opts[:partial]
+                    else
+                      super
+                    end
+                  end
                 end
               end
             end

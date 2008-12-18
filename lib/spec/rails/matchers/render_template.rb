@@ -10,9 +10,19 @@ module Spec
         end
       
         def matches?(response)
-          
           if response.respond_to?(:rendered_file)
             @actual = response.rendered_file
+          elsif response.respond_to?(:rendered)
+            case template = response.rendered[:template]
+            when nil
+              unless response.rendered[:partials].empty?
+                @actual = "_" << response.rendered[:partials].keys.first
+              end
+            when ActionView::Template
+              @actual = template.path
+            when String
+              @actual = template
+            end
           else
             @actual = response.rendered_template.to_s
           end
