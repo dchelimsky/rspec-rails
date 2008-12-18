@@ -16,7 +16,7 @@ module Spec
             case template = response.rendered[:template]
             when nil
               unless response.rendered[:partials].empty?
-                @actual = "_" << response.rendered[:partials].keys.first
+                @actual = path_and_file(response.rendered[:partials].keys.first).join("/_")
               end
             when ActionView::Template
               @actual = template.path
