@@ -95,6 +95,7 @@ begin
           
           (ENV['FIXTURES'] ? ENV['FIXTURES'].split(/,/).map {|f| File.join(fixtures_dir, f) } : Dir.glob(File.join(fixtures_dir, '*.{yml,csv}'))).each do |fixture_file|
             Fixtures.create_fixtures(File.dirname(fixture_file), File.basename(fixture_file, '.*'))
+          end
         end
       end
     end
