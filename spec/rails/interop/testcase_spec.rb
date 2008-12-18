@@ -17,6 +17,10 @@ if ActiveSupport.const_defined?(:Callbacks) && Test::Unit::TestCase.include?(Act
     def self.run?
       @@has_been_run
     end
+
+    def self.run(options=Spec::Runner.options)
+      super options
+    end
     
     def do_some_setup
       @@setup_callback_count += 1
