@@ -149,13 +149,9 @@ rescue MissingSourceFile
   # ... otherwise, do this:
   raise <<-MSG
 
-  You have rspec-rails rake tasks installed in
+  You have rspec rake tasks installed in
   #{__FILE__},
-  but rspec-rails is not configured as a gem in
-  config/environment.rb
-
-  Either remove #{__FILE__}
-  or configure the rspec-rails gem in config/environment.rb.
+  but rspec can not be found in vendor/gems, vendor/plugins or on the system.
 
 MSG
 end
