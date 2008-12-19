@@ -11,19 +11,15 @@ module Spec
 
         def matches?(actual)
           @actual = actual
-          if @actual.respond_to?(:errors)
-            @actual.valid?
-          else
-            @using_be_matcher = true
-            @matcher.matches? @actual
-          end
+          @matcher.matches? @actual
         end
       
         def failure_message
-          if @using_be_matcher
-            @matcher.failure_message
+          if @actual.respond_to?(:errors) &&
+              ActiveRecord::Errors === @actual.errors
+            "Expected #{@actual.inspect} to be valid, but it was not\nErrors: " + @actual.errors.full_messages.join(", ")            
           else
-            "Expected #{@actual.inspect} to be valid, but it was not\nErrors: " + @actual.errors.full_messages.join(", ")
+            @matcher.failure_message
           end
         end
         

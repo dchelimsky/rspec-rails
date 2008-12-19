@@ -13,13 +13,14 @@ describe "be_valid" do
     CanBeValid.new(false).should_not be_valid
   end
 
-  class HasErrors
-    def initialize
+  class CanHaveErrors
+    def initialize(errors)
+      @valid = !errors
       @errors = ActiveRecord::Errors.new self
       @errors.add :name, "is too short"
     end
     attr_reader :errors
-    def valid?; false end
+    def valid?; @valid end
 
     def self.human_attribute_name(ignore)
       "Name"
@@ -28,7 +29,7 @@ describe "be_valid" do
 
   it "should show errors in the output if they're available" do
     lambda { 
-      HasErrors.new.should be_valid
+      CanHaveErrors.new(true).should be_valid
     }.should fail_with(/Name is too short/)
   end
 end
