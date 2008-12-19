@@ -3,6 +3,9 @@ License.txt
 Manifest.txt
 README.txt
 Rakefile
+features/step_definitions/people.rb
+features/support/env.rb
+features/transactions/transactions_should_rollback.feature
 generators/rspec/CHANGES
 generators/rspec/rspec_generator.rb
 generators/rspec/templates/all_stories.rb
@@ -153,9 +156,3 @@ spec/resources/views/view_spec/template_with_partial.rhtml
 spec/resources/views/view_spec/template_with_partial_using_collection.rhtml
 spec/resources/views/view_spec/template_with_partial_with_array.rhtml
 spec/spec_helper.rb
-stories/all.rb
-stories/configuration/stories.rb
-stories/helper.rb
-stories/steps/people.rb
-stories/transactions_should_rollback
-stories/transactions_should_rollback.rb
