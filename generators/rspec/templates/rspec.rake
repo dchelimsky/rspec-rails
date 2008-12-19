@@ -1,11 +1,18 @@
-raise "To avoid rake task loading problems: run 'rake clobber' in vendor/plugins/rspec" if File.directory?(File.join(File.dirname(__FILE__), *%w[.. .. vendor plugins rspec pkg]))
-raise "To avoid rake task loading problems: run 'rake clobber' in vendor/plugins/rspec-rails" if File.directory?(File.join(File.dirname(__FILE__), *%w[.. .. vendor plugins rspec-rails pkg]))
+rspec_gem_dir = nil
+Dir["#{RAILS_ROOT}/vendor/gems/*"].each do |subdir|
+  rspec_gem_dir = subdir if subdir.gsub("#{RAILS_ROOT}/vendor/gems/","") =~ /rspec-(\d+)/
+end
+rspec_plugin_dir = File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/rspec')
 
-# In rails 1.2, plugins aren't available in the path until they're loaded.
-# Check to see if the rspec plugin is installed first and require
-# it if it is.  If not, use the gem version.
-rspec_base = File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/rspec/lib')
-$LOAD_PATH.unshift(rspec_base) if File.exist?(rspec_base)
+if rspec_gem_dir && (test ?d, rspec_plugin_dir)
+  raise "\n#{'*'*50}\nYou have rspec installed in both vendor/gems and vendor/plugins\nPlease pick one and dispose of the other.\n#{'*'*50}\n\n"
+end
+
+if rspec_gem_dir
+  $LOAD_PATH.unshift("#{rspec_gem_dir}/lib") 
+elsif File.exist?(rspec_plugin_dir)
+  $LOAD_PATH.unshift("#{rspec_plugin_dir}/lib")
+end
 
 begin
   require 'spec/rake/spectask'
