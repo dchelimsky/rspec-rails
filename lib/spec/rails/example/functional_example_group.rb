@@ -21,7 +21,7 @@ module Spec
         end
 
         def flash
-          response.flash
+          @controller.__send__ :flash
         end
 
         def session
@@ -71,7 +71,7 @@ module Spec
         #   assigns[:registration].should == Thing.new
         #--
         # NOTE - Even though docs only use assigns[:key] format, this supports
-        # assigns(:key) in order to avoid breaking old specs.
+        # assigns(:key) for backwards compatibility.
         #++
         def assigns(key = nil)
           if key.nil?
