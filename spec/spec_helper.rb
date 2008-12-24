@@ -14,6 +14,10 @@ require File.expand_path("#{dir}/resources/helpers/more_explicit_helper")
 require File.expand_path("#{dir}/resources/helpers/view_spec_helper")
 require File.expand_path("#{dir}/resources/helpers/plugin_application_helper")
 
+require File.expand_path("#{dir}/resources/models/animal")
+require File.expand_path("#{dir}/resources/models/person")
+require File.expand_path("#{dir}/resources/models/thing")
+
 extra_controller_paths = File.expand_path("#{dir}/resources/controllers")
 
 unless ActionController::Routing.controller_paths.include?(extra_controller_paths)

@@ -9,3 +9,5 @@ Cucumber::Rails.use_transactional_fixtures
 # Comment out the next two lines if you're not using RSpec's matchers (should / should_not) in your steps.
 require 'cucumber/rails/rspec'
 # require 'webrat/rspec-rails'
+
+require File.join(File.dirname(__FILE__), "/../../spec/resources/models/person")
