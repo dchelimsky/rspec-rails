@@ -30,21 +30,8 @@ module Spec
       end
 
       # :call-seq:
-      #   response.should have_text(expected)
-      #   response.should_not have_text(expected)
-      #
-      # Accepts a String or a Regexp, matching a String using ==
-      # and a Regexp using =~.
-      #
-      # If response_or_text has a #body, then that is used as to match against
-      # else it uses response_or_text
-      #
-      # Use this instead of <tt>response.should have_tag()</tt>
-      # when you want to match the whole string or whole body
-      #
-      # == Examples
-      #
-      #   response.should have_text("This is the expected text")
+      #   response.should be_valid
+      #   response.should_not be_valid
       def be_valid
         ArBeValid.new
       end
