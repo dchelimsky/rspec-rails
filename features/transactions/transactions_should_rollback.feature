@@ -5,11 +5,12 @@ Story: transactions should rollback in plain text
 
   Scenario: add one Person
     When I add a Person
+    Then there should be one person
 
-  Scenario: add another person
-    GivenScenario: add one Person
+  Scenario: add one Person for the second time
+    When I add a Person
     Then there should be one person
 
   Scenario: add yet another person
-    GivenScenario: add one Person
+    When I add a Person
     Then there should be one person

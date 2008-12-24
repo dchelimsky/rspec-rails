@@ -1,6 +1,11 @@
 require 'rubygems'
 require 'hoe'
 require './lib/spec/rails/version'
+require 'cucumber/rake/task'
+
+$:.unshift(File.join(File.dirname(__FILE__), "/../rspec/lib"))
+
+require 'spec/rake/spectask'
 
 class Hoe
   def extra_deps
@@ -38,3 +43,13 @@ task :release => [:clean, :package] do |t|
     rubyforge.add_file('rspec', 'rspec', Spec::Rails::VERSION::STRING, file)
   end
 end
+
+task :spec do
+  system "spec spec"
+end
+
+Spec::Rake::SpecTask.new
+
+Cucumber::Rake::Task.new
+
+task :default => [:features]
