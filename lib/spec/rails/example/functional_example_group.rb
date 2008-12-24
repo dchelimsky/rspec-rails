@@ -7,7 +7,7 @@ module Spec
 
         attr_reader :request, :response
         before(:each) do
-          @controller_class = Object.path2class @controller_class_name
+          @controller_class = @controller_class_name.split('::').inject(Object) { |k,n| k.const_get n }
           raise "Can't determine controller class for #{@controller_class_name}" if @controller_class.nil?
 
           @controller = @controller_class.new
@@ -15,7 +15,7 @@ module Spec
           @response = ActionController::TestResponse.new
           @response.session = @request.session
         end
-
+        
         def params
           request.parameters
         end
