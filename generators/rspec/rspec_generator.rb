@@ -24,10 +24,6 @@ class RspecGenerator < Rails::Generator::Base
       m.file      'rcov.opts',                     'spec/rcov.opts'
       m.file      'spec.opts',                     'spec/spec.opts'
       m.template  'spec_helper.rb',                'spec/spec_helper.rb'
-
-      m.directory 'stories'
-      m.file      'all_stories.rb',                'stories/all.rb'
-      m.file      'stories_helper.rb',             'stories/helper.rb'
     end
   end
 
