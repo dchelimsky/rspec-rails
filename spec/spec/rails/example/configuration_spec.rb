@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
 module Spec
-  module Example
+  module Runner
     describe Configuration do
 
       def config
@@ -9,18 +9,18 @@ module Spec
       end
 
       describe "#use_transactional_fixtures" do
-        it "should return #{Spec::Example::Configuration::TEST_CASE}.use_transactional_fixtures" do
-          config.use_transactional_fixtures.should == Spec::Example::Configuration::TEST_CASE.use_transactional_fixtures
+        it "should return #{Spec::Runner::Configuration::TEST_CASE}.use_transactional_fixtures" do
+          config.use_transactional_fixtures.should == Spec::Runner::Configuration::TEST_CASE.use_transactional_fixtures
         end
 
-        it "should set #{Spec::Example::Configuration::TEST_CASE}.use_transactional_fixtures to false" do
+        it "should set #{Spec::Runner::Configuration::TEST_CASE}.use_transactional_fixtures to false" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_transactional_fixtures=).with(false)
           end
           config.use_transactional_fixtures = false
         end
 
-        it "should set #{Spec::Example::Configuration::TEST_CASE}.use_transactional_fixtures to true" do
+        it "should set #{Spec::Runner::Configuration::TEST_CASE}.use_transactional_fixtures to true" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_transactional_fixtures=).with(true)
           end
@@ -29,18 +29,18 @@ module Spec
       end
 
       describe "#use_instantiated_fixtures" do
-        it "should return #{Spec::Example::Configuration::TEST_CASE}.use_transactional_fixtures" do
-          config.use_instantiated_fixtures.should == Spec::Example::Configuration::TEST_CASE.use_instantiated_fixtures
+        it "should return #{Spec::Runner::Configuration::TEST_CASE}.use_transactional_fixtures" do
+          config.use_instantiated_fixtures.should == Spec::Runner::Configuration::TEST_CASE.use_instantiated_fixtures
         end
 
-        it "should set #{Spec::Example::Configuration::TEST_CASE}.use_instantiated_fixtures to false" do
+        it "should set #{Spec::Runner::Configuration::TEST_CASE}.use_instantiated_fixtures to false" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_instantiated_fixtures=).with(false)
           end
           config.use_instantiated_fixtures = false
         end
 
-        it "should set #{Spec::Example::Configuration::TEST_CASE}.use_instantiated_fixtures to true" do
+        it "should set #{Spec::Runner::Configuration::TEST_CASE}.use_instantiated_fixtures to true" do
           Configuration::EXAMPLE_GROUP_CLASSES.each do |example_group|
             example_group.should_receive(:use_instantiated_fixtures=).with(true)
           end

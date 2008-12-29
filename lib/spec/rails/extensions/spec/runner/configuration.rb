@@ -1,9 +1,9 @@
-require 'spec/example/configuration'
+require 'spec/runner/configuration'
 require 'test_help'
 
 begin
 module Spec
-  module Example
+  module Runner
     class Configuration
       
       TEST_CASE = ActiveSupport.const_defined?(:TestCase) ? ActiveSupport::TestCase : Test::Unit::TestCase
