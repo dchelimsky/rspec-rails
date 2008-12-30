@@ -3,6 +3,7 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
 class CookiesProxyExamplesController < ActionController::Base
   def index
     cookies[:key] = cookies[:key]
+    render :text => ""
   end
 end
 
@@ -18,18 +19,26 @@ module Spec
             cookies = CookiesProxy.new(self)
             cookies['key'] = 'value'
             get :index
-            cookies['key'].should == ['value']
+            if ::Rails::VERSION::STRING >= "2.3"
+              cookies['key'].should == 'value'
+            else
+              cookies['key'].should == ['value']
+            end
           end
           
-          if Rails::VERSION::STRING >= "2.0.0"
+          if ::Rails::VERSION::STRING >= "2.0.0"
             it "should accept a Hash value" do
               cookies = CookiesProxy.new(self)
               cookies['key'] = { :value => 'value', :expires => expiration = 1.hour.from_now, :path => path = '/path' }
               get :index
-              cookies['key'].should == ['value']
-              cookies['key'].value.should == ['value']
-              cookies['key'].expires.should == expiration
-              cookies['key'].path.should == path
+              if ::Rails::VERSION::STRING >= "2.3"
+                cookies['key'].should == 'value'
+              else
+                cookies['key'].should == ['value']
+                cookies['key'].value.should == ['value']
+                cookies['key'].expires.should == expiration
+                cookies['key'].path.should == path
+              end
             end
           end
             
@@ -41,18 +50,26 @@ module Spec
             example_cookies = CookiesProxy.new(self)
             example_cookies[:key] = 'value'
             get :index
-            example_cookies[:key].should == ['value']
+            if ::Rails::VERSION::STRING >= "2.3"
+              example_cookies[:key].should == 'value'
+            else
+              example_cookies[:key].should == ['value']
+            end
           end
 
-          if Rails::VERSION::STRING >= "2.0.0"
+          if ::Rails::VERSION::STRING >= "2.0.0"
             it "should accept a Hash value" do
               example_cookies = CookiesProxy.new(self)
               example_cookies[:key] = { :value => 'value', :expires => expiration = 1.hour.from_now, :path => path = '/path' }
               get :index
-              example_cookies[:key].should == ['value']
-              example_cookies[:key].value.should == ['value']
-              example_cookies[:key].expires.should == expiration
-              example_cookies[:key].path.should == path
+              if ::Rails::VERSION::STRING >= "2.3"
+                example_cookies[:key].should == 'value'
+              else
+                example_cookies[:key].should == ['value']
+                example_cookies[:key].value.should == ['value']
+                example_cookies[:key].expires.should == expiration
+                example_cookies[:key].path.should == path
+              end
             end
           end
 

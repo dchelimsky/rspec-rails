@@ -44,11 +44,23 @@ module Spec
         #   post :login
         #   cookies[:login].expires.should == 1.week.from_now
         #
-        # == Examples (Rails >= 2.0.0 only)
+        # == Examples (Rails 2.0 > 2.2)
         #
         #   cookies[:user_id] = {:value => '1234', :expires => 1.minute.ago}
         #   get :index
         #   response.should be_redirect
+        #
+        # == Examples (Rails 2.3)
+        #
+        # Rails 2.3 changes the way cookies are made available to functional
+        # tests (and therefore rspec controller specs), only making single
+        # values available with no access to other aspects of the cookie. This
+        # is backwards-incompatible, so you have to change your examples to
+        # look like this:
+        #
+        #   cookies[:foo] = 'bar'
+        #   get :index
+        #   cookies[:foo].should == 'bar'
         def cookies
           @cookies ||= Spec::Rails::Example::CookiesProxy.new(self)
         end

@@ -144,12 +144,20 @@ require 'controller_spec_controller'
   
       it "should support a Symbol key" do
         get 'action_which_sets_cookie', :value => "cookie value"
-        cookies[:cookie_key].value.should == ["cookie value"]
+        if Rails::VERSION::STRING >= "2.3"
+          cookies[:cookie_key].should == "cookie+value"
+        else
+          cookies[:cookie_key].should == ["cookie value"]
+        end
       end
 
       it "should support a String key" do
         get 'action_which_sets_cookie', :value => "cookie value"
-        cookies['cookie_key'].value.should == ["cookie value"]
+        if Rails::VERSION::STRING >= "2.3"
+          cookies['cookie_key'].should == "cookie+value"
+        else
+          cookies['cookie_key'].should == ["cookie value"]
+        end
       end
     
     end
