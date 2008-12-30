@@ -1,5 +1,9 @@
 === Maintenance
 
+* 1 deprecation
+
+  * TestResponse#[] is deprecated if you're using Rails <= 2.2.x and removed if you're using Rails 2.3
+
 * 2 major enhancements
 
   * support controller and action path params in view specs (Mike Vincent).
