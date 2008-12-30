@@ -34,12 +34,10 @@ describe "a controller spec running in integration mode", :type => :controller d
   it "should choke if the template doesn't exist" do
     error = defined?(ActionController::MissingTemplate) ? ActionController::MissingTemplate : ActionView::MissingTemplate    
     lambda { get 'some_action' }.should raise_error(error)
-    response.should_not be_success
   end
 
   it "should choke if the template has errors" do
     lambda { get 'action_with_errors_in_template' }.should raise_error(ActionView::TemplateError)
-    response.should_not be_success
   end
   
   describe "nested" do
