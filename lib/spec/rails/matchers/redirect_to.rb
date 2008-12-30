@@ -81,6 +81,8 @@ module Spec
           def self.parse_query_parameters(query, request)
             if defined?(CGIMethods)
               CGIMethods.parse_query_parameters(query)
+            elsif defined?(ActionController::RequestParser)
+              ActionController::RequestParser.parse_query_parameters(query)
             else
               request.class.parse_query_parameters(query)
             end
