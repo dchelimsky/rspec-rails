@@ -44,10 +44,6 @@ task :release => [:clean, :package] do |t|
   end
 end
 
-task :spec do
-  system "spec spec"
-end
-
 Spec::Rake::SpecTask.new
 
 Cucumber::Rake::Task.new

@@ -51,14 +51,14 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       post 'some_action'
       lambda do
         response.should render_template('non_existent_template')
-      end.should fail_with(/expected \"non_existent_template\", got \"render_spec\/some_action(.rhtml)?\"/)
+      end.should fail_with(/expected \"non_existent_template\", got \"render_spec\/some_action(\.html\.erb)?\"/)
     end
   
     it "should fail without full path when template is associated with a different controller" do
       post 'action_which_renders_template_from_other_controller'
       lambda do
         response.should render_template('action_with_template')
-      end.should fail_with(/expected \"action_with_template\", got \"controller_spec\/action_with_template(.rhtml)?\"/)
+      end.should fail_with(/expected \"action_with_template\", got \"controller_spec\/action_with_template(\.rhtml)?\"/)
     end
   
     it "should fail with incorrect full path when template is associated with a different controller" do
@@ -72,7 +72,7 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       get 'some_action'
       lambda {
         response.should render_template('render_spec/some_action.rjs')
-      }.should fail_with(/expected \"render_spec\/some_action\.rjs\", got \"render_spec\/some_action(\.rhtml)?\"/)
+      }.should fail_with(/expected \"render_spec\/some_action\.rjs\", got \"render_spec\/some_action(\.html\.erb)?\"/)
     end
   
     it "should fail when TEXT is rendered" do
