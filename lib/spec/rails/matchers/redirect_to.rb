@@ -74,7 +74,7 @@ module Spec
         end
 
         def description
-          "redirect to #{@actual.inspect}"
+          "redirect to #{@expected.inspect}"
         end
 
         class QueryParameterParser

@@ -88,6 +88,10 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
         response.should render_template('action_with_alternate_layout')
       end
     end
+    
+    it "provides a description" do
+      render_template("foo/bar").description.should == %q|render template "foo/bar"|
+    end
   end
   
   describe "response.should_not render_template (in #{mode} mode)",

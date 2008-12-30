@@ -204,6 +204,10 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
         response.should redirect_to(route)
       }.should raise_error(ActionController::RoutingError, /(no route found to match|No route matches) \"\/nonexistant\/none\" with \{\}/)
     end
+    
+    it "provides a description" do
+      redirect_to("foo/bar").description.should == %q|redirect to "foo/bar"|
+    end
 
   end
 end
