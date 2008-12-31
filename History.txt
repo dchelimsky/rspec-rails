@@ -1,8 +1,9 @@
 === Maintenance
 
-* 1 deprecation
+* 2 deprecations
 
   * TestResponse#[] is deprecated if you're using Rails <= 2.2.x and removed if you're using Rails 2.3
+  * add_stubs(model, {:method => value}) is deprecated. Use model.stub!(:method => value) instead.
 
 * 2 major enhancements
 
