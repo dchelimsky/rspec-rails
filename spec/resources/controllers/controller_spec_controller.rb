@@ -6,12 +6,8 @@ class ControllerSpecController < ActionController::Base
   end
   
   skip_before_filter :raise_error
-  
-  if ['edge','2.0.0'].include?(ENV['RSPEC_RAILS_VERSION'])
-    set_view_path [File.join(File.dirname(__FILE__), "..", "views")]
-  else
-    set_view_path File.join(File.dirname(__FILE__), "..", "views")
-  end
+
+  set_view_path File.join(File.dirname(__FILE__), "..", "views")
   
   def some_action
     render :template => "template/that/does/not/actually/exist"
