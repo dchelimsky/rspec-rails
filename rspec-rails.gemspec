@@ -24,13 +24,13 @@ Gem::Specification.new do |s|
     s.specification_version = 2
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rspec>, ["= 1.1.11.5"])
+      s.add_runtime_dependency(%q<dchelimsky-rspec>, ["= 1.1.11.5"])
       s.add_development_dependency(%q<cucumber>, [">= 0.1.13"])
       s.add_development_dependency(%q<hoe>, [">= 1.8.2"])
     else
-      s.add_dependency(%q<rspec>, ["= 1.1.11.5"])
+      s.add_dependency(%q<dchelimsky-rspec>, ["= 1.1.11.5"])
     end
   else
-    s.add_dependency(%q<rspec>, ["= 1.1.11.5"])
+    s.add_dependency(%q<dchelimsky-rspec>, ["= 1.1.11.5"])
   end
 end
