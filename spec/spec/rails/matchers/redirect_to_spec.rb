@@ -202,11 +202,16 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       route = {:controller => "nonexistant", :action => "none"}
       lambda {
         response.should redirect_to(route)
-      }.should raise_error(ActionController::RoutingError, /(no route found to match|No route matches) \"\/nonexistant\/none\" with \{\}/)
+      }.should raise_error(ActionController::RoutingError, /(no route found to match|No route matches) \"\/nonexistant\/none\" with \{.*\}/)
     end
     
     it "provides a description" do
       redirect_to("foo/bar").description.should == %q|redirect to "foo/bar"|
+    end
+
+    it "redirects to action with http method restriction" do
+      post 'action_to_redirect_to_action_with_method_restriction'
+      response.should redirect_to(:action => 'action_with_method_restriction')
     end
 
   end

@@ -40,7 +40,7 @@ module Spec
 
         def path_hash(url)
           path = url.sub(%r{^\w+://#{@request.host}(?::\d+)?}, "").split("?", 2)[0]
-          ActionController::Routing::Routes.recognize_path path
+          ActionController::Routing::Routes.recognize_path path, { :method => :get }
         end
 
         def query_hash(url)
