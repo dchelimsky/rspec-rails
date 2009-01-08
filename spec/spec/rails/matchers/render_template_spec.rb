@@ -30,7 +30,11 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
   
     it "should match an rjs template" do
       xhr :post, 'some_action'
-      response.should render_template('render_spec/some_action')
+      if Rails::VERSION::STRING < "2.0.0"
+        response.should render_template('render_spec/some_action.rjs')
+      else
+        response.should render_template('render_spec/some_action')
+      end
     end
   
     it "should match a partial template (simple path)" do

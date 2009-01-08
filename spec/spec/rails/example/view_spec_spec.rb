@@ -149,16 +149,18 @@ describe "A view that includes a partial using :collection and :spacer_template"
 
 end
 
-describe "A view that includes a partial using an array as partial_path", :type => :view do
-  before(:each) do
-    renderable_object = Object.new
-    renderable_object.stub!(:name).and_return("Renderable Object")
-    assigns[:array] = [renderable_object]
-  end
+if Rails::VERSION::MAJOR >= 2
+  describe "A view that includes a partial using an array as partial_path", :type => :view do
+    before(:each) do
+      renderable_object = Object.new
+      renderable_object.stub!(:name).and_return("Renderable Object")
+      assigns[:array] = [renderable_object]
+    end
 
-  it "should render the array passed through to render_partial without modification" do
-    render "view_spec/template_with_partial_with_array" 
-    response.body.should match(/^Renderable Object$/)
+    it "should render the array passed through to render_partial without modification" do
+      render "view_spec/template_with_partial_with_array" 
+      response.body.should match(/^Renderable Object$/)
+    end
   end
 end
 

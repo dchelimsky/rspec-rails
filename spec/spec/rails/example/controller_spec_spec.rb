@@ -131,9 +131,11 @@ require 'controller_spec_controller'
         get 'action_which_gets_cookie', :expected => "cookie value"
       end
       
-      it "should support a Hash value" do
-        cookies[:cookie_key] = {'value' => 'cookie value', 'path' => '/not/default'}
-        get 'action_which_gets_cookie', :expected => {'value' => 'cookie value', 'path' => '/not/default'}
+      if Rails::VERSION::STRING >= "2.0.0"
+        it "should support a Hash value" do
+          cookies[:cookie_key] = {'value' => 'cookie value', 'path' => '/not/default'}
+          get 'action_which_gets_cookie', :expected => {'value' => 'cookie value', 'path' => '/not/default'}
+        end
       end
       
     end

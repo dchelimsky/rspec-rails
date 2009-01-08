@@ -177,7 +177,9 @@ module Spec
           # allowing Controller Examples to run in two modes, freely switching
           # from context to context.
           def render(options=nil, deprecated_status_or_extra_options=nil, &block)
-            deprecated_status_or_extra_options ||= {}
+            if ::Rails::VERSION::STRING >= '2.0.0' && deprecated_status_or_extra_options.nil?
+              deprecated_status_or_extra_options = {}
+            end
               
             unless block_given?
               unless integrate_views?
