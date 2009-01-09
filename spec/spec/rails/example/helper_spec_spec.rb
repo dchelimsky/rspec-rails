@@ -157,6 +157,17 @@ module Spec
         end
       end
       
+      describe HelperExampleGroup, "using a helper that tries to access @template", :type => :helper do
+        helper_name :explicit
+
+        it "should not raise an error" do
+          lambda { method_using_template }.should_not raise_error
+        end
+
+        it "should have the correct output" do
+          method_using_template.should have_text(/#some_id/)
+        end
+      end
     end
   end
 end
