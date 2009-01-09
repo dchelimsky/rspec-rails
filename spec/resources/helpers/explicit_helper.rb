@@ -43,4 +43,5 @@ module ExplicitHelper
   def method_using_template
     update_page { |p| p["#some_id"].replace_html "" }
   end
+
 end
