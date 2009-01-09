@@ -121,6 +121,7 @@ module Spec
           session['flash'] = @flash
           
           @output_buffer = ""
+          @template = helper
           ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
           
           helper.session = session

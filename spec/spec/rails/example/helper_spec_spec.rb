@@ -156,7 +156,7 @@ module Spec
           output_buffer.should == "the_text_from_concat"
         end
       end
-    
+
       describe HelperExampleGroup, "using a helper that tries to access @template", :type => :helper do
         helper_name :explicit
 
