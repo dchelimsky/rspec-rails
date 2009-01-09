@@ -20,7 +20,7 @@ Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.description = "Behaviour Driven Development for Ruby on Rails."
   p.rubyforge_name = 'rspec'
   p.developer('RSpec Development Team', 'rspec-devel@rubyforge.org')
-  p.extra_deps = [["dchelimsky-rspec","1.1.11.6"]]
+  p.extra_deps = [["rspec","1.1.11.7"]]
   p.extra_dev_deps = [["cucumber",">= 0.1.13"]]
   p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
 end
