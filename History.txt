@@ -11,6 +11,7 @@ IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer s
 
   * support controller and action path params in view specs (Mike Vincent).
   * use ActiveSupport::TestCase when available, else Test::Unit::TestCase - supports Rails 1.2.6 (Brandon Keepers). Closes #620.
+  * support form tag helpers in helpers (Ivo Dancet). Closes #641.
 
 * 3 minor enhancements
 
