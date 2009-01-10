@@ -38,29 +38,9 @@ module Spec
       #
       # == Expecting Errors
       #
-      # Rspec on Rails will raise errors that occur in controller actions.
-      # In contrast, Rails will swallow errors that are raised in controller
-      # actions and return an error code in the header. If you wish to override
-      # Rspec and have Rail's default behaviour,tell the controller to use
-      # rails error handling ...
+      # Rspec on Rails will raise errors that occur in controller actions and
+      # are not rescued or handeled with rescue_from.
       #
-      #   before(:each) do
-      #     controller.use_rails_error_handling!
-      #   end
-      #
-      # When using Rail's error handling, you can expect error codes in headers ...
-      #
-      #   it "should return an error in the header" do
-      #     response.should be_error
-      #   end
-      #
-      #   it "should return a 501" do
-      #     response.response_code.should == 501
-      #   end
-      #
-      #   it "should return a 501" do
-      #     response.code.should == "501"
-      #   end
       class ControllerExampleGroup < FunctionalExampleGroup
         class << self
                     
