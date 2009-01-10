@@ -90,10 +90,8 @@ class ControllerSpecController < ActionController::Base
   class RescuedError < Exception; end
   class UnRescuedError < Exception; end
   
-  if Rails::VERSION::MAJOR >= 2
-    rescue_from RescuedError do |e|
-      render :text => 'Rescued!'
-    end
+  rescue_from RescuedError do |e|
+    render :text => 'Rescued!'
   end
 
   def rescued_error_action
