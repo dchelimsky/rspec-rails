@@ -159,6 +159,27 @@ require 'controller_spec_controller'
       end
     
     end
+    
+    describe "with an error that is not rescued in the controller" do
+      it "should raise the error" do
+        lambda do
+          get 'other_error_action'
+        end.should raise_error(ControllerSpecController::OtherError)
+      end
+    end
+    
+    describe "with an error that is rescued in the controller" do
+      it "should not raise error" do
+        lambda do
+          get 'rescued_error_action'
+        end.should_not raise_error
+      end
+
+      it "should execute rescue_from" do
+        get 'rescued_error_action'
+        response.body.should == 'Rescued!'
+      end
+    end
 
     it "should support custom routes" do
       route_for(:controller => "custom_route_spec", :action => "custom_route").should == "/custom_route"
