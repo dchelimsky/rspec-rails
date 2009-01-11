@@ -18,7 +18,7 @@ IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer s
   * use more liberal globs to allow for specs in symlinked dirs (Martin Luder). Closes #361.
   * Enable loading fixtures from arbitrary locations (Jacek Becela). Closes #464.
   
-* 6 bug fixes
+* 7 bug fixes
 
   * Attempt to load application_controller before falling back to application (Geoff Garside). Closes #626.
   * Include _id and reduce quoting of default values in view specs (Steen Lehmann). Closes #598.
@@ -26,6 +26,7 @@ IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer s
   * config.gem 'rspec' can't be unpacked. Closes #629.
   * spec_server not working with Rails 2.2.2 (Andreas Wolff). Closes #631.
   * redirect_to doesn't work with http method constrained urls (Maxim Kulkin). Closes #648.
+  * rescue_with declarations are no longer by-passed (Brandon Keepers). #85
 
 === Version 1.1.11 / 2008-10-24
 

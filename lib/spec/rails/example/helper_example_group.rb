@@ -161,9 +161,6 @@ module Spec
 
       class HelperExampleGroupController < ApplicationController #:nodoc:
         attr_accessor :request, :url
-
-        # Re-raise errors
-        def rescue_action(e); raise e; end
       end
     end
   end
