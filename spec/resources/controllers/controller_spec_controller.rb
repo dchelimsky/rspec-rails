@@ -88,7 +88,7 @@ class ControllerSpecController < ActionController::Base
   end
   
   class RescuedError < Exception; end
-  class OtherError < Exception; end
+  class UnRescuedError < Exception; end
   rescue_from RescuedError do |e|
     render :text => 'Rescued!'
   end
@@ -98,7 +98,7 @@ class ControllerSpecController < ActionController::Base
   end
   
   def other_error_action
-    raise OtherError
+    raise UnRescuedError
   end
   
 end
