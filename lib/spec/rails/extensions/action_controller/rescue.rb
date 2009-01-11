@@ -9,9 +9,9 @@ module ActionController
     end
 
   protected
-    
+  
     def rescue_action_with_fast_errors(exception)
-      unless rescue_with_handler(exception)
+      unless respond_to?(:rescue_with_handler) and rescue_with_handler(exception)
         if use_rails_error_handling?
           rescue_action_without_fast_errors exception
         else
