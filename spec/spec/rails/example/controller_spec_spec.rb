@@ -176,33 +176,35 @@ require 'controller_spec_controller'
       end
     end
     
-    describe "with an error that is rescued in the controller" do
-      context "without rails' error handling" do
-        it "does not raise error" do
-          lambda do
+    if Rails::VERSION::MAJOR >= 2
+      describe "with an error that is rescued in the controller" do
+        context "without rails' error handling" do
+          it "does not raise error" do
+            lambda do
+              get 'rescued_error_action'
+            end.should_not raise_error
+          end
+
+          it "executes rescue_from" do
             get 'rescued_error_action'
-          end.should_not raise_error
+            response.body.should == 'Rescued!'
+          end
         end
 
-        it "executes rescue_from" do
-          get 'rescued_error_action'
-          response.body.should == 'Rescued!'
-        end
-      end
+        context "with rails' error handling" do
+          before(:each) do
+            controller.use_rails_error_handling!
+          end
+          it "does not raise error" do
+            lambda do
+              get 'rescued_error_action'
+            end.should_not raise_error
+          end
 
-      context "with rails' error handling" do
-        before(:each) do
-          controller.use_rails_error_handling!
-        end
-        it "does not raise error" do
-          lambda do
+          it "executes rescue_from" do
             get 'rescued_error_action'
-          end.should_not raise_error
-        end
-
-        it "executes rescue_from" do
-          get 'rescued_error_action'
-          response.body.should == 'Rescued!'
+            response.body.should == 'Rescued!'
+          end
         end
       end
     end

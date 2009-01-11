@@ -144,16 +144,18 @@ module Spec
         end
       end
       
-      describe HelperExampleGroup, "using a helper that uses output_buffer inside helper", :type => :helper do
-        helper_name :explicit
+      if Rails::VERSION::MAJOR >= 2
+        describe HelperExampleGroup, "using a helper that uses output_buffer inside helper", :type => :helper do
+          helper_name :explicit
 
-        it "should not raise an error" do
-          lambda { method_using_output_buffer }.should_not raise_error
-        end
+          it "should not raise an error" do
+            lambda { method_using_output_buffer }.should_not raise_error
+          end
 
-        it "should put the output in the output_buffer" do
-          method_using_output_buffer
-          output_buffer.should == "the_text_from_concat"
+          it "should put the output in the output_buffer" do
+            method_using_output_buffer
+            output_buffer.should == "the_text_from_concat"
+          end
         end
       end
 
