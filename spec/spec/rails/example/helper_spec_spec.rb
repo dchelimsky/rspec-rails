@@ -112,8 +112,6 @@ module Spec
           ActionView::Helpers::TextHelper,
           ActionView::Helpers::UrlHelper
         ]
-        helpers << ActionView::Helpers::PaginationHelper rescue nil       #removed for 2.0
-        helpers << ActionView::Helpers::JavaScriptMacrosHelper rescue nil #removed for 2.0
         helpers.each do |helper_module|
           it "should include #{helper_module}" do
             self.class.ancestors.should include(helper_module)
