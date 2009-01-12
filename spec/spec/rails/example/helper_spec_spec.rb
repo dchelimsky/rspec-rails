@@ -144,6 +144,12 @@ module Spec
       
       describe HelperExampleGroup, "using a helper that uses output_buffer inside helper", :type => :helper do
         helper_name :explicit
+        
+        before(:each) do
+          if Rails::VERSION::STRING <= "2.1"
+            pending("need to get this new feature working against pre 2.2 versions of rails")
+          end
+        end
 
         it "should not raise an error" do
           lambda { method_using_output_buffer }.should_not raise_error
