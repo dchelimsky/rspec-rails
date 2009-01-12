@@ -1,5 +1,7 @@
 === Maintenance
 
+IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer supporting 1.x versions of rails.
+
 * 1 enhancement
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.

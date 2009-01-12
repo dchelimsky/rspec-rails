@@ -156,10 +156,7 @@ module Spec
           # This gets added to the controller's singleton meta class,
           # allowing Controller Examples to run in two modes, freely switching
           # from context to context.
-          def render(options=nil, deprecated_status_or_extra_options=nil, &block)
-            if ::Rails::VERSION::STRING >= '2.0.0' && deprecated_status_or_extra_options.nil?
-              deprecated_status_or_extra_options = {}
-            end
+          def render(options=nil, &block)
               
             unless block_given?
               unless integrate_views?
@@ -203,7 +200,7 @@ module Spec
               if matching_stub_exists(options)
                 @performed_render = true
               else
-                super(options, deprecated_status_or_extra_options, &block)
+                super(options, &block)
               end
             end
           end

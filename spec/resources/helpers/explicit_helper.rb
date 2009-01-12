@@ -35,7 +35,7 @@ module ExplicitHelper
   def flash_thing
     flash[:thing]
   end
-  
+
   def method_using_output_buffer
     concat("the_text_from_concat")
   end
