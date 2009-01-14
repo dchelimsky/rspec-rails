@@ -2,10 +2,11 @@
 
 IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer supporting 1.x versions of rails.
 
-* 2 enhancements
+* 3 enhancements
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.
   * Initialize current URL before executing any examples in a ViewExampleGroup (Wilson Bilkovich). Closes #654.
+  * Support query strings in params_from (Wilson Bilkovich). Closes #652.
 
 === Version 1.1.12 / 2009-01-11
 

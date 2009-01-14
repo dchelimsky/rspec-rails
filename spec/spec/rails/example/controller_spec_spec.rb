@@ -215,31 +215,45 @@ require 'controller_spec_controller'
       route_for(:controller => "controller_spec", :action => "some_action").should == "/controller_spec/some_action"
     end
 
+    it "should support existing routes with additional parameters" do
+      route_for(:controller => "controller_spec", :action => "some_action", :param => '1').should == "/controller_spec/some_action?param=1"
+    end
+
     it "should generate params for custom routes" do
       params_from(:get, '/custom_route').should == {:controller => "custom_route_spec", :action => "custom_route"}
     end
-    
+
     it "should generate params for existing routes" do
       params_from(:get, '/controller_spec/some_action').should == {:controller => "controller_spec", :action => "some_action"}
     end
-    
+
+    it "should generate params for an existing route with a query parameter" do
+      expected = {:controller => "controller_spec", :action => "some_action", :param => '1'}
+      params_from(:get, '/controller_spec/some_action?param=1').should == expected
+    end
+
+    it "should generate params for an existing route with multiple query parameters" do
+      expected = {:controller => "controller_spec", :action => "some_action", :param1 => '1', :param2 => '2' }
+      params_from(:get, '/controller_spec/some_action?param1=1&param2=2').should == expected
+    end
+
     it "should expose instance vars through the assigns hash" do
       get 'action_setting_the_assigns_hash'
       assigns[:indirect_assigns_key].should == :indirect_assigns_key_value
     end
-    
+
     it "should expose instance vars through the assigns hash that are set to false" do
       get 'action_that_assigns_false_to_a_variable'
       assigns[:a_variable].should be_false
     end
-    
+
     it "should NOT complain when calling should_receive with arguments other than :render" do
       controller.should_receive(:anything_besides_render)
       lambda {
         controller.rspec_verify
       }.should raise_error(Exception, /expected :anything_besides_render/)
     end
-    
+
     it "should not run a skipped before_filter" do
       lambda {
         get 'action_with_skipped_before_filter'

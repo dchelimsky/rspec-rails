@@ -129,11 +129,13 @@ module Spec
         # Uses ActionController::Routing::Routes to parse
         # an incoming path so the parameters it generates can be checked
         # == Example
-        #   params_from(:get, '/registrations/1;edit')
+        #   params_from(:get, '/registrations/1/edit')
         #     => :controller => 'registrations', :action => 'edit', :id => 1
         def params_from(method, path)
           ensure_that_routes_are_loaded
-          ActionController::Routing::Routes.recognize_path(path, :method => method)
+          path, querystring = path.split('?')
+          params = ActionController::Routing::Routes.recognize_path(path, :method => method)
+          querystring.blank? ? params : params.merge(params_from_querystring(querystring))
         end
 
         protected
@@ -144,6 +146,15 @@ module Spec
         end
 
         private
+        def params_from_querystring(querystring)
+          params = {}
+          querystring.split('&').each do |piece|
+            key, value = piece.split('=')
+            params[key.to_sym] = value
+          end
+          params
+        end
+
         def ensure_that_routes_are_loaded
           ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
         end
