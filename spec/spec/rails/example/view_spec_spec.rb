@@ -268,6 +268,12 @@ describe "setting path parameters", :type => :view do
   end
 end
 
+describe "route helpers", :type => :view do
+  it "should be available before render is called" do
+    custom_route_path.should == '/custom_route'
+  end
+end
+
 module Spec
   module Rails
     module Example
