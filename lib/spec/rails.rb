@@ -13,6 +13,10 @@ require 'test/unit'
 
 require 'spec'
 
+if Spec.class != Module
+  raise "Uh oh, we didn't load RSpec.  Do you have a model named Spec?  You need to rename it!"
+end
+
 require 'spec/rails/matchers'
 require 'spec/rails/mocks'
 require 'spec/rails/example'
