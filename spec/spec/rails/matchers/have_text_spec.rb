@@ -2,17 +2,25 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
 
 describe "have_text" do
   
+
+  it "should have a helpful description" do
+    matcher = have_text("foo bar")
+    matcher.description.should == 'have text "foo bar"'
+  end
+
   describe "where target is a Regexp" do
     it 'should should match submitted text using a regexp' do
-      string = 'foo'
-      string.should have_text(/fo*/)
+      matcher = have_text(/fo*/)
+      matcher.matches?('foo').should be_true
+      matcher.matches?('bar').should be_nil
     end
   end
   
   describe "where target is a String" do
     it 'should match submitted text using a string' do
-      string = 'foo'
-      string.should have_text('foo')
+      matcher = have_text('foo')
+      matcher.matches?('foo').should be_true
+      matcher.matches?('foo bar').should be_false
     end
   end
   

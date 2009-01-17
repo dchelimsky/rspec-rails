@@ -2,21 +2,19 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
 
 describe "include_text" do
 
-  describe "where target is a String" do
-    it 'should match submitted text using a string' do
-      string = 'foo'
-      string.should include_text('foo')
-    end
+  it "should have a helpful description" do
+    matcher = include_text("foo bar")
+    matcher.description.should == 'include text "foo bar"'
+  end
 
-    it 'should match if the text is contained' do
-      string = 'I am a big piece of text'
-      string.should include_text('big piece')
-    end
+  it 'should match if the text is contained' do
+    matcher = include_text('big piece')
+    matcher.matches?('I am a big piece of text').should be_true
+  end
 
-    it 'should not match if text is not contained' do
-      string = 'I am a big piece of text'
-      string.should_not include_text('corey')
-    end
+  it 'should not match if text is not contained' do
+    matcher = include_text('foo bar')
+    matcher.matches?('hello world').should be_false
   end
 
 end

@@ -21,7 +21,7 @@ module Spec
           "expected not to include text #{expected.inspect}"
         end
 
-        def to_s
+        def description
           "include text #{expected.inspect}"
         end
 

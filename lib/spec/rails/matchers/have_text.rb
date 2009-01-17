@@ -22,7 +22,7 @@ module Spec
           "expected not to have text #{expected.inspect}"
         end
         
-        def to_s
+        def description
           "have text #{expected.inspect}"
         end
       
