@@ -1,4 +1,4 @@
-silence_warnings { RAILS_ENV = "test" }
+RAILS_ENV ||= "test"
 
 begin
   require_dependency 'application_controller'
