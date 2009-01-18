@@ -9,8 +9,8 @@
 
 Behaviour Driven Development for Ruby on Rails.
 
-Spec::Rails (a.k.a. RSpec on Rails) is an RSpec extension that allows you
-to drive the development of your RoR application using RSpec.
+rspec-rails is an RSpec extension that allows you to drive the development of
+Ruby on Rails applications with RSpec.
 
 == FEATURES:
 
