@@ -786,6 +786,7 @@ describe "have_tag", :type => :controller do
 end
 
 describe 'selecting in HTML that contains a mock with null_object' do
+  include ActionController::Assertions::SelectorAssertions
   module HTML
     class Document
       def initialize_with_strict_error_checking(text, strict=false, xml=false)

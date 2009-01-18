@@ -77,7 +77,7 @@ module Spec
           end
           attr_accessor :controller_class_name # :nodoc:
         end
-
+        
         before(:each) do
           # Some Rails apps explicitly disable ActionMailer in environment.rb
           if defined?(ActionMailer)

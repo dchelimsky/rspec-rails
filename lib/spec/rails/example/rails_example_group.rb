@@ -8,18 +8,7 @@ module Spec
   module Rails
 
     module Example
-      if ActiveSupport.const_defined?(:TestCase)
-        class RailsExampleGroup < ActiveSupport::TestCase
-          include ActionController::Assertions::SelectorAssertions
-        end
-      else
-        class RailsExampleGroup < Test::Unit::TestCase
-        end
-      end
-      
-      class RailsExampleGroup
-        include Spec::Rails::Matchers
-        include Spec::Rails::Mocks
+      class RailsExampleGroup < ActiveSupport::TestCase
         Spec::Example::ExampleGroupFactory.default(self)
       end
       

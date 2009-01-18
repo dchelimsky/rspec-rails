@@ -289,10 +289,10 @@ module Spec
 
         it "should clear ActionView::Base.base_view_path on teardown" do
           group = describe("base_view_path_cleared flag", :type => :view) {}
-          example = group.it{}
+          example = group.example {}
           
           ActionView::Base.should_receive(:base_view_path=).with(nil)
-          group.run_after_each(example)
+          example.run_after_each
         end
       end
     end

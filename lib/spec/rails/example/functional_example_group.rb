@@ -1,9 +1,12 @@
+require 'action_controller/test_case'
+
 module Spec
   module Rails
     module Example
-      class FunctionalExampleGroup < RailsExampleGroup
-        include ActionController::TestProcess
-        include ActionController::Assertions
+      class FunctionalExampleGroup < ActionController::TestCase
+        def setup_controller_request_and_response
+          # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
+        end
 
         attr_reader :request, :response
         before(:each) do
