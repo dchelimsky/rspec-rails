@@ -95,7 +95,7 @@ describe "A template that includes a partial", :type => :view do
       template.verify_rendered
     rescue Spec::Mocks::MockExpectationError => e
     ensure
-      e.backtrace.find{|line| line =~ /view_spec_spec\.rb\:92/}.should_not be_nil
+      e.backtrace.find{|line| line =~ /#{__FILE__}\:#{__LINE__ - 6}/}.should_not be_nil
     end
   end
   
@@ -112,7 +112,7 @@ describe "A template that includes a partial", :type => :view do
       template.verify_rendered
     rescue Spec::Mocks::MockExpectationError => e
     ensure
-      e.backtrace.find{|line| line =~ /view_spec_spec\.rb\:109/}.should_not be_nil
+      e.backtrace.find{|line| line =~ /#{__FILE__}\:#{__LINE__ - 6}/}.should_not be_nil
     end
   end
   
