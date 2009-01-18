@@ -60,7 +60,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'action_to_redirect_to_action_with_method_restriction', :controller => 'redirect_spec', :action => 'action_to_redirect_to_action_with_method_restriction'
 
   map.resources :rspec_on_rails_specs
-  map.custom_route 'custom_route', :controller => 'custom_route_spec', :action => 'custom_route'
+  map.connect 'custom_route', :controller => 'custom_route_spec', :action => 'custom_route'
   map.connect ":controller/:action/:id"
 end
 

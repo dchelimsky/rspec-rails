@@ -208,33 +208,38 @@ require 'controller_spec_controller'
     end
 
     it "should support custom routes" do
-      route_for(:controller => "custom_route_spec", :action => "custom_route").should == "/custom_route"
+      route_for(:controller => "custom_route_spec", :action => "custom_route").
+        should == "/custom_route"
     end
 
     it "should support existing routes" do
-      route_for(:controller => "controller_spec", :action => "some_action").should == "/controller_spec/some_action"
+      route_for(:controller => "controller_spec", :action => "some_action").
+        should == "/controller_spec/some_action"
     end
 
     it "should support existing routes with additional parameters" do
-      route_for(:controller => "controller_spec", :action => "some_action", :param => '1').should == "/controller_spec/some_action?param=1"
+      route_for(:controller => "controller_spec", :action => "some_action", :param => '1').
+        should == "/controller_spec/some_action?param=1"
     end
 
     it "should generate params for custom routes" do
-      params_from(:get, '/custom_route').should == {:controller => "custom_route_spec", :action => "custom_route"}
+      params_from(:get, '/custom_route').
+        should == {:controller => "custom_route_spec", :action => "custom_route"}
     end
 
     it "should generate params for existing routes" do
-      params_from(:get, '/controller_spec/some_action').should == {:controller => "controller_spec", :action => "some_action"}
+      params_from(:get, '/controller_spec/some_action').
+        should == {:controller => "controller_spec", :action => "some_action"}
     end
 
     it "should generate params for an existing route with a query parameter" do
-      expected = {:controller => "controller_spec", :action => "some_action", :param => '1'}
-      params_from(:get, '/controller_spec/some_action?param=1').should == expected
+      params_from(:get, '/controller_spec/some_action?param=1').
+        should == {:controller => "controller_spec", :action => "some_action", :param => '1'}
     end
 
     it "should generate params for an existing route with multiple query parameters" do
-      expected = {:controller => "controller_spec", :action => "some_action", :param1 => '1', :param2 => '2' }
-      params_from(:get, '/controller_spec/some_action?param1=1&param2=2').should == expected
+      params_from(:get, '/controller_spec/some_action?param1=1&param2=2').
+        should == {:controller => "controller_spec", :action => "some_action", :param1 => '1', :param2 => '2' }
     end
 
     it "should expose instance vars through the assigns hash" do
