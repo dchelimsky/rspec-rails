@@ -49,3 +49,15 @@ Spec::Rake::SpecTask.new
 Cucumber::Rake::Task.new
 
 task :default => [:features]
+
+namespace :update do
+  desc "update the manfest"
+  task :manifest do
+    system %q[touch Manifest.txt; rake check_manifest | grep -v "(in " | patch]
+  end
+  
+  desc "update the gemspec"
+  task :gemspec do
+    system %q[rake debug_gem | grep -v "(in " | grep -v "s.add_dependency(%q<hoe" | grep -v "s.add_dependency(%q<cuc" > `basename \\`pwd\\``.gemspec]
+  end
+end
