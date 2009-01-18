@@ -54,6 +54,7 @@ lib/spec/rails/extensions/action_controller/rescue.rb
 lib/spec/rails/extensions/action_controller/test_response.rb
 lib/spec/rails/extensions/action_view/base.rb
 lib/spec/rails/extensions/active_record/base.rb
+lib/spec/rails/extensions/active_support/test_case.rb
 lib/spec/rails/extensions/spec/matchers/have.rb
 lib/spec/rails/extensions/spec/runner/configuration.rb
 lib/spec/rails/interop/testcase.rb
