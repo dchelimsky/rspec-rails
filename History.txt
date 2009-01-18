@@ -1,6 +1,10 @@
 === Maintenance
 
-IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer supporting 1.x versions of rails.
+IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer
+supporting 1.x versions of rails.
+
+IMPORTANT: expect_render and stub_render have been removed. Both of these
+methods were deprecated in rspec-rails-1.1.5, released in Sept, 2008.
 
 * 3 enhancements
 

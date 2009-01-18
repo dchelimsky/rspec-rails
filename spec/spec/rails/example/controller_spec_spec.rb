@@ -101,22 +101,6 @@ require 'controller_spec_controller'
       end
     end
     
-    describe "handling deprecated expect_render" do
-      it "should warn" do
-        Kernel.should_receive(:warn).with(/expect_render is deprecated/)
-        controller.expect_render(:template => "controller_spec/action_with_template")
-        get :action_with_template
-      end
-    end
-    
-    describe "handling deprecated stub_render" do
-      it "should warn" do
-        Kernel.should_receive(:warn).with(/stub_render is deprecated/)
-        controller.stub_render(:template => "controller_spec/action_with_template")
-        get :action_with_template
-      end
-    end
-    
     describe "setting cookies in the request" do
     
       it "should support a String key" do
