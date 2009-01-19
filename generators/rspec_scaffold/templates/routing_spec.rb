@@ -11,19 +11,23 @@ describe <%= controller_class_name %>Controller do
     end
   
     it "should map #show" do
-      route_for(:controller => "<%= table_name %>", :action => "show", :id => 1).should == "/<%= table_name %>/1"
+      route_for(:controller => "<%= table_name %>", :action => "show", :id => "1").should == "/<%= table_name %>/1"
     end
   
     it "should map #edit" do
-      route_for(:controller => "<%= table_name %>", :action => "edit", :id => 1).should == "/<%= table_name %>/1<%= resource_edit_path %>"
+      route_for(:controller => "<%= table_name %>", :action => "edit", :id => "1").should == "/<%= table_name %>/1<%= resource_edit_path %>"
     end
-  
-    it "should map #update" do
-      route_for(:controller => "<%= table_name %>", :action => "update", :id => 1).should == "/<%= table_name %>/1"
-    end
+
+  it "should map #create" do
+    route_for(:controller => "<%= table_name %>", :action => "create").should == {:path => "/<%= table_name %>", :method => :post}
+  end
+
+  it "should map #update" do
+    route_for(:controller => "<%= table_name %>", :action => "update", :id => "1").should == {:path =>"/<%= table_name %>/1", :method => :put}
+  end
   
     it "should map #destroy" do
-      route_for(:controller => "<%= table_name %>", :action => "destroy", :id => 1).should == "/<%= table_name %>/1"
+      route_for(:controller => "<%= table_name %>", :action => "destroy", :id => "1").should == {:path =>"/<%= table_name %>/1", :method => :delete}
     end
   end
 

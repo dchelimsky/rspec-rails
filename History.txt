@@ -1,16 +1,25 @@
 === Maintenance
 
-IMPORTANT: rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2. We are no longer
-supporting 1.x versions of rails.
+IMPORTANT: This release includes the following backwards-compatibility-breaking changes.
 
-IMPORTANT: expect_render and stub_render have been removed. Both of these
-methods were deprecated in rspec-rails-1.1.5, released in Sept, 2008.
+* rspec-rails supports rails 2.0.2, 2.1.2 and 2.2.2.
+  
+  * We are no longer supporting 1.x versions of rails.
 
-* 3 enhancements
+* expect_render and stub_render have been removed.
+
+  * Both of these methods were deprecated in rspec-rails-1.1.5, released in Sept, 2008.
+  
+* { route_for(args).should == "/path" } now delegates to assert_generates (in rails)
+
+  * see Upgrade.txt for more information
+
+* 4 enhancements
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.
   * Initialize current URL before executing any examples in a ViewExampleGroup (Wilson Bilkovich). Closes #654.
   * Support query strings in params_from (Wilson Bilkovich). Closes #652.
+  * delegate route_for to assert_recognizes (less brittle)
 
 === Version 1.1.12 / 2009-01-11
 

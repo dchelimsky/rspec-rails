@@ -115,6 +115,24 @@ module Spec
           end
           @integrate_views = self.class.integrate_views?
         end
+        
+        class RouteForMatcher
+          def initialize(example, options)
+            @example, @options = example, options
+          end
+          
+          def ==(expected)
+            if Hash === expected
+              path, querystring = expected[:path].split('?')
+              path = expected.merge(:path => path)
+            else
+              path, querystring = expected.split('?')
+            end
+            params = querystring.blank? ? {} : @example.params_from_querystring(querystring)
+            @example.assert_recognizes(@options, path, params)
+            true
+          end
+        end
 
         # Uses ActionController::Routing::Routes to generate
         # the correct route for a given set of options.
@@ -122,8 +140,7 @@ module Spec
         #   route_for(:controller => 'registrations', :action => 'edit', :id => 1)
         #     => '/registrations/1;edit'
         def route_for(options)
-          ensure_that_routes_are_loaded
-          ActionController::Routing::Routes.generate(options)
+          RouteForMatcher.new(self, options)
         end
 
         # Uses ActionController::Routing::Routes to parse

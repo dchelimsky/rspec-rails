@@ -191,6 +191,9 @@ require 'controller_spec_controller'
       end
     end
 
+    class CustomRouteSpecController < ActionController::Base; end
+    class RspecOnRailsSpecsController < ActionController::Base; end
+
     it "should support custom routes" do
       route_for(:controller => "custom_route_spec", :action => "custom_route").
         should == "/custom_route"
@@ -204,6 +207,11 @@ require 'controller_spec_controller'
     it "should support existing routes with additional parameters" do
       route_for(:controller => "controller_spec", :action => "some_action", :param => '1').
         should == "/controller_spec/some_action?param=1"
+    end
+    
+    it "recognizes routes with methods besides :get" do
+      route_for(:controller => "rspec_on_rails_specs", :action => "update", :id => "37").
+        should == {:path => "/rspec_on_rails_specs/37", :method => :put}
     end
 
     it "should generate params for custom routes" do
