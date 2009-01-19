@@ -155,15 +155,7 @@ module Spec
           querystring.blank? ? params : params.merge(params_from_querystring(querystring))
         end
 
-        protected
-        def _assigns_hash_proxy
-          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
-            @response.template
-          end
-        end
-
-        private
-        def params_from_querystring(querystring)
+        def params_from_querystring(querystring) # :nodoc:
           params = {}
           querystring.split('&').each do |piece|
             key, value = piece.split('=')
@@ -171,6 +163,16 @@ module Spec
           end
           params
         end
+
+      protected
+
+        def _assigns_hash_proxy
+          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
+            @response.template
+          end
+        end
+
+      private
 
         def ensure_that_routes_are_loaded
           ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
