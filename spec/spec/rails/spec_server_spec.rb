@@ -22,7 +22,7 @@ describe "script/spec_server file", :shared => true do
   it "runs a spec" do
     dir = File.expand_path(File.dirname(__FILE__))
     output = ""
-    Timeout.timeout(10) do
+    Timeout.timeout(20) do
       loop do
         output = `#{RAILS_ROOT}/script/spec #{dir}/sample_spec.rb --drb 2>&1`
         break unless output.include?("No server is running")
@@ -40,7 +40,7 @@ describe "script/spec_server file", :shared => true do
       f.write YAML.dump(fixtures)
     end
 
-    Timeout.timeout(10) do
+    Timeout.timeout(20) do
       loop do
         output = `#{RAILS_ROOT}/script/spec #{dir}/sample_modified_fixture.rb --drb 2>&1`
         break unless output.include?("No server is running")
