@@ -4,6 +4,7 @@ Manifest.txt
 README.txt
 Rakefile
 TODO.txt
+Upgrade.txt
 features/step_definitions/people.rb
 features/support/env.rb
 features/transactions/transactions_should_rollback.feature
@@ -131,15 +132,15 @@ spec/resources/views/view_spec/template_with_partial_using_collection.rhtml
 spec/resources/views/view_spec/template_with_partial_with_array.rhtml
 spec/spec/rails/example/assigns_hash_proxy_spec.rb
 spec/spec/rails/example/configuration_spec.rb
+spec/spec/rails/example/controller_example_group_spec.rb
 spec/spec/rails/example/controller_isolation_spec.rb
-spec/spec/rails/example/controller_spec_spec.rb
 spec/spec/rails/example/cookies_proxy_spec.rb
 spec/spec/rails/example/example_group_factory_spec.rb
-spec/spec/rails/example/helper_spec_spec.rb
-spec/spec/rails/example/model_spec_spec.rb
+spec/spec/rails/example/helper_example_group_spec.rb
+spec/spec/rails/example/model_example_group_spec.rb
 spec/spec/rails/example/shared_behaviour_spec.rb
 spec/spec/rails/example/test_unit_assertion_accessibility_spec.rb
-spec/spec/rails/example/view_spec_spec.rb
+spec/spec/rails/example/view_example_group_spec.rb
 spec/spec/rails/extensions/action_controller_rescue_action_spec.rb
 spec/spec/rails/extensions/action_view_base_spec.rb
 spec/spec/rails/extensions/active_record_spec.rb
