@@ -10,13 +10,8 @@ require 'action_controller/test_process'
 require 'action_controller/integration'
 require 'active_support/test_case'
 require 'active_record/fixtures' if defined?(ActiveRecord::Base)
-require 'test/unit'
 
-require 'spec'
-
-if Spec.class != Module
-  raise "Uh oh, we didn't load RSpec.  Do you have a model named Spec?  You need to rename it!"
-end
+require 'spec/test/unit'
 
 require 'spec/rails/matchers'
 require 'spec/rails/mocks'
