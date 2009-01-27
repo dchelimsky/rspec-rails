@@ -14,12 +14,13 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
 
   * see Upgrade.txt for more information
 
-* 4 enhancements
+* 5 enhancements
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.
   * Initialize current URL before executing any examples in a ViewExampleGroup (Wilson Bilkovich). Closes #654.
   * Support query strings in params_from (Wilson Bilkovich). Closes #652.
   * delegate route_for to assert_recognizes (less brittle)
+  * it { should be_valid } (Kakutani). Closes #665.:
 
 === Version 1.1.12 / 2009-01-11
 
