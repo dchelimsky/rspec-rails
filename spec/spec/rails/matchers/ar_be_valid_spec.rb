@@ -13,6 +13,16 @@ describe "be_valid" do
     CanBeValid.new(false).should_not be_valid
   end
 
+  describe CanBeValid do
+    subject { CanBeValid.new(true) }
+    it { subject.should be_valid }
+  end
+
+  describe CanBeValid do
+    subject { CanBeValid.new(false) }
+    it { subject.should_not be_valid }
+  end
+
   class CanHaveErrors
     def initialize(errors)
       @valid = !errors

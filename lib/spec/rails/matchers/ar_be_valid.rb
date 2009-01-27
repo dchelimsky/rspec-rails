@@ -27,6 +27,9 @@ module Spec
           @matcher.negative_failure_message
         end
         
+        def description
+          "be valid"
+        end
       end
 
       # :call-seq:
