@@ -21,6 +21,10 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * Support query strings in params_from (Wilson Bilkovich). Closes #652.
   * delegate route_for to assert_recognizes (less brittle)
   * it { should be_valid } (Kakutani). Closes #665.:
+  
+* 1 bug fix
+
+  * you no longer *have* to load ActionMailer to get specs to run. Closes #650.
 
 === Version 1.1.12 / 2009-01-11
 
