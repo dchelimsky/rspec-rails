@@ -98,12 +98,10 @@ module Spec
 
         class QueryParameterParser
           def self.parse_query_parameters(query, request)
-            if defined?(CGIMethods)
-              CGIMethods.parse_query_parameters(query)
-            elsif defined?(ActionController::RequestParser)
-              ActionController::RequestParser.parse_query_parameters(query)
-            else
+            if request.class.respond_to?(:parse_query_parameters)
               request.class.parse_query_parameters(query)
+            else
+              ActionController::UrlEncodedPairParser.parse_query_parameters(query)
             end
           end
         end
