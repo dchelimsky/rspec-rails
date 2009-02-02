@@ -42,4 +42,4 @@ expectations you can set on responses and models, etc.
 
 == INSTALL
 
-* Visit http://github.com/dchelimsky/rspec-rails/wikis for installation instructions.
+* Visit http://wiki.github.com/dchelimsky/rspec/rails for installation instructions.
