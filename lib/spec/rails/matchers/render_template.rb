@@ -9,7 +9,13 @@ module Spec
           @expected = expected
         end
       
-        def matches?(response)
+        def matches?(response_or_controller)
+          if response_or_controller.respond_to?(:response)
+            response = response_or_controller.response
+          else
+            response = response_or_controller
+          end
+
           if response.respond_to?(:rendered_file)
             @actual = response.rendered_file
           elsif response.respond_to?(:rendered)

@@ -11,7 +11,13 @@ module Spec
           @request = request
         end
 
-        def matches?(response)
+        def matches?(response_or_controller)
+          if response_or_controller.respond_to?(:response)
+            response = response_or_controller.response
+          else
+            response = response_or_controller
+          end
+
           @redirected = response.redirect?
           @actual = response.redirect_url
           return false unless @redirected
