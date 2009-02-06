@@ -12,7 +12,7 @@ module Spec
       #
       # == Example
       #
-      #   class ThingHelper
+      #   module ThingHelper
       #     def number_of_things
       #       Thing.count
       #     end
