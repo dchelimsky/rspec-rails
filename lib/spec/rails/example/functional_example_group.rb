@@ -5,7 +5,10 @@ module Spec
     module Example
       class FunctionalExampleGroup < ActionController::TestCase
         def self.inherited(klass) # :nodoc:
-          tests described_type if described_type
+          # FIXME - this should just be described_class.kind_of?(described_class) but that fails!
+          if described_class && described_class.ancestors.include?(ActionController::Base)
+            tests described_class
+          end
           super
         end
         
