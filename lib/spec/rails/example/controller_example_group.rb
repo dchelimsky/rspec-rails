@@ -74,6 +74,7 @@ module Spec
           #     ...
           def controller_name(name)
             @controller_class_name = "#{name}_controller".camelize
+            tests @controller_class_name.constantize
           end
           attr_accessor :controller_class_name # :nodoc:
         end

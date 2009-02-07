@@ -4,7 +4,16 @@ module Spec
   module Rails
     module Example
       class FunctionalExampleGroup < ActionController::TestCase
+        def self.inherited(klass) # :nodoc:
+          tests described_type if described_type
+          super
+        end
+        
         def setup_controller_request_and_response
+          # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
+        end
+        
+        def setup
           # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
         end
 

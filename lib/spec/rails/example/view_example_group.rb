@@ -1,6 +1,29 @@
 module Spec
   module Rails
     module Example
+      class ViewExampleGroupController < ApplicationController #:nodoc:
+        include Spec::Rails::Example::RenderObserver
+        attr_reader :template
+
+        def add_helper_for(template_path)
+          add_helper(template_path.split('/')[0])
+        end
+
+        def add_helper(name)
+          begin
+            helper_module = "#{name}_helper".camelize.constantize
+          rescue
+            return
+          end
+          (class << template; self; end).class_eval do
+            include helper_module
+          end
+        end
+        
+        def forget_variables_added_to_assigns
+        end
+      end
+
       # View Examples live in $RAILS_ROOT/spec/views/.
       #
       # View Specs use Spec::Rails::Example::ViewExampleGroup,
@@ -24,6 +47,7 @@ module Spec
       #     end
       #   end
       class ViewExampleGroup < FunctionalExampleGroup
+        tests ViewExampleGroupController
         before(:each) do
           ensure_that_flash_and_session_work_properly
         end
@@ -155,28 +179,6 @@ module Spec
         end
       end
 
-      class ViewExampleGroupController < ApplicationController #:nodoc:
-        include Spec::Rails::Example::RenderObserver
-        attr_reader :template
-
-        def add_helper_for(template_path)
-          add_helper(template_path.split('/')[0])
-        end
-
-        def add_helper(name)
-          begin
-            helper_module = "#{name}_helper".camelize.constantize
-          rescue
-            return
-          end
-          (class << template; self; end).class_eval do
-            include helper_module
-          end
-        end
-        
-        def forget_variables_added_to_assigns
-        end
-      end
     end
   end
 end
