@@ -12,10 +12,6 @@ module Spec
           super
         end
         
-        def setup_controller_request_and_response
-          # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
-        end
-        
         def setup
           # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
         end
@@ -24,11 +20,7 @@ module Spec
         before(:each) do
           @controller_class = @controller_class_name.split('::').inject(Object) { |k,n| k.const_get n }
           raise "Can't determine controller class for #{@controller_class_name}" if @controller_class.nil?
-
           @controller = @controller_class.new
-          @request = ActionController::TestRequest.new
-          @response = ActionController::TestResponse.new
-          @response.session = @request.session
         end
         
         def params
@@ -40,7 +32,7 @@ module Spec
         end
 
         def session
-          response.session
+          request.session
         end
         
         # Overrides the <tt>cookies()</tt> method in
