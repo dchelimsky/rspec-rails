@@ -177,6 +177,18 @@ describe "A view", :type => :view do
     render "view_spec/accessor"
   end
 
+  it "should use the template as the implicit subject" do
+    subject.should == template
+  end
+
+  describe "with a specified subject" do
+    subject { 'specified' }
+
+    it "should use the specified subject" do
+      subject.should == 'specified'
+    end
+  end
+
   it "should have access to session data" do
     response.should have_tag("div#session", "session")
   end

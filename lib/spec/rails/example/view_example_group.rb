@@ -48,6 +48,13 @@ module Spec
       #   end
       class ViewExampleGroup < FunctionalExampleGroup
         tests ViewExampleGroupController
+        class << self
+          def inherited(klass) # :nodoc:
+            klass.subject { template }
+            super
+          end
+        end
+
         before(:each) do
           ensure_that_flash_and_session_work_properly
         end
