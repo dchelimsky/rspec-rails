@@ -5,6 +5,18 @@ require 'controller_spec_controller'
   describe "A controller example running in #{mode} mode", :type => :controller do
     controller_name :controller_spec
     integrate_views if mode == 'integration'
+
+    it "should use the controller as the implicit subject" do
+      subject.should == controller
+    end
+
+    describe "with a specified subject" do
+      subject { 'specified' }
+      
+      it "should use the specified subject instead of the controller" do
+        subject.should == 'specified'
+      end
+    end
     
     it "should provide controller.session as session" do
       get 'action_with_template'

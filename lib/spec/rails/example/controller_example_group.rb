@@ -63,6 +63,7 @@ module Spec
           def inherited(klass) # :nodoc:
             klass.controller_class_name = controller_class_name
             klass.integrate_views(integrate_views?)
+            klass.subject { controller }
             super
           end
 
