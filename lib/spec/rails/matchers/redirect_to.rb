@@ -12,11 +12,9 @@ module Spec
         end
 
         def matches?(response_or_controller)
-          if response_or_controller.respond_to?(:response)
-            response = response_or_controller.response
-          else
-            response = response_or_controller
-          end
+          response  = response_or_controller.respond_to?(:response) ?
+                      response_or_controller.response :
+                      response_or_controller
 
           @redirected = response.redirect?
           @actual = response.redirect_url
