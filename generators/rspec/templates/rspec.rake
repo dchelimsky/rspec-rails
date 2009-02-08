@@ -108,14 +108,14 @@ begin
     end
 
     namespace :server do
-      daemonized_server_pid = File.expand_path("spec_server.pid", RAILS_ROOT + "/tmp")
-
+      daemonized_server_pid = File.expand_path("#{RAILS_ROOT}/tmp/spec_server.pid")
+      
       desc "start spec_server."
       task :start do
         if File.exist?(daemonized_server_pid)
           $stderr.puts "spec_server is already running."
         else
-          $stderr.puts "Starting up spec server."
+          $stderr.puts %Q{Starting up spec_server ...}
           system("ruby", "script/spec_server", "--daemon", "--pid", daemonized_server_pid)
         end
       end
@@ -125,19 +125,21 @@ begin
         unless File.exist?(daemonized_server_pid)
           $stderr.puts "No server running."
         else
-          $stderr.puts "Shutting down spec_server."
+          $stderr.puts "Shutting down spec_server ..."
           system("kill", "-s", "TERM", File.read(daemonized_server_pid).strip) && 
           File.delete(daemonized_server_pid)
         end
       end
 
-      desc "reload spec_server."
-      task :restart do
-        unless File.exist?(daemonized_server_pid)
-          $stderr.puts "No server running."
+      desc "restart spec_server."
+      task :restart => [:stop, :start]
+      
+      desc "check if spec server is running"
+      task :status do
+        if File.exist?(daemonized_server_pid)
+          $stderr.puts %Q{spec_server is running (PID: #{File.read(daemonized_server_pid).gsub("\n","")})}
         else
-          $stderr.puts "Reloading down spec_server."
-          system("kill", "-s", "USR2", File.read(daemonized_server_pid).strip)
+          $stderr.puts "No server running."
         end
       end
     end
