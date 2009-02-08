@@ -13,18 +13,22 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
 * { route_for(args).should == "/path" } now delegates to assert_generates (in rails)
 
   * see Upgrade.txt for more information
-
-* 5 enhancements
+  
+* enhancements
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.
   * Initialize current URL before executing any examples in a ViewExampleGroup (Wilson Bilkovich). Closes #654.
   * Support query strings in params_from (Wilson Bilkovich). Closes #652.
   * delegate route_for to assert_recognizes (less brittle)
-  * it { should be_valid } (Kakutani). Closes #665.:
+  * it { should be_valid } (Kakutani). Closes #665.
+  * controller is implicit subject in controller specs (Joe Ferris). #686.
+  * template is implicit subject in view specs (Joe Ferris). #686.
+  * redirect_to and render_template matchers can accept controller or response (Joe Ferris). Closes #686. 
   
-* 1 bug fix
+* bug fixes
 
   * you no longer *have* to load ActionMailer to get specs to run. Closes #650.
+  * query_params are now parsed by Rack::Utils.parse_query in redirect_to matcher. Closes #684.
 
 === Version 1.1.12 / 2009-01-11
 

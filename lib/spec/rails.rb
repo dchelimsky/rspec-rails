@@ -5,6 +5,7 @@ begin
 rescue MissingSourceFile
   require_dependency 'application'
 end
+require 'rack/utils'
 
 require 'action_controller/test_process'
 require 'action_controller/integration'
