@@ -29,6 +29,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
 
   * you no longer *have* to load ActionMailer to get specs to run. Closes #650.
   * query_params are now parsed by Rack::Utils.parse_query in redirect_to matcher. Closes #684.
+  * cleaned up spec_server (there was a bunch of pre-rails 2.0 material). Closes #685.
 
 === Version 1.1.12 / 2009-01-11
 
