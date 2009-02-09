@@ -114,10 +114,6 @@ module Spec
           include mod if mod.parents.include?(ActionView::Helpers)
         end
 
-        before(:all) do
-          @controller_class_name = 'Spec::Rails::Example::HelperExampleGroupController'
-        end
-
         before(:each) do
           @controller.request = @request
           @controller.url = ActionController::UrlRewriter.new @request, {} # url_for

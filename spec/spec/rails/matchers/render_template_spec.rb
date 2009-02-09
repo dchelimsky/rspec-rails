@@ -82,8 +82,7 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       end
     
       describe "with an alternate layout" do
-        subject { send(subject_method) }
-
+        controller_name :render_spec
         it "should say it rendered the action's template" do
           get 'action_with_alternate_layout'
           should render_template('action_with_alternate_layout')

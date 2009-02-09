@@ -61,10 +61,16 @@ module Spec
           end
           
           def inherited(klass) # :nodoc:
-            klass.controller_class_name = controller_class_name
             klass.integrate_views(integrate_views?)
             klass.subject { controller }
             super
+          end
+          
+          def set_description(*args)
+            super
+            if described_class && described_class.ancestors.include?(ActionController::Base)
+              tests described_class
+            end
           end
 
           # You MUST provide a controller_name within the context of
@@ -74,10 +80,8 @@ module Spec
           #     controller_name :thing
           #     ...
           def controller_name(name)
-            @controller_class_name = "#{name}_controller".camelize
-            tests @controller_class_name.constantize
+            tests "#{name}_controller".camelize.constantize
           end
-          attr_accessor :controller_class_name # :nodoc:
         end
         
         before(:each) do
@@ -109,12 +113,6 @@ module Spec
 
         def initialize(defined_description, options={}, &implementation) #:nodoc:
           super
-          controller_class_name = self.class.controller_class_name
-          if controller_class_name
-            @controller_class_name = controller_class_name.to_s
-          else
-            @controller_class_name = self.class.described_type.to_s
-          end
           @integrate_views = self.class.integrate_views?
         end
         

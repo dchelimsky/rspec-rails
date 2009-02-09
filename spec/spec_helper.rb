@@ -29,7 +29,7 @@ module Spec
   module Rails
     module Example
       class ViewExampleGroupController
-        set_view_path File.join(File.dirname(__FILE__), "..", "spec", "resources", "views")
+        prepend_view_path File.join(File.dirname(__FILE__), "..", "spec", "resources", "views")
       end
     end
   end
@@ -48,12 +48,6 @@ class Proc
     lambda { self.call }.should_not raise_error
   end
 end
-
-Spec::Runner.configure do |config|
-  config.before(:each, :type => :controller) do
-  end
-end
-
 
 ActionController::Routing::Routes.draw do |map|
   map.connect 'action_with_method_restriction', :controller => 'redirect_spec', :action => 'action_with_method_restriction', :conditions => { :method => :get }

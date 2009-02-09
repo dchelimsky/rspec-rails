@@ -7,7 +7,7 @@ class ControllerSpecController < ActionController::Base
   
   skip_before_filter :raise_error
 
-  set_view_path File.join(File.dirname(__FILE__), "..", "views")
+  prepend_view_path File.join(File.dirname(__FILE__), "..", "views")
   
   def some_action
     render :template => "template/that/does/not/actually/exist"

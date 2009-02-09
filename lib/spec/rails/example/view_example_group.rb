@@ -55,18 +55,8 @@ module Spec
           end
         end
 
-        before(:each) do
-          ensure_that_flash_and_session_work_properly
-        end
-
-        after(:each) do
-          ensure_that_base_view_path_is_not_set_across_example_groups
-        end
-
-        def initialize(defined_description, options={}, &implementation) #:nodoc:
-          super
-          @controller_class_name = "Spec::Rails::Example::ViewExampleGroupController"
-        end
+        before {ensure_that_flash_and_session_work_properly}
+        after {ensure_that_base_view_path_is_not_set_across_example_groups}
 
         def ensure_that_flash_and_session_work_properly #:nodoc:
           @controller.send :initialize_template_class, @response

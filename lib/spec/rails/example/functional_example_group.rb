@@ -4,25 +4,12 @@ module Spec
   module Rails
     module Example
       class FunctionalExampleGroup < ActionController::TestCase
-        def self.inherited(klass) # :nodoc:
-          # FIXME - this should just be described_class.kind_of?(described_class) but that fails!
-          if described_class && described_class.ancestors.include?(ActionController::Base)
-            tests described_class
-          end
-          super
-        end
-        
         def setup
           # no-op to override AC::TC's setup w/ conflicts with the before(:each) below
         end
 
         attr_reader :request, :response
-        before(:each) do
-          @controller_class = @controller_class_name.split('::').inject(Object) { |k,n| k.const_get n }
-          raise "Can't determine controller class for #{@controller_class_name}" if @controller_class.nil?
-          @controller = @controller_class.new
-        end
-        
+
         def params
           request.parameters
         end

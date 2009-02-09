@@ -324,10 +324,10 @@ end
 
 # # FIXME - not sure why this fails against 2.0.5, since generated controller
 # # specs that use the implicit controller pass.
-# describe ControllerSpecController, :type => :controller do
-#   it "should use the controller passed to #describe" do
-#   end  
-# end
+describe ControllerSpecController, :type => :controller do
+  it "should use the controller passed to #describe" do
+  end  
+end
 
 describe "A controller spec with controller_name set", :type => :controller do
   controller_name :controller_spec
