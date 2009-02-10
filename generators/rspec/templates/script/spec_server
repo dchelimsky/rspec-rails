@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 $LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/plugins/rspec-rails/lib' # For rspec installed as plugin
+require 'rubygems'
 require 'optparse'
 require 'spec/rails/spec_server'
 
