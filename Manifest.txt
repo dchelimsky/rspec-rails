@@ -50,7 +50,6 @@ lib/spec/rails/example/rails_example_group.rb
 lib/spec/rails/example/render_observer.rb
 lib/spec/rails/example/view_example_group.rb
 lib/spec/rails/extensions.rb
-lib/spec/rails/extensions/action_controller/base.rb
 lib/spec/rails/extensions/action_controller/rescue.rb
 lib/spec/rails/extensions/action_controller/test_response.rb
 lib/spec/rails/extensions/action_view/base.rb
@@ -68,6 +67,7 @@ lib/spec/rails/matchers/include_text.rb
 lib/spec/rails/matchers/redirect_to.rb
 lib/spec/rails/matchers/render_template.rb
 lib/spec/rails/mocks.rb
+lib/spec/rails/spec_server.rb
 lib/spec/rails/story_adapter.rb
 lib/spec/rails/version.rb
 rspec-rails.gemspec
