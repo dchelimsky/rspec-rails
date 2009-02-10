@@ -18,7 +18,7 @@ describe "/<%= table_name %>/index.<%= default_file_extension %>" do
     ]
   end
 
-  it "should render list of <%= table_name %>" do
+  it "renders a list of <%= table_name %>" do
     render "/<%= table_name %>/index.<%= default_file_extension %>"
 <% for attribute in output_attributes -%>
     response.should have_tag("tr>td", <%= attribute.default_value %>.to_s, 2)

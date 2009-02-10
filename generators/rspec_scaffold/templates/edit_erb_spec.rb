@@ -13,7 +13,7 @@ describe "/<%= table_name %>/edit.<%= default_file_extension %>" do
     )
   end
 
-  it "should render edit form" do
+  it "renders the edit <%= file_name %> form" do
     render "/<%= table_name %>/edit.<%= default_file_extension %>"
     
     response.should have_tag("form[action=#{<%= file_name %>_path(@<%= file_name %>)}][method=post]") do
