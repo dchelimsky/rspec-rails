@@ -24,6 +24,8 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * controller is implicit subject in controller specs (Joe Ferris). #686.
   * template is implicit subject in view specs (Joe Ferris). #686.
   * redirect_to and render_template matchers can accept controller or response (Joe Ferris). Closes #686. 
+  * generated specs use declarative docstrings
+  * rspec_scaffold generator generates layout and stylesheet (per Rails-2.3)
   
 * bug fixes
 
