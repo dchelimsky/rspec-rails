@@ -32,12 +32,6 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
     
     @resource_generator = "scaffold"
     @default_file_extension = "html.erb"
-    
-    if ActionController::Base.respond_to?(:resource_action_separator)
-      @resource_edit_path = "/edit"
-    else
-      @resource_edit_path = ";edit"
-    end
   end
 
   def manifest
@@ -52,12 +46,19 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
       m.directory(File.join('app/controllers', controller_class_path))
       m.directory(File.join('app/helpers', controller_class_path))
       m.directory(File.join('app/views', controller_class_path, controller_file_name))
+      m.directory(File.join('app/views/layouts', controller_class_path))
+      m.directory(File.join('public/stylesheets', class_path))
+
       m.directory(File.join('spec/controllers', controller_class_path))
       m.directory(File.join('spec/models', class_path))
       m.directory(File.join('spec/helpers', class_path))
       m.directory File.join('spec/fixtures', class_path)
       m.directory File.join('spec/views', controller_class_path, controller_file_name)
       
+      # Layout and stylesheet.
+      m.template("#{@resource_generator}:layout.html.erb", File.join('app/views/layouts', controller_class_path, "#{controller_file_name}.html.erb"))
+      m.template("#{@resource_generator}:style.css", 'public/stylesheets/scaffold.css')
+
       # Controller spec, class, and helper.
       m.template 'rspec_scaffold:routing_spec.rb',
         File.join('spec/controllers', controller_class_path, "#{controller_file_name}_routing_spec.rb")
