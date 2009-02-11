@@ -17,10 +17,9 @@ describe <%= controller_class_name %>Controller do
     describe "with mime type of xml" do
   
       it "renders all <%= table_name.pluralize %> as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
         <%= class_name %>.should_receive(:find).with(:all).and_return(<%= file_name.pluralize %> = mock("Array of <%= class_name.pluralize %>"))
         <%= file_name.pluralize %>.should_receive(:to_xml).and_return("generated XML")
-        get :index
+        get :index, :format => 'xml'
         response.body.should == "generated XML"
       end
     
@@ -39,10 +38,9 @@ describe <%= controller_class_name %>Controller do
     describe "with mime type of xml" do
 
       it "renders the requested <%= file_name %> as xml" do
-        request.env["HTTP_ACCEPT"] = "application/xml"
         <%= class_name %>.should_receive(:find).with("37").and_return(mock_<%= file_name %>)
         mock_<%= file_name %>.should_receive(:to_xml).and_return("generated XML")
-        get :show, :id => "37"
+        get :show, :id => "37", :format => 'xml'
         response.body.should == "generated XML"
       end
 
