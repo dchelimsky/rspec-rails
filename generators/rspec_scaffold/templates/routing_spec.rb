@@ -15,7 +15,7 @@ describe <%= controller_class_name %>Controller do
     end
   
     it "maps #edit" do
-      route_for(:controller => "<%= table_name %>", :action => "edit", :id => "1").should == "/<%= table_name %>/1<%= resource_edit_path %>"
+      route_for(:controller => "<%= table_name %>", :action => "edit", :id => "1").should == "/<%= table_name %>/1/edit"
     end
 
   it "maps #create" do
@@ -49,7 +49,7 @@ describe <%= controller_class_name %>Controller do
     end
   
     it "generates params for #edit" do
-      params_from(:get, "/<%= table_name %>/1<%= resource_edit_path %>").should == {:controller => "<%= table_name %>", :action => "edit", :id => "1"}
+      params_from(:get, "/<%= table_name %>/1/edit").should == {:controller => "<%= table_name %>", :action => "edit", :id => "1"}
     end
   
     it "generates params for #update" do
