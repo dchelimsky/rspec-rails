@@ -1,4 +1,11 @@
-=== Upgrade to rspec-rails ????
+=== Upgrade to rspec-rails-1.1.99.4
+
+== update generated files
+
+Be sure to run "script/generate rspec" and allow the following files to be overwritten:
+
+* lib/tasks/rspec.rake
+* script/spec_server
 
 == route_for
 
