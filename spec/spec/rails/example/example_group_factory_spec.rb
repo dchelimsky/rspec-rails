@@ -24,21 +24,21 @@ module Spec
         example_group.superclass.should == Spec::Rails::Example::ModelExampleGroup
       end
 
-      it "should return a RailsExampleGroup when given :spec_path => '/blah/spec/foo/' (anything other than controllers, views and helpers)" do
+      it "should return an ActiveSupport::TestCase when given :spec_path => '/blah/spec/foo/' (anything other than controllers, views and helpers)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
           "name", :spec_path => '/blah/spec/foo/blah.rb'
         ) {}
-        example_group.superclass.should == Spec::Rails::Example::RailsExampleGroup
+        example_group.superclass.should == ActiveSupport::TestCase
       end
 
-      it "should return a RailsExampleGroup when given :spec_path => '\\blah\\spec\\foo\\' (windows format)  (anything other than controllers, views and helpers)" do
+      it "should return an ActiveSupport::TestCase when given :spec_path => '\\blah\\spec\\foo\\' (windows format)  (anything other than controllers, views and helpers)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
           "name", :spec_path => '\\blah\\spec\\foo\\blah.rb'
         ) {}
-        example_group.superclass.should == Spec::Rails::Example::RailsExampleGroup
+        example_group.superclass.should == ActiveSupport::TestCase
       end
 
-      it "should return a ViewExampleGroup when given :type => :model" do
+      it "should return a ViewExampleGroup when given :type => :view" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
           "name", :type => :view
         ) {}

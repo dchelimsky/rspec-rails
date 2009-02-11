@@ -2,7 +2,6 @@ dir = File.dirname(__FILE__)
 
 require 'spec/rails/example/assigns_hash_proxy'
 require "spec/rails/example/render_observer"
-require "spec/rails/example/rails_example_group"
 require "spec/rails/example/model_example_group"
 require "spec/rails/example/functional_example_group"
 require "spec/rails/example/controller_example_group"

@@ -4,6 +4,8 @@ describe "A template with an implicit helper", :type => :view do
   before(:each) do
     render "view_spec/implicit_helper"
   end
+  
+  accesses_configured_helper_methods
 
   it "should include the helper" do
     response.should have_tag('div', :content => "This is text from a method in the ViewSpecHelper")

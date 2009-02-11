@@ -16,6 +16,8 @@ module Spec
       describe HelperExampleGroup, :type => :helper do
         helper_name :explicit
 
+        accesses_configured_helper_methods
+
         it "DEPRECATED should have direct access to methods defined in helpers" do
           method_in_explicit_helper.should =~ /text from a method/
         end

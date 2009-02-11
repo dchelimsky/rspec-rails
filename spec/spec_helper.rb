@@ -58,3 +58,21 @@ ActionController::Routing::Routes.draw do |map|
   map.connect ":controller/:action/:id"
 end
 
+module HelperMethods
+  def method_in_module_included_in_configuration
+  end
+end
+
+module HelperMacros
+  def accesses_configured_helper_methods
+    it "has access to methods in modules included in configuration" do
+      method_in_module_included_in_configuration
+    end
+  end
+end
+
+Spec::Runner.configure do |config|
+  config.include HelperMethods
+  config.extend HelperMacros
+end
+

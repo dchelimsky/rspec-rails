@@ -4,7 +4,9 @@ module Spec
   module Rails
     module Example
       describe ModelExampleGroup do
-        it "should clear its name from the description" do
+        accesses_configured_helper_methods
+        
+        it "clears its name from the description" do
           group = describe("foo", :type => :model) do
             $nested_group = describe("bar") do
             end

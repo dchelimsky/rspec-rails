@@ -6,6 +6,8 @@ require 'controller_spec_controller'
     controller_name :controller_spec
     integrate_views if mode == 'integration'
 
+    accesses_configured_helper_methods
+
     it "should use the controller as the implicit subject" do
       subject.should == controller
     end
