@@ -36,6 +36,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * cleaned up spec_server (there was a bunch of pre-rails 2.0 material). Closes #685.
   * rspec's rake tasks are not loaded when running "rake gems" or any of its subtasks
   * only warn when rspec is not installed when trying to invoke an rspec rake task
+  * support 2 arg version of ActionController::Base#render (reported by Nathan Wilmes)
 
 === Version 1.1.12 / 2009-01-11
 

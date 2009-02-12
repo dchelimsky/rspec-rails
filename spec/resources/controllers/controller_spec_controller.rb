@@ -87,6 +87,12 @@ class ControllerSpecController < ActionController::Base
     render :text => ""
   end
   
+  def action_with_two_arg_render
+    render :update, :status => 404 do |page|
+      page.visual_effect :highlight, 'user_list'
+    end
+  end
+  
   class RescuedError < Exception; end
   class UnRescuedError < Exception; end
   

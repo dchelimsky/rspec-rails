@@ -8,14 +8,16 @@ require 'controller_spec_controller'
 
     accesses_configured_helper_methods
 
-    it "should use the controller as the implicit subject" do
-      subject.should == controller
+    describe "with an implicit subject" do
+      it "uses the controller" do
+        subject.should == controller
+      end
     end
 
     describe "with a specified subject" do
       subject { 'specified' }
       
-      it "should use the specified subject instead of the controller" do
+      it "uses the specified subject" do
         subject.should == 'specified'
       end
     end
@@ -272,6 +274,13 @@ require 'controller_spec_controller'
         get 'action_with_skipped_before_filter'
       }.should_not raise_error
     end
+    
+    describe "extending #render on a controller" do
+      it "supports two arguments (as with rails 2.2)" do
+        get 'action_with_two_arg_render'
+        response.body.should =~ /new Effect\.Highlight/
+      end
+    end
   end
 
   describe "Given a controller spec for RedirectSpecController running in #{mode} mode", :type => :controller do
@@ -324,8 +333,6 @@ end
   end
 end
 
-# # FIXME - not sure why this fails against 2.0.5, since generated controller
-# # specs that use the implicit controller pass.
 describe ControllerSpecController, :type => :controller do
   it "should use the controller passed to #describe" do
   end  

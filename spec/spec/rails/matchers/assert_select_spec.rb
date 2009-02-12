@@ -212,8 +212,8 @@ describe "should have_tag", :type => :controller do
     response.should have_tag("form[action=test]") { |form|
       with_tag("input[type=text][name=email]")
     }
-    response.should have_tag("form[action=test]") { |form|
-      with_tag("input[type=text][name=email]")
+    response.should have_tag("form[action=other]") { |form|
+      with_tag("input[type=text][name=other_input]")
     }
     
     lambda {
