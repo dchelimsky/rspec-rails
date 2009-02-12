@@ -119,7 +119,7 @@ module Spec
         # See Spec::Rails::Example::ViewExampleGroup for more information.
         def render(*args)
           options = Hash === args.last ? args.pop : {}
-          options[:template] = args.first.to_s unless args.empty?
+          options[:template] = args.first.to_s.sub(/^\//,'') unless args.empty?
 
           set_base_view_path(options)
           add_helpers(options)
