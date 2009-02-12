@@ -5,14 +5,27 @@ describe "AssignsHashProxy" do
     @object.assigns
   end
   
+  class Foo
+    def initialize(bar)
+      @bar = bar
+    end
+    attr_reader :bar
+
+    def ==(other)
+      self.bar == other.bar
+    end
+  end
+
   before(:each) do
     @object = Class.new do
-      attr_accessor :assigns
+      def assigns; @assigns ||= Hash.new; end
     end.new
-    @object.assigns = Hash.new
-    @proxy = Spec::Rails::Example::AssignsHashProxy.new self do
-      @object
-    end
+    @proxy = Spec::Rails::Example::AssignsHashProxy.new(self) {@object}
+  end
+  
+  it "doesn't wig out on objects that define their own == method" do
+    @object.assigns['foo'] = Foo.new(1)
+    @proxy['foo'].should == Foo.new(1)
   end
   
   it "should set ivars on object using string" do
