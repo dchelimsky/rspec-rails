@@ -177,11 +177,35 @@ module Spec
         def ensure_that_routes_are_loaded
           ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
         end
+        
+        module TemplateIsolationExtensions
+          def file_exists?(ignore); true; end
+          
+          def render_file(*args)
+            @first_render ||= args[0] unless args[0] =~ /^layouts/
+          end
+          
+          # Rails 2.2
+          def _pick_template(*args)
+            @_first_render ||= args[0] unless args[0] =~ /^layouts/
+            PickedTemplate.new
+          end
+          
+          def render(*args)
+            if @_rendered
+              opts = args[0]
+              (@_rendered[:template] ||= opts[:file]) if opts[:file]
+              (@_rendered[:partials][opts[:partial]] += 1) if opts[:partial]
+            else
+              super
+            end
+          end
+        end
 
         module ControllerInstanceMethods #:nodoc:
           include Spec::Rails::Example::RenderObserver
 
-          # === render(options = nil, extra_options = {}, &block)
+          # === render(options = nil, extra_options={}, &block)
           #
           # This gets added to the controller's singleton meta class,
           # allowing Controller Examples to run in two modes, freely switching
@@ -189,36 +213,7 @@ module Spec
           def render(options=nil, extra_options={}, &block)
             unless block_given?
               unless integrate_views?
-                if @template.respond_to?(:finder)
-                  (class << @template.finder; self; end).class_eval do
-                    define_method :file_exists? do; true; end
-                  end
-                else
-                  (class << @template; self; end).class_eval do
-                    define_method :file_exists? do; true; end
-                  end
-                end
-                (class << @template; self; end).class_eval do
-                  define_method :render_file do |*args|
-                    @first_render ||= args[0] unless args[0] =~ /^layouts/
-                    @_first_render ||= args[0] unless args[0] =~ /^layouts/
-                  end
-                  
-                  define_method :_pick_template do |*args|
-                    @_first_render ||= args[0] unless args[0] =~ /^layouts/
-                    PickedTemplate.new
-                  end
-                  
-                  define_method :render do |*args|
-                    if @_rendered
-                      opts = args[0]
-                      (@_rendered[:template] ||= opts[:file]) if opts[:file]
-                      (@_rendered[:partials][opts[:partial]] += 1) if opts[:partial]
-                    else
-                      super
-                    end
-                  end
-                end
+                @template.extend TemplateIsolationExtensions
               end
             end
 
