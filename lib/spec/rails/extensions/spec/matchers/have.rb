@@ -3,19 +3,21 @@ require 'spec/matchers/have'
 module Spec #:nodoc:
   module Matchers #:nodoc:
     class Have #:nodoc:
-      alias_method :__original_failure_message, :failure_message
-      def failure_message
+
+      def failure_message_with_errors_on_extensions
         return "expected #{relativities[@relativity]}#{@expected} errors on :#{@args[0]}, got #{@given}" if @collection_name == :errors_on
         return "expected #{relativities[@relativity]}#{@expected} error on :#{@args[0]}, got #{@given}" if @collection_name == :error_on
-        return __original_failure_message
+        return failure_message_without_errors_on_extensions
       end
+      alias_method_chain :failure_message, :errors_on_extensions
       
-      alias_method :__original_description, :description
-      def description
+      def description_with_errors_on_extensions
         return "should have #{relativities[@relativity]}#{@expected} errors on :#{@args[0]}" if @collection_name == :errors_on
         return "should have #{relativities[@relativity]}#{@expected} error on :#{@args[0]}" if @collection_name == :error_on
-        return __original_description
+        return description_without_errors_on_extensions
       end
+      alias_method_chain :description, :errors_on_extensions
+
     end
   end
 end
