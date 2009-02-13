@@ -166,6 +166,7 @@ require 'controller_spec_controller'
           end.should raise_error(ControllerSpecController::UnRescuedError)
         end
       end
+
       context "with rails' error handling" do
         it "does not raise the error" do
           pending "deal with use_rails_error_handling" do
@@ -180,15 +181,10 @@ require 'controller_spec_controller'
     
     describe "with an error that is rescued in the controller" do
       context "without rails' error handling" do
-        it "does not raise error" do
+        it "raises the error" do
           lambda do
             get 'rescued_error_action'
-          end.should_not raise_error
-        end
-
-        it "executes rescue_from" do
-          get 'rescued_error_action'
-          response.body.should == 'Rescued!'
+          end.should raise_error(ControllerSpecController::RescuedError)
         end
       end
 
@@ -196,6 +192,7 @@ require 'controller_spec_controller'
         before(:each) do
           controller.use_rails_error_handling!
         end
+
         it "does not raise error" do
           lambda do
             get 'rescued_error_action'
