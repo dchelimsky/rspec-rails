@@ -56,14 +56,14 @@ module Spec
         end
 
         before {ensure_that_flash_and_session_work_properly}
-        after {ensure_that_base_view_path_is_not_set_across_example_groups}
+        after  {ensure_that_base_view_path_is_not_set_across_example_groups}
 
         def ensure_that_flash_and_session_work_properly #:nodoc:
-          @controller.send :initialize_template_class, @response
-          @controller.send :assign_shortcuts, @request, @response
-          @controller.send :initialize_current_url
+          @controller.class.__send__ :public, :flash
+          @controller.__send__ :initialize_template_class, @response
+          @controller.__send__ :assign_shortcuts, @request, @response
+          @controller.__send__ :initialize_current_url
           @session = @controller.session
-          @controller.class.send :public, :flash
         end
 
         def ensure_that_base_view_path_is_not_set_across_example_groups #:nodoc:
@@ -134,7 +134,7 @@ module Spec
           defaults = { :layout => false }
           options = defaults.merge options
 
-          @controller.send(:params).reverse_merge! @request.parameters
+          @controller.__send__(:params).reverse_merge! @request.parameters
 
           @controller.class.instance_eval %{
             def controller_path
@@ -146,9 +146,9 @@ module Spec
             end
           }
 
-          @controller.send :forget_variables_added_to_assigns
-          @controller.send :render, options
-          @controller.send :process_cleanup
+          @controller.__send__ :forget_variables_added_to_assigns
+          @controller.__send__ :render, options
+          @controller.__send__ :process_cleanup
         end
 
         # This provides the template. Use this to set mock
@@ -168,11 +168,9 @@ module Spec
 
         Spec::Example::ExampleGroupFactory.register(:view, self)
 
-        protected
+      protected
         def _assigns_hash_proxy
-          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
-            @response.template
-          end
+          @_assigns_hash_proxy ||= AssignsHashProxy.new(self) {@response.template}
         end
       end
 

@@ -17,7 +17,7 @@ module Spec
           :errors => stub("errors", :count => 0)
         })
         m = mock("#{model_class.name}_#{id}", options_and_stubs)
-        m.send(:__mock_proxy).instance_eval <<-CODE
+        m.__send__(:__mock_proxy).instance_eval <<-CODE
           def @target.as_new_record
             self.stub!(:id).and_return nil
             self.stub!(:to_param).and_return nil

@@ -20,10 +20,10 @@ module ActionView #:nodoc:
     alias_method_chain :render_partial, :base_view_path_handling
 
     def render_with_mock_proxy(options = {}, old_local_assigns = {}, &block)
-      if render_proxy.send(:__mock_proxy).send(:find_matching_expectation, :render, options)
+      if render_proxy.__send__(:__mock_proxy).__send__(:find_matching_expectation, :render, options)
         render_proxy.render(options)
       else
-        unless render_proxy.send(:__mock_proxy).send(:find_matching_method_stub, :render, options)
+        unless render_proxy.__send__(:__mock_proxy).__send__(:find_matching_method_stub, :render, options)
           render_without_mock_proxy(options, old_local_assigns, &block)
         end
       end

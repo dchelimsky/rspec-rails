@@ -155,11 +155,10 @@ module Spec
 
         Spec::Example::ExampleGroupFactory.register(:helper, self)
 
-        protected
+      protected
+
         def _assigns_hash_proxy
-          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
-            helper
-          end
+          @_assigns_hash_proxy ||= AssignsHashProxy.new(self) {helper}
         end
 
       end

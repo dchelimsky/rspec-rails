@@ -14,8 +14,8 @@ require 'spec/rails'
 
 Test::Unit.run = true
 
-ActionController::Integration::Session.send(:include, Spec::Matchers)
-ActionController::Integration::Session.send(:include, Spec::Rails::Matchers)
+ActionController::Integration::Session.__send__ :include, Spec::Matchers
+ActionController::Integration::Session.__send__ :include, Spec::Rails::Matchers
 
 class RailsStory < ActionController::IntegrationTest
   if defined?(ActiveRecord::Base)
@@ -43,7 +43,7 @@ class ActiveRecordSafetyListener
       if ActiveRecord::Base.connection.respond_to?(:increment_open_transactions)
         ActiveRecord::Base.connection.increment_open_transactions
       else
-        ActiveRecord::Base.send :increment_open_transactions
+        ActiveRecord::Base.__send__ :increment_open_transactions
       end
     end
     ActiveRecord::Base.connection.begin_db_transaction
@@ -55,7 +55,7 @@ class ActiveRecordSafetyListener
       if ActiveRecord::Base.connection.respond_to?(:decrement_open_transactions)
         ActiveRecord::Base.connection.decrement_open_transactions
       else
-        ActiveRecord::Base.send :decrement_open_transactions
+        ActiveRecord::Base.__send__ :decrement_open_transactions
       end
     end
   end

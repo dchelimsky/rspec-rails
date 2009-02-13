@@ -3,21 +3,22 @@ module Spec
     module Example
       # Controller Examples live in $RAILS_ROOT/spec/controllers/.
       #
-      # Controller Examples use Spec::Rails::Example::ControllerExampleGroup, which supports running specs for
-      # Controllers in two modes, which represent the tension between the more granular
-      # testing common in TDD and the more high level testing built into
-      # rails. BDD sits somewhere in between: we want to a balance between
-      # specs that are close enough to the code to enable quick fault
-      # isolation and far enough away from the code to enable refactoring
-      # with minimal changes to the existing specs.
+      # Controller Examples use Spec::Rails::Example::ControllerExampleGroup,
+      # which supports running specs for Controllers in two modes, which
+      # represent the tension between the more granular testing common in TDD
+      # and the more high level testing built into rails. BDD sits somewhere
+      # in between: we want to a balance between specs that are close enough
+      # to the code to enable quick fault isolation and far enough away from
+      # the code to enable refactoring with minimal changes to the existing
+      # specs.
       #
       # == Isolation mode (default)
       #
-      # No dependencies on views because none are ever rendered. The
-      # benefit of this mode is that can spec the controller completely
-      # independent of the view, allowing that responsibility to be
-      # handled later, or by somebody else. Combined w/ separate view
-      # specs, this also provides better fault isolation.
+      # No dependencies on views because none are ever rendered. The benefit
+      # of this mode is that can spec the controller completely independent of
+      # the view, allowing that responsibility to be handled later, or by
+      # somebody else. Combined w/ separate view specs, this also provides
+      # better fault isolation.
       #
       # == Integration mode
       #
@@ -28,13 +29,12 @@ module Spec
       #     integrate_views
       #     ...
       #
-      # In this mode, controller specs are run in the same way that
-      # rails functional tests run - one set of tests for both the
-      # controllers and the views. The benefit of this approach is that
-      # you get wider coverage from each spec. Experienced rails
-      # developers may find this an easier approach to begin with, however
-      # we encourage you to explore using the isolation mode and revel
-      # in its benefits.
+      # In this mode, controller specs are run in the same way that rails
+      # functional tests run - one set of tests for both the controllers and
+      # the views. The benefit of this approach is that you get wider coverage
+      # from each spec. Experienced rails developers may find this an easier
+      # approach to begin with, however we encourage you to explore using the
+      # isolation mode and revel in its benefits.
       #
       # == Expecting Errors
       #
@@ -44,14 +44,15 @@ module Spec
       class ControllerExampleGroup < FunctionalExampleGroup
         class << self
                     
-          # Use this to instruct RSpec to render views in your controller examples (Integration Mode).
+          # Use integrate_views to instruct RSpec to render views in
+          # your controller examples in Integration mode.
           #
           #   describe ThingController do
           #     integrate_views
           #     ...
           #
-          # See Spec::Rails::Example::ControllerExampleGroup for more information about
-          # Integration and Isolation modes.
+          # See Spec::Rails::Example::ControllerExampleGroup for more
+          # information about Integration and Isolation modes.
           def integrate_views(integrate_views = true)
             @integrate_views = integrate_views
           end
@@ -66,14 +67,18 @@ module Spec
             super
           end
           
-          def set_description(*args)
+          def set_description(*args) # :nodoc:
             super
             if described_class && described_class.ancestors.include?(ActionController::Base)
               tests described_class
             end
           end
 
-          # You MUST provide a controller_name within the context of
+          # When you don't pass a controller to describe, like this:
+          #
+          #   describe ThingsController do
+          #
+          # ... then you must provide a controller_name within the context of
           # your controller specs:
           #
           #   describe "ThingController" do
@@ -94,19 +99,20 @@ module Spec
           end
 
           unless @controller.class.ancestors.include?(ActionController::Base)
-            Spec::Expectations.fail_with <<-EOE
-            You have to declare the controller name in controller specs. For example:
-            describe "The ExampleController" do
-            controller_name "example" #invokes the ExampleController
-            end
-            EOE
+            Spec::Expectations.fail_with <<-MESSAGE
+Controller specs need to know what controller is being specified. You can
+indicate this by passing the controller to describe():
+
+  describe MyController do
+    
+or by declaring the controller's name
+
+  describe "a MyController" do
+    controller_name :my #invokes the MyController
+end
+MESSAGE
           end
-          (class << @controller; self; end).class_eval do
-            def controller_path #:nodoc:
-              self.class.name.underscore.gsub('_controller', '')
-            end
-            include ControllerInstanceMethods
-          end
+          @controller.extend ControllerInstanceMethods
           @controller.integrate_views! if @integrate_views
           @controller.session = session
         end
@@ -121,9 +127,7 @@ module Spec
       protected
 
         def _assigns_hash_proxy
-          @_assigns_hash_proxy ||= AssignsHashProxy.new self do
-            @response.template
-          end
+          @_assigns_hash_proxy ||= AssignsHashProxy.new(self) {@response.template}
         end
 
       private
@@ -146,24 +150,33 @@ module Spec
           end
           
           def render(*args)
-            if @_rendered
-              opts = args[0]
-              (@_rendered[:template] ||= opts[:file]) if opts[:file]
-              (@_rendered[:partials][opts[:partial]] += 1) if opts[:partial]
-            else
-              super
-            end
+            @_rendered ? record_render(args[0]) : super
+          end
+        
+        private
+        
+          def record_render(opts)
+            (@_rendered[:template] ||= opts[:file]) if opts[:file]
+            (@_rendered[:partials][opts[:partial]] += 1) if opts[:partial]
+          end
+          
+          # Returned by _pick_template when running controller examples in isolation mode.
+          class PickedTemplate 
+            # Do nothing when running controller examples in isolation mode.
+            def render_template(*ignore_args); end
+            # Do nothing when running controller examples in isolation mode.
+            def render_partial(*ignore_args);  end
           end
         end
-
-        module ControllerInstanceMethods #:nodoc:
+        
+        module ControllerInstanceMethods # :nodoc:
           include Spec::Rails::Example::RenderObserver
 
           # === render(options = nil, extra_options={}, &block)
           #
           # This gets added to the controller's singleton meta class,
           # allowing Controller Examples to run in two modes, freely switching
-          # from context to context.
+          # from example group to example group.
           def render(options=nil, extra_options={}, &block)
             unless block_given?
               unless integrate_views?
@@ -193,31 +206,24 @@ module Spec
             @integrate_views = true
           end
 
-          private
+        private
 
           def integrate_views?
             @integrate_views
           end
 
           def matching_message_expectation_exists(options)
-            render_proxy.send(:__mock_proxy).send(:find_matching_expectation, :render, options)
+            render_proxy.__send__(:__mock_proxy).__send__(:find_matching_expectation, :render, options)
           end
         
           def matching_stub_exists(options)
-            render_proxy.send(:__mock_proxy).send(:find_matching_method_stub, :render, options)
+            render_proxy.__send__(:__mock_proxy).__send__(:find_matching_method_stub, :render, options)
           end
         
         end
 
         Spec::Example::ExampleGroupFactory.register(:controller, self)
-      end
-      
-      # Returned by _pick_template when running controller examples in isolation mode.
-      class PickedTemplate 
-        # Do nothing when running controller examples in isolation mode.
-        def render_template(*ignore_args); end
-        # Do nothing when running controller examples in isolation mode.
-        def render_partial(*ignore_args);  end
+        
       end
     end
   end

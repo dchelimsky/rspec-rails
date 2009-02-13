@@ -6,7 +6,7 @@ module Spec
         
         def initialize
           @matcher = Spec::Matchers::Be.new :be_valid
-          @matcher.send :handling_predicate!
+          @matcher.__send__ :handling_predicate!
         end
 
         def matches?(actual)
