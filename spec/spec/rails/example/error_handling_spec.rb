@@ -22,7 +22,16 @@ require 'controller_spec_controller'
       end
     end
 
-    describe "with use_rails_error_handling!" do
+    describe "with deprecated use_rails_error_handling!" do
+      before(:each) do
+        Kernel.stub!(:warn)
+      end
+
+      it "warns of deprecation" do
+        Kernel.should_receive(:warn).with(/DEPRECATION NOTICE/)
+        controller.use_rails_error_handling!
+      end
+
       describe "with an error that is *not* rescued" do
         it "returns the error code" do
           controller.use_rails_error_handling!
@@ -30,9 +39,28 @@ require 'controller_spec_controller'
           response.response_code.should == 500
         end
       end
+
       describe "with an error that *is* rescued" do
         it "returns a 200" do
           controller.use_rails_error_handling!
+          get 'rescued_error_action'
+          response.response_code.should == 200
+        end
+      end
+    end
+
+    describe "with rescue_action_in_public!" do
+      describe "with an error that is *not* rescued" do
+        it "returns the error code" do
+          rescue_action_in_public!
+          get 'un_rescued_error_action'
+          response.response_code.should == 500
+        end
+      end
+
+      describe "with an error that *is* rescued" do
+        it "returns a 200" do
+          rescue_action_in_public!
           get 'rescued_error_action'
           response.response_code.should == 200
         end

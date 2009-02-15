@@ -16,6 +16,11 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
 
   * see Upgrade.txt for more information
   
+* deprecations
+
+  * controller.use_rails_error_handling! is deprecated
+    * use rescue_action_in_public! (from rails) instead
+  
 * enhancements
 
   * Adding status codes to redirect_to matcher (Damian Janowski). Closes #570.
