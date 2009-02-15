@@ -104,7 +104,7 @@ class ControllerSpecController < ActionController::Base
     raise RescuedError
   end
 
-  def other_error_action
+  def un_rescued_error_action
     raise UnRescuedError
   end
 end
