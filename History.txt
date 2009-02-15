@@ -1,6 +1,6 @@
 === Version 1.1.99.4 (in git)
 
-IMPORTANT: See Upgrade.txt for information about upgrading to rspec-rails-1.1.99.4
+IMPORTANT: See Upgrade.markdown for information about upgrading to rspec-rails-1.1.99.4
 
 IMPORTANT: This release includes the following backwards-compatibility-breaking changes.
 
