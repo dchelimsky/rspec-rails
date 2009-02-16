@@ -1,5 +1,14 @@
 # Upgrade to rspec-rails-1.1.99.x
 
+## Supported Rails Versions
+
+This release supports the following versions of rails:
+
+* 2.0.5
+* 2.1.2
+* 2.2.2
+* 2.3.0
+
 ## update generated files
 
 Be sure to run "script/generate rspec" and allow the following files to be overwritten:
@@ -7,16 +16,10 @@ Be sure to run "script/generate rspec" and allow the following files to be overw
 * lib/tasks/rspec.rake
 * script/spec_server
 
-## Controller Errors
+## controller.use\_rails\_error\_handling! is deprecated
 
-Controller error handling in rspec-rails has been broken for a while, behaving
-differently in different versions of rails. This is now fixed, but it might
-mean you'll see some errors you weren't getting before.
-
-The default behaviour now is to *always* raise errors, even if they are
-captured with a #rescue\_from declaration. To get the rescue\_from
-declarations to be recognized, you have to call use\_rails\_error\_handling! on
-the controller.
+Use rescue\_action\_in\_public! instead. It comes directly from rails and does
+exactly the same thing
 
 ## route_for
 
