@@ -124,6 +124,24 @@ MESSAGE
           @integrate_views = self.class.integrate_views?
         end
         
+        # Bypasses any error rescues defined with rescue_from. Useful
+        # in cases in which you want to specify errors coming out of
+        # actions that might be caught by a rescue_from clause that is
+        # specified separately.
+        #
+        # Note that this will override the effect of rescue_action_in_public
+        def bypass_rescue
+          if ::Rails::VERSION::STRING >= '2.2'
+            def controller.rescue_action(exception)
+              raise exception
+            end
+          else
+            def controller.rescue_action_with_handler(exception)
+              raise exception
+            end
+          end
+        end
+        
       protected
 
         def _assigns_hash_proxy

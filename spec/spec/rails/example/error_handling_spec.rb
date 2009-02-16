@@ -66,5 +66,25 @@ require 'controller_spec_controller'
         end
       end
     end
+    
+    describe "with bypass_rescue" do
+      describe "with an error that is *not* rescued" do
+        it "raises the error" do
+          bypass_rescue
+          lambda do
+            get 'un_rescued_error_action'
+          end.should raise_error(ControllerSpecController::UnRescuedError)
+        end
+      end
+
+      describe "with an error that *is* rescued" do
+        it "raises the error" do
+          bypass_rescue
+          lambda do
+            get 'rescued_error_action'
+          end.should raise_error(ControllerSpecController::RescuedError)
+        end
+      end
+    end
   end
 end
