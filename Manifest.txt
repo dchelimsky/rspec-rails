@@ -4,7 +4,7 @@ Manifest.txt
 README.txt
 Rakefile
 TODO.txt
-Upgrade.txt
+Upgrade.markdown
 features/step_definitions/people.rb
 features/support/env.rb
 features/transactions/transactions_should_rollback.feature
@@ -51,6 +51,7 @@ lib/spec/rails/example/routing_helpers.rb
 lib/spec/rails/example/view_example_group.rb
 lib/spec/rails/extensions.rb
 lib/spec/rails/extensions/action_controller/rescue.rb
+lib/spec/rails/extensions/action_controller/test_case.rb
 lib/spec/rails/extensions/action_controller/test_response.rb
 lib/spec/rails/extensions/action_view/base.rb
 lib/spec/rails/extensions/active_record/base.rb
@@ -135,13 +136,13 @@ spec/spec/rails/example/configuration_spec.rb
 spec/spec/rails/example/controller_example_group_spec.rb
 spec/spec/rails/example/controller_isolation_spec.rb
 spec/spec/rails/example/cookies_proxy_spec.rb
+spec/spec/rails/example/error_handling_spec.rb
 spec/spec/rails/example/example_group_factory_spec.rb
 spec/spec/rails/example/helper_example_group_spec.rb
 spec/spec/rails/example/model_example_group_spec.rb
 spec/spec/rails/example/shared_behaviour_spec.rb
 spec/spec/rails/example/test_unit_assertion_accessibility_spec.rb
 spec/spec/rails/example/view_example_group_spec.rb
-spec/spec/rails/extensions/action_controller_rescue_action_spec.rb
 spec/spec/rails/extensions/action_view_base_spec.rb
 spec/spec/rails/extensions/active_record_spec.rb
 spec/spec/rails/interop/testcase_spec.rb
