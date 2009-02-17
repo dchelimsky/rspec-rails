@@ -59,7 +59,11 @@ module Spec
           ::ActiveSupport::Dependencies.mechanism = :load :
           ::Dependencies.mechanism = :load
 
-        require_dependency('application.rb') unless Object.const_defined?(:ApplicationController)
+        unless Object.const_defined?(:ApplicationController)
+          %w(application_controller.rb application.rb).each do |name|
+            require_dependency(name) if File.exists?("#{RAILS_ROOT}/app/controllers/#{name}")
+          end
+        end
         load "#{RAILS_ROOT}/spec/spec_helper.rb"
 
         if in_memory_database?
