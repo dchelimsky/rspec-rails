@@ -45,19 +45,20 @@ module Spec
         $stdout = stdout
         $stderr = stderr
         
+        ::Rails::Configuration.extend Module.new {def cache_classes; false; end}
+
+        ::ActiveSupport.const_defined?(:Dependencies) ?
+          ::ActiveSupport::Dependencies.mechanism = :load :
+          ::Dependencies.mechanism = :load
+        
         require 'action_controller/dispatcher'
         dispatcher = ::ActionController::Dispatcher.new($stdout)
-        dispatcher.respond_to?(:cleanup_application) ?
-          dispatcher.cleanup_application :
-          dispatcher.reload_application
+        dispatcher.reload_application
         
         if Object.const_defined?(:Fixtures) && Fixtures.respond_to?(:reset_cache)
           Fixtures.reset_cache
         end
         
-        ::ActiveSupport.const_defined?(:Dependencies) ?
-          ::ActiveSupport::Dependencies.mechanism = :load :
-          ::Dependencies.mechanism = :load
 
         unless Object.const_defined?(:ApplicationController)
           %w(application_controller.rb application.rb).each do |name|
@@ -70,7 +71,7 @@ module Spec
           load "#{RAILS_ROOT}/db/schema.rb" # use db agnostic schema by default
           ActiveRecord::Migrator.up('db/migrate') # use migrations
         end
-
+        
         ::Spec::Runner::CommandLine.run(
           ::Spec::Runner::OptionParser.parse(
             argv,
@@ -78,6 +79,8 @@ module Spec
             $stdout
           )
         )
+
+        dispatcher.cleanup_application if dispatcher.respond_to?(:cleanup_application)
       end
 
       def in_memory_database?
