@@ -9,6 +9,20 @@ puts "Loading Rails environment"
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 
+if Rails::VERSION::STRING >= '2.2' && Rails.configuration.cache_classes
+  warn <<-MESSAGE
+
+#{'*'*50}
+
+spec_server won't reload your classes if config.cache_classes
+is set to true. Please modify environment/test.rb:
+
+    config.cache_classes = false
+
+#{'*'*50}
+MESSAGE
+end
+
 options = Hash.new
 parser = OptionParser.new
 parser.on("-d", "--daemon")     {|ignore| options[:daemon] = true }
