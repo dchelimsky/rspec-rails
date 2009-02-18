@@ -144,6 +144,7 @@ namespace :spec do
         $stderr.puts "spec_server is already running."
       else
         $stderr.puts %Q{Starting up spec_server ...}
+        FileUtils.mkdir('tmp') unless test ?d, 'tmp'
         system("ruby", "script/spec_server", "--daemon", "--pid", daemonized_server_pid)
       end
     end

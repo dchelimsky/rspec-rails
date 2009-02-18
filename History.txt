@@ -43,6 +43,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * rspec's rake tasks are not loaded when running "rake gems" or any of its subtasks
   * only warn when rspec is not installed when trying to invoke an rspec rake task
   * support 2 arg version of ActionController::Base#render (reported by Nathan Wilmes)
+  * rake spec:server:start doesn't choke if there is no tmp directory
 
 === Version 1.1.12 / 2009-01-11
 
