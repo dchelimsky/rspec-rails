@@ -14,6 +14,7 @@ This release supports the following versions of rails:
 Be sure to run "script/generate rspec" and allow the following files to be overwritten:
 
 * lib/tasks/rspec.rake
+* script/spec
 * script/spec_server
 
 ## controller.use\_rails\_error\_handling! is deprecated
