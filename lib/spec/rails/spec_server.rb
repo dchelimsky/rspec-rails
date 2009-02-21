@@ -54,7 +54,6 @@ module Spec
         require 'action_controller/dispatcher'
         dispatcher = ::ActionController::Dispatcher.new($stdout)
 
-        # Rails 2.3 (since ec40b5c) move the reload_application as a class method of ::ActionController::Dispatcher
         if ::ActionController::Dispatcher.respond_to?(:reload_application)
           ::ActionController::Dispatcher.reload_application
         else
@@ -64,7 +63,6 @@ module Spec
         if Object.const_defined?(:Fixtures) && Fixtures.respond_to?(:reset_cache)
           Fixtures.reset_cache
         end
-        
 
         unless Object.const_defined?(:ApplicationController)
           %w(application_controller.rb application.rb).each do |name|
@@ -74,8 +72,8 @@ module Spec
         load "#{RAILS_ROOT}/spec/spec_helper.rb"
 
         if in_memory_database?
-          load "#{RAILS_ROOT}/db/schema.rb" # use db agnostic schema by default
-          ActiveRecord::Migrator.up('db/migrate') # use migrations
+          load "#{RAILS_ROOT}/db/schema.rb"
+          ActiveRecord::Migrator.up('db/migrate')
         end
         
         ::Spec::Runner::CommandLine.run(
