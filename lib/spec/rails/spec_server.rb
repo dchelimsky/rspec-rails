@@ -53,7 +53,13 @@ module Spec
         
         require 'action_controller/dispatcher'
         dispatcher = ::ActionController::Dispatcher.new($stdout)
-        dispatcher.reload_application
+
+        # Rails 2.3 (since ec40b5c) move the reload_application as a class method of ::ActionController::Dispatcher
+        if ::ActionController::Dispatcher.respond_to?(:reload_application)
+          ::ActionController::Dispatcher.reload_application
+        else
+          dispatcher.reload_application
+        end
         
         if Object.const_defined?(:Fixtures) && Fixtures.respond_to?(:reset_cache)
           Fixtures.reset_cache
