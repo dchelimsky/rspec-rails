@@ -14,7 +14,7 @@ describe "/<%= table_name %>/new.<%= default_file_extension %>" do
   end
 
   it "renders new <%= file_name %> form" do
-    render "/<%= table_name %>/new.<%= default_file_extension %>"
+    render
     
     response.should have_tag("form[action=?][method=post]", <%= table_name %>_path) do
 <% for attribute in output_attributes -%>

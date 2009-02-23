@@ -119,8 +119,15 @@ module Spec
         # See Spec::Rails::Example::ViewExampleGroup for more information.
         def render(*args)
           options = Hash === args.last ? args.pop : {}
+          
+          if args.empty? 
+            unless [:partial, :inline, :file, :template, :xml, :json, :update].any? {|k| options.has_key? k} 
+              args << self.class.description_parts.first
+            end
+          end
+          
           options[:template] = args.first.to_s.sub(/^\//,'') unless args.empty?
-
+          
           set_base_view_path(options)
           add_helpers(options)
 

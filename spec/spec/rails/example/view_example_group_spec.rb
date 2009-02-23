@@ -261,6 +261,15 @@ describe "render 'view_spec/foo/show.rhtml'", :type => :view do
   end
 end
 
+describe "view_spec/foo/show.rhtml", :type => :view do
+  context "rendered with no args" do
+    it "renders just fine" do
+      render
+      request.path_parameters[:action].should == 'show'
+    end
+  end
+end
+
 describe "setting path parameters", :type => :view do
   describe "(controller)" do
     it "should supercede the default path parameters" do

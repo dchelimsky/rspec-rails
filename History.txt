@@ -34,6 +34,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * generated specs use declarative docstrings
   * rspec_scaffold generator generates layout and stylesheet (per Rails-2.3)
   * add bypass_rescue for controller specs
+  * infer template path from the first arg passed to describe in view specs
   
 * bug fixes
 
