@@ -30,7 +30,6 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
       @controller_class_name = "#{@controller_class_nesting}::#{@controller_class_name_without_nesting}"
     end
     
-    @resource_generator = "scaffold"
     @default_file_extension = "html.erb"
   end
 
@@ -57,8 +56,8 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
       m.directory File.join('spec/views', controller_class_path, controller_file_name)
       
       # Layout and stylesheet.
-      m.template("#{@resource_generator}:layout.html.erb", File.join('app/views/layouts', controller_class_path, "#{controller_file_name}.html.erb"))
-      m.template("#{@resource_generator}:style.css", 'public/stylesheets/scaffold.css')
+      m.template("scaffold:layout.html.erb", File.join('app/views/layouts', controller_class_path, "#{controller_file_name}.html.erb"))
+      m.template("scaffold:style.css", 'public/stylesheets/scaffold.css')
 
       # Controller spec, class, and helper.
       m.template 'rspec_scaffold:routing_spec.rb',
@@ -67,18 +66,18 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
       m.template 'rspec_scaffold:controller_spec.rb',
         File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
 
-      m.template "#{@resource_generator}:controller.rb",
+      m.template "scaffold:controller.rb",
         File.join('app/controllers', controller_class_path, "#{controller_file_name}_controller.rb")
 
       m.template 'rspec_scaffold:helper_spec.rb',
         File.join('spec/helpers', class_path, "#{controller_file_name}_helper_spec.rb")
 
-      m.template "#{@resource_generator}:helper.rb",
+      m.template "scaffold:helper.rb",
         File.join('app/helpers', controller_class_path, "#{controller_file_name}_helper.rb")
 
       for action in scaffold_views
         m.template(
-          "#{@resource_generator}:view_#{action}.#{@default_file_extension}",
+          "scaffold:view_#{action}.#{@default_file_extension}",
           File.join('app/views', controller_class_path, controller_file_name, "#{action}.#{default_file_extension}")
         )
       end
