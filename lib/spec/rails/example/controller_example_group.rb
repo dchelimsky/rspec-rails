@@ -89,8 +89,6 @@ module Spec
           end
         end
         
-        include ::Spec::Rails::Example::RoutingHelpers
-        
         before(:each) do
           # Some Rails apps explicitly disable ActionMailer in environment.rb
           if defined?(ActionMailer)
@@ -149,10 +147,6 @@ MESSAGE
         end
 
       private
-
-        def ensure_that_routes_are_loaded
-          ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
-        end
         
         module TemplateIsolationExtensions
           def file_exists?(ignore); true; end

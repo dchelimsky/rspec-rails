@@ -3,7 +3,19 @@ module Spec
     module Example
       module RoutingHelpers
         
+        module ParamsFromQueryString # :nodoc:
+          def params_from_querystring(querystring) # :nodoc:
+            params = {}
+            querystring.split('&').each do |piece|
+              key, value = piece.split('=')
+              params[key.to_sym] = value
+            end
+            params
+          end
+        end
+        
         class RouteFor
+          include ::Spec::Rails::Example::RoutingHelpers::ParamsFromQueryString
           def initialize(example, options)
             @example, @options = example, options
           end
@@ -42,13 +54,12 @@ module Spec
           querystring.blank? ? params : params.merge(params_from_querystring(querystring))
         end
 
-        def params_from_querystring(querystring) # :nodoc:
-          params = {}
-          querystring.split('&').each do |piece|
-            key, value = piece.split('=')
-            params[key.to_sym] = value
-          end
-          params
+      private
+
+        include ParamsFromQueryString
+
+        def ensure_that_routes_are_loaded
+          ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
         end
 
       end

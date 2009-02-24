@@ -8,6 +8,7 @@ require "spec/rails/example/functional_example_group"
 require "spec/rails/example/controller_example_group"
 require "spec/rails/example/helper_example_group"
 require "spec/rails/example/view_example_group"
+require "spec/rails/example/routing_example_group"
 require "spec/rails/example/cookies_proxy"
 
 module Spec
