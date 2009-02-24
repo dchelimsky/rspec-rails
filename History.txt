@@ -48,6 +48,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * rake spec:server:start doesn't choke if there is no tmp directory
   * force cache_classes = false when running with spec_server. Closes #287.
   * keep spec_server working against edge rails (Jonathan Tron). Closes #685.
+  * create lib/tasks if not present when running script/generate rspec. Closes #687.
 
 === Version 1.1.12 / 2009-01-11
 

@@ -14,6 +14,7 @@ class RspecGenerator < Rails::Generator::Base
     record do |m|
       script_options     = { :chmod => 0755, :shebang => options[:shebang] == DEFAULT_SHEBANG ? nil : options[:shebang] }
 
+      m.directory 'lib/tasks'
       m.file      'rspec.rake',                    'lib/tasks/rspec.rake'
 
       m.file      'script/autospec',               'script/autospec',    script_options
