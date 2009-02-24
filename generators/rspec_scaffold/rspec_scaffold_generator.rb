@@ -50,6 +50,7 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
       m.directory(File.join('public/stylesheets', class_path))
 
       m.directory(File.join('spec/controllers', controller_class_path))
+      m.directory(File.join('spec/routing', controller_class_path))
       m.directory(File.join('spec/models', class_path))
       m.directory(File.join('spec/helpers', class_path))
       m.directory File.join('spec/fixtures', class_path)
@@ -61,7 +62,7 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
 
       # Controller spec, class, and helper.
       m.template 'rspec_scaffold:routing_spec.rb',
-        File.join('spec/controllers', controller_class_path, "#{controller_file_name}_routing_spec.rb")
+        File.join('spec/routing', controller_class_path, "#{controller_file_name}_routing_spec.rb")
 
       m.template 'rspec_scaffold:controller_spec.rb',
         File.join('spec/controllers', controller_class_path, "#{controller_file_name}_controller_spec.rb")
