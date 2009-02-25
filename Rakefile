@@ -20,7 +20,7 @@ Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.description = "Behaviour Driven Development for Ruby on Rails."
   p.rubyforge_name = 'rspec'
   p.developer('RSpec Development Team', 'rspec-devel@rubyforge.org')
-  p.extra_deps = [["dchelimsky-rspec","1.1.99.9"],["rack",">=0.4.0"]]
+  p.extra_deps = [["rspec","1.1.99.9"],["rack",">=0.4.0"]]
   p.extra_dev_deps = [["cucumber",">= 0.1.13"]]
   p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
 end
@@ -54,10 +54,5 @@ namespace :update do
   desc "update the manfest"
   task :manifest do
     system %q[touch Manifest.txt; rake check_manifest | grep -v "(in " | patch]
-  end
-  
-  desc "update the gemspec"
-  task :gemspec do
-    system %q[rake debug_gem | grep -v "(in " | grep -v "s.add_dependency(%q<hoe" | grep -v "s.add_dependency(%q<cuc" > `basename \\`pwd\\``.gemspec]
   end
 end
