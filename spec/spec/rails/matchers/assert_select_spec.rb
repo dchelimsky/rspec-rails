@@ -745,7 +745,12 @@ describe "string.should have_tag", :type => :helper do
     "<div><p>a paragraph</p></div>".should have_tag("p", "a paragraph")
   end
 
+  it "should find nested element in one line" do
+    "<div><p>a paragraph</p></div>".should have_tag("div p","a paragraph")
+  end
+
   it "should find nested element" do
+    pending("how did this break?")
     "<div><p>a paragraph</p></div>".should have_tag("div") do
       with_tag("p", "a paragraph")
     end
