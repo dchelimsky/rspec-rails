@@ -80,7 +80,7 @@ module Spec
           end
         end
 
-        def failure_message
+        def failure_message_for_should
           if @redirected
             if @status_matched
               return %Q{expected redirect to #{@expected.inspect}, got redirect to #{@actual.inspect}}
@@ -92,7 +92,7 @@ module Spec
           end
         end
 
-        def negative_failure_message
+        def failure_message_for_should_not
             return %Q{expected not to be redirected to #{@expected.inspect}, but was} if @redirected
         end
 

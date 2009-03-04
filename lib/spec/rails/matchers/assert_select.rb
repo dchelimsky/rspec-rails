@@ -31,8 +31,8 @@ module Spec # :nodoc:
           @error.nil?
         end
 
-        def failure_message; @error.message; end
-        def negative_failure_message; "should not #{description}, but did"; end
+        def failure_message_for_should; @error.message; end
+        def failure_message_for_should_not; "should not #{description}, but did"; end
 
         def description
           {

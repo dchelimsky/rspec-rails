@@ -36,11 +36,11 @@ module Spec
           given_controller_path == expected_controller_path && given_file.match(expected_file)
         end
         
-        def failure_message
+        def failure_message_for_should
           "expected #{@expected.inspect}, got #{@actual.inspect}"
         end
         
-        def negative_failure_message
+        def failure_message_for_should_not
           "expected not to render #{@expected.inspect}, but did"
         end
         

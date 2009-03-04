@@ -13,11 +13,11 @@ module Spec
           return actual.include?(expected)
         end
 
-        def failure_message
+        def failure_message_for_should
           "expected to find #{expected.inspect} in #{actual.inspect}"
         end
 
-        def negative_failure_message
+        def failure_message_for_should_not
           "expected not to include text #{expected.inspect}"
         end
 
