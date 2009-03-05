@@ -75,7 +75,7 @@ module Spec # :nodoc:
       #
       # see documentation for assert_select at http://api.rubyonrails.org/
       def have_tag(*args, &block)
-        AssertSelect.new(:assert_select, self, *args, &block)
+        @__current_scope_for_assert_select = AssertSelect.new(:assert_select, self, *args, &block)
       end
     
       # wrapper for a nested assert_select
@@ -86,7 +86,7 @@ module Spec # :nodoc:
       #
       # see documentation for assert_select at http://api.rubyonrails.org/
       def with_tag(*args, &block)
-        should have_tag(*args, &block)
+        @__current_scope_for_assert_select.should have_tag(*args, &block)
       end
     
       # wrapper for a nested assert_select with false
@@ -97,7 +97,7 @@ module Spec # :nodoc:
       #
       # see documentation for assert_select at http://api.rubyonrails.org/
       def without_tag(*args, &block)
-        should_not have_tag(*args, &block)
+        @__current_scope_for_assert_select.should_not have_tag(*args, &block)
       end
     
       # :call-seq:

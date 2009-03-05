@@ -12,11 +12,6 @@ class AssertSelectController < ActionController::Base
     @content = content
   end
 
-  #NOTE - this is commented because response is implemented in lib/spec/rails/context/controller
-  # def response(&block)
-  #   @update = block
-  # end
-  # 
   def html()
     render :text=>@content, :layout=>false, :content_type=>Mime::HTML
     @content = nil
@@ -484,8 +479,7 @@ describe "have_rjs behaviour_type", :type => :controller do
       with_tag("#1")
       with_tag("#2")
       with_tag("#3")
-      # with_tag("#4")
-      # with_tag("#5")
+      with_tag("#4")
     end
   end
 
@@ -678,56 +672,6 @@ describe "send_email behaviour_type", :type => :controller do
 
 end
 
-# describe "An rjs call to :visual_effect, a 'should have_rjs' spec with",
-#   :type => :view do
-#     
-#   before do
-#     render 'rjs_spec/visual_effect'
-#   end
-# 
-#   it "should pass with the correct element name" do
-#     response.should have_rjs(:effect, :fade, 'mydiv')
-#   end
-#   
-#   it "should fail the wrong element name" do
-#     lambda {
-#       response.should have_rjs(:effect, :fade, 'wrongname')
-#     }.should raise_error(SpecFailed)
-#   end
-#   
-#   it "should fail with the correct element but the wrong command" do
-#     lambda {
-#       response.should have_rjs(:effect, :puff, 'mydiv')
-#     }.should raise_error(SpecFailed)
-#   end
-#   
-# end
-#   
-# describe "An rjs call to :visual_effect for a toggle, a 'should have_rjs' spec with",
-#   :type => :view do
-#     
-#   before do
-#     render 'rjs_spec/visual_toggle_effect'
-#   end
-#   
-#   it "should pass with the correct element name" do
-#     response.should have_rjs(:effect, :toggle_blind, 'mydiv')
-#   end
-#   
-#   it "should fail with the wrong element name" do
-#     lambda {
-#       response.should have_rjs(:effect, :toggle_blind, 'wrongname')
-#     }.should raise_error(SpecFailed)
-#   end
-#   
-#   it "should fail the correct element but the wrong command" do
-#     lambda {
-#       response.should have_rjs(:effect, :puff, 'mydiv')
-#     }.should raise_error(SpecFailed)
-#   end
-#   
-# end
-
 describe "string.should have_tag", :type => :helper do
   include AssertSelectSpecHelpers
 
@@ -750,7 +694,6 @@ describe "string.should have_tag", :type => :helper do
   end
 
   it "should find nested element" do
-    pending("how did this break?")
     "<div><p>a paragraph</p></div>".should have_tag("div") do
       with_tag("p", "a paragraph")
     end
@@ -814,3 +757,53 @@ describe 'selecting in HTML that contains a mock with null_object' do
     lambda {html.should have_tag('b')}.should_not raise_error
   end
 end
+
+# describe "An rjs call to :visual_effect, a 'should have_rjs' spec with",
+#   :type => :view do
+#     
+#   before do
+#     render 'rjs_spec/visual_effect'
+#   end
+# 
+#   it "should pass with the correct element name" do
+#     response.should have_rjs(:effect, :fade, 'mydiv')
+#   end
+#   
+#   it "should fail the wrong element name" do
+#     lambda {
+#       response.should have_rjs(:effect, :fade, 'wrongname')
+#     }.should raise_error(SpecFailed)
+#   end
+#   
+#   it "should fail with the correct element but the wrong command" do
+#     lambda {
+#       response.should have_rjs(:effect, :puff, 'mydiv')
+#     }.should raise_error(SpecFailed)
+#   end
+#   
+# end
+#   
+# describe "An rjs call to :visual_effect for a toggle, a 'should have_rjs' spec with",
+#   :type => :view do
+#     
+#   before do
+#     render 'rjs_spec/visual_toggle_effect'
+#   end
+#   
+#   it "should pass with the correct element name" do
+#     response.should have_rjs(:effect, :toggle_blind, 'mydiv')
+#   end
+#   
+#   it "should fail with the wrong element name" do
+#     lambda {
+#       response.should have_rjs(:effect, :toggle_blind, 'wrongname')
+#     }.should raise_error(SpecFailed)
+#   end
+#   
+#   it "should fail the correct element but the wrong command" do
+#     lambda {
+#       response.should have_rjs(:effect, :puff, 'mydiv')
+#     }.should raise_error(SpecFailed)
+#   end
+#   
+# end
