@@ -5,7 +5,7 @@ module Spec # :nodoc:
     module Matchers
 
       class AssertSelect #:nodoc:
-
+        
         def initialize(assertion, spec_scope, *args, &block)
           @assertion = assertion
           @spec_scope = spec_scope
@@ -14,23 +14,20 @@ module Spec # :nodoc:
         end
         
         def matches?(response_or_text, &block)
-          if ActionController::TestResponse === response_or_text and
-                   response_or_text.headers.key?('Content-Type') and
-                   !response_or_text.headers['Content-Type'].blank? and
-                   response_or_text.headers['Content-Type'].to_sym == :xml
-            @args.unshift(HTML::Document.new(response_or_text.body, false, true).root)           
-          elsif String === response_or_text
-            @args.unshift(HTML::Document.new(response_or_text).root)
-          end
           @block = block if block
+
+          if doc = doc_from(response_or_text)
+            @args.unshift(doc)
+          end
+
           begin
             @spec_scope.__send__(@assertion, *@args, &@block)
+            true
           rescue ::Test::Unit::AssertionFailedError => @error
+            false
           end
-          
-          @error.nil?
         end
-
+        
         def failure_message_for_should; @error.message; end
         def failure_message_for_should_not; "should not #{description}, but did"; end
 
@@ -43,13 +40,31 @@ module Spec # :nodoc:
 
       private
 
+        module TestResponseOrString
+          def test_response?
+            ActionController::TestResponse === self and
+                                               !self.headers['Content-Type'].blank? and
+                                               self.headers['Content-Type'].to_sym == :xml
+          end
+        
+          def string?
+            String === self
+          end
+        end
+
+        def doc_from(response_or_text)
+          response_or_text.extend TestResponseOrString
+          markup = response_or_text.body if response_or_text.test_response?
+          markup = response_or_text if response_or_text.string?
+          HTML::Document.new(markup, false, true).root if markup
+        end
+        
         def format_args(*args)
-          return "" if args.empty?
-          return "(#{arg_list(*args)})"
+          args.empty? ? "" : "(#{arg_list(*args)})"
         end
 
         def arg_list(*args)
-          args.collect do |arg|
+          args.map do |arg|
             arg.respond_to?(:description) ? arg.description : arg.inspect
           end.join(", ")
         end
