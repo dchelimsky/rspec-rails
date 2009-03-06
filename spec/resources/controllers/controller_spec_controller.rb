@@ -86,6 +86,10 @@ class ControllerSpecController < ActionController::Base
     render :inline => "<%= 'inline code' %>"
   end
   
+  def action_that_sends_a_file
+    send_file(File.join(File.dirname(__FILE__), "/example.txt"))
+  end
+  
   def action_that_assigns_false_to_a_variable
     @a_variable = false
     render :text => ""

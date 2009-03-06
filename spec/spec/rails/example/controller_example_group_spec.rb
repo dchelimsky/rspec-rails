@@ -110,6 +110,11 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
       response.body.should == "inline code"
     end
     
+    it "allows sending files" do
+      get 'action_that_sends_a_file'
+      response.body.should == "foo"
+    end
+
     describe "handling should_receive(:render)" do
       it "should warn" do
         controller.should_receive(:render).with(:template => "controller_spec/action_with_template")
