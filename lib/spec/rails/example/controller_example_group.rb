@@ -162,6 +162,7 @@ MESSAGE
           end
           
           def render(*args)
+            return super if Hash === args.last && args.last[:inline]
             @_rendered ? record_render(args[0]) : super
           end
         

@@ -104,7 +104,12 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
         get 'action_which_gets_session', :expected => "session value"
       end.should_not raise_error
     end
-
+    
+    it "allows inline rendering" do
+      get 'action_that_renders_inline'
+      response.body.should == "inline code"
+    end
+    
     describe "handling should_receive(:render)" do
       it "should warn" do
         controller.should_receive(:render).with(:template => "controller_spec/action_with_template")

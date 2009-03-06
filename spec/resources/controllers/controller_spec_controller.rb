@@ -82,6 +82,10 @@ class ControllerSpecController < ActionController::Base
     render :text => ""
   end
   
+  def action_that_renders_inline
+    render :inline => "<%= 'inline code' %>"
+  end
+  
   def action_that_assigns_false_to_a_variable
     @a_variable = false
     render :text => ""
