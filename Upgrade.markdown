@@ -68,8 +68,8 @@ but it still won't be rendered unless you declare ``integrate_views``.
 
 ### render no longer requires a path
 
-The <code>render()</code> method in view specs will infer the path from the
-first argument passed to <code>describe</code>.
+The ``render()`` method in view specs will infer the path from the
+first argument passed to ``describe()``.
 
     describe "players/show" do
       it "does something" do
@@ -78,3 +78,26 @@ first argument passed to <code>describe</code>.
       end
     end
     
+### routing specs live in spec/routing
+
+``script/generate rspec_scaffold`` now generates its routing spec in
+``spec/routing/``.
+
+### bypass_rescue
+
+Added a new ``bypass_rescue()`` declaration for controller specs. Use this
+when you want to specify that an error is raised by an action, even if that
+error is later captured by a ``rescue_from()`` declaration.
+
+    describe AccountController do
+      describe "GET @account" do
+        context "requested by anonymous user" do
+          it "denies access" do
+            bypass_rescue
+            lambda do
+              get :show, :id => "37"
+            end.should raise_error(AccessDenied)
+          end
+        end
+      end
+    end
