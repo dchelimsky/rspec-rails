@@ -49,8 +49,6 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * force cache_classes = false when running with spec_server. Closes #287.
   * keep spec_server working against edge rails (Jonathan Tron). Closes #685.
   * create lib/tasks if not present when running script/generate rspec. Closes #687.
-  * fixed regression (and added spec so it won't regress again) where
-    render => :inline didn't render unless integrate_views was set
 
 === Version 1.1.12 / 2009-01-11
 
