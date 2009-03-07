@@ -57,14 +57,14 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
         post 'action_which_renders_template_from_other_controller'
         lambda do
           should render_template('action_with_template')
-        end.should fail_with(/expected \"action_with_template\", got \"controller_spec\/action_with_template(\.rhtml)?\"/)
+        end.should fail_with(/expected \"action_with_template\", got \"controller_spec\/action_with_template(\.html\.erb)?\"/)
       end
     
       it "should fail with incorrect full path when template is associated with a different controller" do
         post 'action_which_renders_template_from_other_controller'
         lambda do
           should render_template('render_spec/action_with_template')
-        end.should fail_with(/expected \"render_spec\/action_with_template\", got \"controller_spec\/action_with_template(\.rhtml)?\"/)
+        end.should fail_with(/expected \"render_spec\/action_with_template\", got \"controller_spec\/action_with_template(\.html\.erb)?\"/)
       end
     
       it "should fail on the wrong extension (given rhtml)" do
