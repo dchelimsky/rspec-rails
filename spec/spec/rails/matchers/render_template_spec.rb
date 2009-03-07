@@ -16,6 +16,11 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
         should render_template('some_action')
       end
 
+      it "matches an action with specified extenstions" do
+        post 'some_action'
+        should render_template('some_action.html.erb')
+      end
+
       it "matches an action (using a symbol)" do
         post 'some_action'
         should render_template(:some_action)
@@ -70,8 +75,8 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
       it "fails on the wrong extension" do
         get 'some_action'
         lambda {
-          should render_template('render_spec/some_action.rjs')
-        }.should fail_with(/expected \"render_spec\/some_action\.rjs\", got \"render_spec\/some_action(\.html\.erb)?\"/)
+          should render_template('render_spec/some_action.js.rjs')
+        }.should fail_with(/expected \"render_spec\/some_action\.js\.rjs\", got \"render_spec\/some_action(\.html\.erb)?\"/)
       end
     
       it "faild when TEXT is rendered" do
