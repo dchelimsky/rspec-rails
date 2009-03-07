@@ -212,7 +212,7 @@ MESSAGE
           def response(&block)
             # NOTE - we're setting @update for the assert_select_spec - kinda weird, huh?
             @update = block
-            @_response || @response
+            super
           end
 
           def integrate_views!
@@ -220,7 +220,7 @@ MESSAGE
           end
 
         private
-
+        
           def integrate_views?
             @integrate_views
           end

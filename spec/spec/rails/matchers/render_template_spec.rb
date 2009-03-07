@@ -16,9 +16,11 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
         should render_template('some_action')
       end
 
-      it "matches an action with specified extenstions" do
-        post 'some_action'
-        should render_template('some_action.html.erb')
+      if ::Rails::VERSION::STRING >= '2.3'
+        it "matches an action with specified extenstions" do
+          post 'some_action'
+          should render_template('some_action.html.erb')
+        end
       end
 
       it "matches an action (using a symbol)" do
@@ -88,8 +90,10 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
     
       describe "with an alternate layout" do
         it "says it rendered the action's layout" do
-          get 'action_with_alternate_layout'
-          should render_template('action_with_alternate_layout')
+          pending("record rendering of layouts") do
+            get 'action_with_alternate_layout'
+            should render_template('layouts/simple')
+          end
         end
       end
       
