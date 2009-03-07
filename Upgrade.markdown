@@ -1,6 +1,8 @@
-# Upgrade to rspec-rails-1.1.99.x
+# Upgrade to rspec-rails-1.1.99.x (pre rspec-rails-1.2)
 
-## Supported Rails Versions
+## What's changed
+
+### Supported Rails Versions
 
 This release supports the following versions of rails:
 
@@ -9,7 +11,7 @@ This release supports the following versions of rails:
 * 2.2.2
 * 2.3.1
 
-## update generated files
+### update generated files
 
 Be sure to run "script/generate rspec" and allow the following files to be overwritten:
 
@@ -17,12 +19,12 @@ Be sure to run "script/generate rspec" and allow the following files to be overw
 * script/spec
 * script/spec_server
 
-## ``controller.use_rails_error_handling!`` is deprecated
+### ``controller.use_rails_error_handling!`` is deprecated
 
 Use ``rescue_action_in_public!`` instead. It comes directly from rails and does
 exactly the same thing
 
-## route_for
+### route_for
 
 After a change to edge rails broke our monkey-patched ``route_for`` method, I
 decided to just delegate to rails' ``assert_generates`` method. For most cases,
@@ -30,23 +32,49 @@ this will not present a problem, but for some it might. You'll know if you
 upgrade and see any newly failing, route-related examples. Here are the things
 that you might need to change.
 
-### Make sure IDs are strings
+#### Make sure IDs are strings
 
 If you had :id => 1 before, you need to change that to :id => "1"
 
-	  #old
-	  route_for(:controller => 'things', :action => 'show', :id => 1).should == "/things/1"
+    #old
+    route_for(:controller => 'things', :action => 'show', :id => 1).should == "/things/1"
   
-	  #new
-	  route_for(:controller => 'things', :action => 'show', :id => "1").should == "/things/1"
+    #new
+    route_for(:controller => 'things', :action => 'show', :id => "1").should == "/things/1"
   
-### Convert paths for non-get methods to hashes
+#### Convert paths for non-get methods to hashes
 
 If you had an example with a route that requires post, put, or delete, you'll
 need to declare that explicitly.
 
-	  #old
-	  route_for(:controller => 'things', :action => 'create').should == "/things"
+    #old
+    route_for(:controller => 'things', :action => 'create').should == "/things"
   
-	  #new
-	  route_for(:controller => 'things', :action => 'create').should == {:path => "/things", :method => :post}
+    #new
+    route_for(:controller => 'things', :action => 'create').should == {:path => "/things", :method => :post}
+  
+### Controller/template isolation
+
+Even though controller specs do not render views by default (use
+``integrate_views`` to get them to render views), the way this works has
+changed in this version.
+
+It used to be that the view template need not even exist, but due to changes
+in rails it became much more difficult to manage that for all the different
+versions of rails that rspec-rails supports. So now the template must exist,
+but it still won't be rendered unless you declare ``integrate_views``.
+
+## What's new
+
+### render no longer requires a path
+
+The <code>render()</code> method in view specs will infer the path from the
+first argument passed to <code>describe</code>.
+
+    describe "players/show" do
+      it "does something" do
+        render
+        response.should have_tag("....")
+      end
+    end
+    
