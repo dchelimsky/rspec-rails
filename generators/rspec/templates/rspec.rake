@@ -136,7 +136,7 @@ namespace :spec do
   end
 
   namespace :server do
-    daemonized_server_pid = File.expand_path("#{RAILS_ROOT}/tmp/spec_server.pid")
+    daemonized_server_pid = File.expand_path("#{RAILS_ROOT}/tmp/pids/spec_server.pid")
     
     desc "start spec_server."
     task :start do
@@ -144,7 +144,7 @@ namespace :spec do
         $stderr.puts "spec_server is already running."
       else
         $stderr.puts %Q{Starting up spec_server ...}
-        FileUtils.mkdir('tmp') unless test ?d, 'tmp'
+        FileUtils.mkdir_p('tmp/pids') unless test ?d, 'tmp/pids'
         system("ruby", "script/spec_server", "--daemon", "--pid", daemonized_server_pid)
       end
     end

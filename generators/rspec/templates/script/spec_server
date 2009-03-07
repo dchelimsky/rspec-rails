@@ -1,5 +1,21 @@
 #!/usr/bin/env ruby
-$LOAD_PATH.unshift File.dirname(__FILE__) + '/../vendor/plugins/rspec-rails/lib' # For rspec installed as plugin
+rails_root = File.expand_path(File.dirname(__FILE__) + "/..")
+rspec_rails_gem_dir = nil
+Dir["#{rails_root}/vendor/gems/*"].each do |subdir|
+  rspec_rails_gem_dir = subdir if subdir.gsub("#{rails_root}/vendor/gems/","") =~ /^(\w+-)?rspec-rails-(\d+)/
+end
+rspec_rails_plugin_dir = File.expand_path("#{rails_root}/vendor/plugins/rspec-rails")
+
+if rspec_rails_gem_dir && (test ?d, rspec_rails_plugin_dir)
+  raise "\n#{'*'*50}\nYou have rspec installed in both vendor/gems and vendor/plugins\nPlease pick one and dispose of the other.\n#{'*'*50}\n\n"
+end
+
+if rspec_rails_gem_dir
+  $LOAD_PATH.unshift("#{rspec_rails_gem_dir}/lib") 
+elsif File.exist?(rspec_rails_plugin_dir)
+  $LOAD_PATH.unshift("#{rspec_rails_plugin_dir}/lib")
+end
+
 require 'optparse'
 require 'spec/rails/spec_server'
 
@@ -33,5 +49,3 @@ if options[:daemon]
 else
   ::Spec::Rails::SpecServer.run
 end
-
-puts "Ready"
