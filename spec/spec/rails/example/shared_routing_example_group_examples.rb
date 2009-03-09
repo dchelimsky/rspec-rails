@@ -1,8 +1,7 @@
+class CustomRouteSpecController < ActionController::Base; end
+class RspecOnRailsSpecsController < ActionController::Base; end
+
 share_as :RoutingExampleGroupSpec do
-
-  class CustomRouteSpecController < ActionController::Base; end
-  class RspecOnRailsSpecsController < ActionController::Base; end
-
   it "support custom routes" do
     route_for(:controller => "custom_route_spec", :action => "custom_route").
       should == "/custom_route"
