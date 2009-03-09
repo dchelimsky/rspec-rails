@@ -1,3 +1,4 @@
+.document
 History.txt
 License.txt
 Manifest.txt
@@ -72,6 +73,7 @@ lib/spec/rails/mocks.rb
 lib/spec/rails/spec_server.rb
 lib/spec/rails/story_adapter.rb
 lib/spec/rails/version.rb
+rspec-rails.gemspec
 spec/autotest/mappings_spec.rb
 spec/rails_suite.rb
 spec/resources/controllers/action_view_base_spec_controller.rb
