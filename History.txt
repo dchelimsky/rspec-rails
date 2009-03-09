@@ -51,6 +51,7 @@ IMPORTANT: This release includes the following backwards-compatibility-breaking 
   * create lib/tasks if not present when running script/generate rspec. Closes #687.
   * fixed regression (and added spec so it won't regress again) where
     render => :inline didn't render unless integrate_views was set
+  * fixed nil.with_output_buffer bug in helper specs. Closes #719.
 
 === Version 1.1.12 / 2009-01-11
 

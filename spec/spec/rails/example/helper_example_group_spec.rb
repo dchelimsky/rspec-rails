@@ -204,3 +204,30 @@ module Spec
     end
   end
 end
+
+module Bug719
+  # see http://rspec.lighthouseapp.com/projects/5645/tickets/719
+  # FIXME - helper and example provided in ticket. The example did
+  # fail initially, so running it now shows that the bug is fixed,
+  # but this doesn't serve as a good internal example.
+  module ImagesHelper
+    def hide_images_button
+      content_tag :div, :class => :hide_images_button do
+        button_to_function "Hide Images", :id => :hide_images_button do |page|
+          page[:more_images_button].toggle
+          page[:image_browser].toggle
+        end
+      end
+    end
+  end
+  
+  describe ImagesHelper, :type => :helper do
+    it "should render a hide_images_button" do
+      helper.hide_images_button.should have_tag('div[class=?]','hide_images_button') do
+        with_tag('input[id=?][type=?][value=?][onclick^=?]',
+                 'hide_images_button', 'button', 'Hide Images',
+                 "$(&quot;more_images_button&quot;).toggle();\n$(&quot;image_browser&quot;).toggle();;")
+        end
+     end
+  end
+end

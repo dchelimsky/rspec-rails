@@ -34,29 +34,15 @@ module Spec
         attr_accessor :output_buffer
         
         class HelperObject < ActionView::Base
+          def initialize(*args)
+            @template = self
+            super
+          end
           def protect_against_forgery?
             false
           end
           
-          def session=(session)
-            @session = session
-          end
-          
-          def request=(request)
-            @request = request
-          end
-          
-          def flash=(flash)
-            @flash = flash
-          end
-          
-          def params=(params)
-            @params = params
-          end
-          
-          def controller=(controller)
-            @controller = controller
-          end
+          attr_writer :session, :request, :flash, :params, :controller
           
           private
             attr_reader :session, :request, :flash, :params, :controller
@@ -113,7 +99,7 @@ module Spec
         ActionView::Base.included_modules.reverse.each do |mod|
           include mod if mod.parents.include?(ActionView::Helpers)
         end
-
+        
         before(:each) do
           @controller.request = @request
           @controller.url = ActionController::UrlRewriter.new @request, {} # url_for
