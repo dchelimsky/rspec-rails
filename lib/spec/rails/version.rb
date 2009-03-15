@@ -3,9 +3,9 @@ module Spec
     module VERSION #:nodoc:
       unless defined? MAJOR
         MAJOR  = 1
-        MINOR  = 1
-        TINY   = 99
-        MINESCULE = 16
+        MINOR  = 2
+        TINY   = 0
+        MINESCULE = nil
 
         STRING = [MAJOR, MINOR, TINY, MINESCULE].compact.join('.')
 
