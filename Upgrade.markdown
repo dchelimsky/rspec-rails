@@ -1,4 +1,4 @@
-# Upgrade to rspec-rails-1.1.99.x (pre rspec-rails-1.2)
+# Upgrade to 1.2.0
 
 ## What's changed
 
