@@ -1,4 +1,4 @@
-=== Version 1.1.99.x (in git)
+=== Version 1.2.0 / 2009-03-15
 
 IMPORTANT: See Upgrade.markdown for information about upgrading to rspec-rails-1.1.99.4
 
