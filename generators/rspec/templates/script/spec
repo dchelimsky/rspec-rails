@@ -16,7 +16,7 @@ if rspec_gem_dir
 elsif File.exist?(rspec_plugin_dir)
   $LOAD_PATH.unshift("#{rspec_plugin_dir}/lib")
 else
-  require 'rubygems' unless ENV['DONT_MAKE_ME_USE_RUBYGEMS']
+  require 'rubygems' unless ENV['NO_RUBYGEMS']
 end
 
 require 'spec/autorun'
