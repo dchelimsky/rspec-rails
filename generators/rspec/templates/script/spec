@@ -15,8 +15,9 @@ if rspec_gem_dir
   $LOAD_PATH.unshift("#{rspec_gem_dir}/lib") 
 elsif File.exist?(rspec_plugin_dir)
   $LOAD_PATH.unshift("#{rspec_plugin_dir}/lib")
+else
+  require 'rubygems' unless ENV['DONT_MAKE_ME_USE_RUBYGEMS']
 end
-
 
 require 'spec/autorun'
 exit ::Spec::Runner::CommandLine.run
