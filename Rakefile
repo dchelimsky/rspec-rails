@@ -1,4 +1,6 @@
-require 'rubygems'
+# -*- ruby -*-
+
+gem 'hoe', '>=1.9.0'
 require 'hoe'
 require './lib/spec/rails/version'
 require 'cucumber/rake/task'
@@ -7,21 +9,14 @@ $:.unshift(File.join(File.dirname(__FILE__), "/../rspec/lib"))
 
 require 'spec/rake/spectask'
 
-class Hoe
-  def extra_deps
-    @extra_deps.reject! { |x| Array(x).first == 'hoe' }
-    @extra_deps
-  end
-end
-
 Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.summary = Spec::Rails::VERSION::SUMMARY
   p.url = 'http://rspec.info/'
   p.description = "Behaviour Driven Development for Ruby on Rails."
   p.rubyforge_name = 'rspec'
   p.developer('RSpec Development Team', 'rspec-devel@rubyforge.org')
-  p.extra_deps = [["rspec","1.2.0"],["rack",">=0.4.0"]]
-  p.extra_dev_deps = [["cucumber",">= 0.1.13"]]
+  p.extra_deps = [["rspec","1.2.1"],["rack",">=0.4.0"]]
+  p.extra_dev_deps = [["cucumber",">= 0.1.16"]]
   p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
 end
 
