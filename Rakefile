@@ -18,6 +18,21 @@ Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.extra_deps = [["rspec","1.2.1"],["rack",">=0.4.0"]]
   p.extra_dev_deps = [["cucumber",">= 0.1.16"]]
   p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
+  p.post_install_message = <<-POST_INSTALL_MESSAGE
+#{'*'*50}
+
+  Thank you for installing rspec-rails-#{Spec::Rails::VERSION::STRING}
+  
+  If you are upgrading, do this in each of your rails apps
+  that you want to upgrade:
+
+    $ ruby script/generate rspec
+
+  Please be sure to read History.txt and Upgrade.markdown
+  for useful information about this release.
+
+#{'*'*50}
+POST_INSTALL_MESSAGE
 end
 
 ['audit','test','test_deps','default','post_blog', 'release'].each do |task|

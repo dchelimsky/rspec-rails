@@ -6,6 +6,23 @@ class RspecGenerator < Rails::Generator::Base
                               Config::CONFIG['ruby_install_name'])
 
   def initialize(runtime_args, runtime_options = {})
+    if test ?f, 'spec/spec_helper.rb'
+      
+      puts <<-HELPFUL_INSTRUCTIONS
+
+It looks like you are upgrading rspec-rails in this application. Please let
+this script overwrite everything it wants to with the following exceptions,
+*if* you have customized any of these files:
+
+  * spec/spec.opts
+  * spec/rcov.opts
+  * spec/spec_helper.rb
+  
+If you have customized spec/spec_helper.rb, please set aside a copy of that
+file so that it can be updated and you can manually restore your changes.
+
+HELPFUL_INSTRUCTIONS
+    end
     Dir.mkdir('lib/tasks') unless File.directory?('lib/tasks')
     super
   end
