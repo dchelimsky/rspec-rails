@@ -111,17 +111,16 @@ end
 MESSAGE
           end
           @controller.extend ControllerInstanceMethods
-          @controller.integrate_views! if @integrate_views
+          @controller.integrate_views! if integrate_views?
           @controller.session = session
         end
 
         attr_reader :response, :request, :controller
-
-        def initialize(defined_description, options={}, &implementation) #:nodoc:
-          super
-          @integrate_views = self.class.integrate_views?
-        end
         
+        def integrate_views?
+          @integrate_views || self.class.integrate_views?
+        end
+
         # Bypasses any error rescues defined with rescue_from. Useful
         # in cases in which you want to specify errors coming out of
         # actions that might be caught by a rescue_from clause that is
