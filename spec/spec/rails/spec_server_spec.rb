@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../../spec_helper'
 
-describe "script/spec_server file", :shared => true do
+shared_examples_for "script/spec_server file" do
   attr_accessor :tmbundle_install_directory, :tmbundle_source_directory
   attr_reader :animals_yml_path, :original_animals_content
 

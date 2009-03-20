@@ -1,3 +1,21 @@
+if Rails::VERSION::STRING >= '2.2' && Rails.configuration.cache_classes
+  raise <<-MESSAGE
+
+#{'*'*65}
+
+  Rails.configuration.cache_classes == true
+  
+  This means that spec_server won't reload your classes when
+  you change them, which defeats the purpose of spec_server.
+  
+  Please set 'config.cache_classes = false' (it's probably
+  set to true in config/environments/test.rb) and give it
+  another try.
+
+#{'*'*65}
+MESSAGE
+end
+
 require 'drb/drb'
 require 'rbconfig'
 
@@ -94,4 +112,16 @@ module Spec
       end
     end
   end
+end
+
+options = Hash.new
+parser = OptionParser.new
+parser.on("-d", "--daemon")     {|ignore| options[:daemon] = true }
+parser.on("-p", "--pid PIDFILE"){|pid|    options[:pid]    = pid  }
+parser.parse!(ARGV)
+
+if options[:daemon]
+  ::Spec::Rails::SpecServer.daemonize(options[:pid])
+else
+  ::Spec::Rails::SpecServer.run
 end
