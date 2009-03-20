@@ -1,3 +1,20 @@
+=== dev
+
+* enhancements
+
+  * more cleanup of internals (reducing dependency on rspec-core)
+  * don't require config/environments more than once
+  * autotest includes spec/routing directory (Matt Peterson). Closes #739.
+  * display helpful messages when installing rspec-rails running script/generate rspec
+    * thanks for Dr Nic for the pointers
+  * restored require 'rubygems' where needed
+    * export NO_RUBYGEMS=true if you don't use rubygems
+    
+* bug fixes
+
+  * fix scoping issues in rspec-rails' own suite for ruby 1.9.1 (Matthias
+    Hennemeyer). Closes #717.
+
 === Version 1.2.0 / 2009-03-15
 
 IMPORTANT: See Upgrade.markdown for information about upgrading to rspec-rails-1.1.99.4
