@@ -105,7 +105,6 @@ namespace :spec do
     ::CodeStatistics::TEST_TYPES << "Helper specs" if File.exist?('spec/helpers')
     ::CodeStatistics::TEST_TYPES << "Library specs" if File.exist?('spec/lib')
     ::CodeStatistics::TEST_TYPES << "Routing specs" if File.exist?('spec/routing')
-    ::STATS_DIRECTORIES.delete_if {|a| a[0] =~ /test/}
   end
 
   namespace :db do
