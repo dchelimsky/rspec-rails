@@ -1,4 +1,6 @@
-=== dev
+=== Version 1.2.1 (dev)
+
+IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
 
 * enhancements
 
@@ -18,7 +20,7 @@
 
 === Version 1.2.0 / 2009-03-15
 
-IMPORTANT: See Upgrade.markdown for information about upgrading to rspec-rails-1.1.99.4
+IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.0
 
 IMPORTANT: This release includes the following backwards-compatibility-breaking changes.
 

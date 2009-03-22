@@ -1,5 +1,4 @@
 # -*- ruby -*-
-
 gem 'hoe', '>=1.9.0'
 require 'hoe'
 require './lib/spec/rails/version'
@@ -18,6 +17,8 @@ Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.extra_deps = [["rspec","1.2.1"],["rack",">=0.4.0"]]
   p.extra_dev_deps = [["cucumber",">= 0.1.16"]]
   p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
+  p.history_file = 'History.rdoc'
+  p.readme_file  = 'README.rdoc'
   p.post_install_message = <<-POST_INSTALL_MESSAGE
 #{'*'*50}
 
@@ -28,7 +29,7 @@ Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
 
     $ ruby script/generate rspec
 
-  Please be sure to read History.txt and Upgrade.markdown
+  Please be sure to read History.rdoc and Upgrade.rdoc
   for useful information about this release.
 
 #{'*'*50}

@@ -1,11 +1,11 @@
 .document
-History.txt
+History.rdoc
 License.txt
 Manifest.txt
-README.txt
+README.rdoc
 Rakefile
 TODO.txt
-Upgrade.markdown
+Upgrade.rdoc
 features/step_definitions/people.rb
 features/support/env.rb
 features/transactions/transactions_should_rollback.feature
