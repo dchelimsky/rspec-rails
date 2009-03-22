@@ -14,6 +14,7 @@
 
   * fix scoping issues in rspec-rails' own suite for ruby 1.9.1 (Matthias
     Hennemeyer). Closes #717.
+  * rake stats no longer hides test directories. Closes #748.
 
 === Version 1.2.0 / 2009-03-15
 
