@@ -66,23 +66,19 @@ module Spec
             klass.subject { controller }
             super
           end
-          
+
           def set_description(*args) # :nodoc:
             super
-            controller_name_defined if superclass.controller_name_defined?
-            if described_class && described_class.ancestors.include?(ActionController::Base) && !controller_name_defined?
-              tests described_class
+            if described_class && described_class.ancestors.include?(ActionController::Base)
+              controller_klass = if superclass.controller_class.ancestors.include?(ActionController::Base)
+                superclass.controller_class
+              else
+                described_class
+              end
+              tests controller_klass
             end
           end
-          
-          def controller_name_defined?
-            @controller_name_defined == true
-          end
-          
-          def controller_name_defined
-            @controller_name_defined = true
-          end
-          
+
           # When you don't pass a controller to describe, like this:
           #
           #   describe ThingsController do
@@ -94,7 +90,6 @@ module Spec
           #     controller_name :thing
           #     ...
           def controller_name(name)
-            controller_name_defined
             tests "#{name}_controller".camelize.constantize
           end
         end
