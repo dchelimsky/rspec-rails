@@ -265,19 +265,21 @@ end
 module Spec
   module Rails
     module Example
-      describe ApplicationController, :type => :controller do
-        describe "controller_name" do
-          controller_name :controller_spec
-          it "overrides the controller class submitted to the outermost group" do
-            subject.should be_an_instance_of(ControllerSpecController)
-          end
-          describe "in a nested group" do
+      if Rails::VERSION::STRING >= '2.2.2'
+        describe ApplicationController, :type => :controller do
+          describe "controller_name" do
+            controller_name :controller_spec
             it "overrides the controller class submitted to the outermost group" do
               subject.should be_an_instance_of(ControllerSpecController)
             end
-            describe "(doubly nested)" do
+            describe "in a nested group" do
               it "overrides the controller class submitted to the outermost group" do
                 subject.should be_an_instance_of(ControllerSpecController)
+              end
+              describe "(doubly nested)" do
+                it "overrides the controller class submitted to the outermost group" do
+                  subject.should be_an_instance_of(ControllerSpecController)
+                end
               end
             end
           end

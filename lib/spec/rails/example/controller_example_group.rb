@@ -69,7 +69,7 @@ module Spec
           
           def set_description(*args) # :nodoc:
             super
-            @controller_name_defined = true if superclass.controller_name_defined?
+            controller_name_defined if superclass.controller_name_defined?
             if described_class && described_class.ancestors.include?(ActionController::Base) && !controller_name_defined?
               tests described_class
             end
@@ -77,6 +77,10 @@ module Spec
           
           def controller_name_defined?
             @controller_name_defined == true
+          end
+          
+          def controller_name_defined
+            @controller_name_defined = true
           end
           
           # When you don't pass a controller to describe, like this:
@@ -90,7 +94,7 @@ module Spec
           #     controller_name :thing
           #     ...
           def controller_name(name)
-            @controller_name_defined = true
+            controller_name_defined
             tests "#{name}_controller".camelize.constantize
           end
         end
