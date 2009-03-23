@@ -40,6 +40,10 @@ end
   Rake.application.instance_variable_get('@tasks').delete(task)
 end
 
+task :post_blog do
+  # no-op
+end
+
 task :release => [:clean, :package] do |t|
   version = ENV["VERSION"] or abort "Must supply VERSION=x.y.z"
   abort "Versions don't match #{version} vs #{Spec::Rails::VERSION::STRING}" unless version == Spec::Rails::VERSION::STRING
