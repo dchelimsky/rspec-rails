@@ -35,9 +35,11 @@ module Spec
 
         # Uses ActionController::Routing::Routes to generate
         # the correct route for a given set of options.
-        # == Example
-        #   route_for(:controller => 'registrations', :action => 'edit', :id => 1)
-        #     => '/registrations/1;edit'
+        # == Examples
+        #   route_for(:controller => 'registrations', :action => 'edit', :id => '1')
+        #     => '/registrations/1/edit'
+        #   route_for(:controller => 'registrations', :action => 'create')
+        #     => {:path => "/registrations", :method => :post}
         def route_for(options)
           RouteFor.new(self, options)
         end
@@ -46,7 +48,7 @@ module Spec
         # an incoming path so the parameters it generates can be checked
         # == Example
         #   params_from(:get, '/registrations/1/edit')
-        #     => :controller => 'registrations', :action => 'edit', :id => 1
+        #     => :controller => 'registrations', :action => 'edit', :id => '1'
         def params_from(method, path)
           ensure_that_routes_are_loaded
           path, querystring = path.split('?')
