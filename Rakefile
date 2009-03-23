@@ -10,7 +10,6 @@ require 'spec/rake/spectask'
 
 Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
   p.summary = Spec::Rails::VERSION::SUMMARY
-  p.url = 'http://rspec.info/'
   p.description = "Behaviour Driven Development for Ruby on Rails."
   p.rubyforge_name = 'rspec'
   p.developer('RSpec Development Team', 'rspec-devel@rubyforge.org')

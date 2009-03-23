@@ -1,6 +1,9 @@
 === Version 1.2.1 / 2009-03-22
 
-IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
+This is a bug-fix release, recommended for anybody who has already upgraded to
+rspec-rails-1.2.0 or is upgrading to rails-2.3.2
+
+See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
 
 * enhancements
 
