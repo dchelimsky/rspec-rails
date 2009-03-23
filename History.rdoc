@@ -17,12 +17,9 @@ IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
   * fix scoping issues in rspec-rails' own suite for ruby 1.9.1 (Matthias
     Hennemeyer). Closes #717.
   * rake stats no longer hides test directories. Closes #748.
-  * fixed regression that was introduced in 1.2 in which controller_name failed
-    to override the controller class passed to describe() (Aaron Gibralter).
-    Closes #732
-    * Note this is only fixed for rails >= 2.2.2
-    * For rails &lt; 2.2.2, you can work around the problem by passing a string
-      to describe() instead of a class.
+  * fixed regression that was introduced in 1.2 in which controller_name
+    failed to override the controller class passed to describe() (Patches from
+    Aaron Gibralter and Zach Dennis). Closes #732.
 
 === Version 1.2.0 / 2009-03-15
 
