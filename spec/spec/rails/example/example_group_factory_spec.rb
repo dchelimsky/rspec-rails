@@ -10,30 +10,30 @@ module Spec
         example_group.superclass.should == Spec::Rails::Example::ModelExampleGroup
       end
 
-      it "should return a ModelExampleGroup when given :spec_path => '/blah/spec/models/'" do
+      it "should return a ModelExampleGroup when given :location => '/blah/spec/models/'" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/models/blah.rb'
+          "name", :location => '/blah/spec/models/blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ModelExampleGroup
       end
 
-      it "should return a ModelExampleGroup when given :spec_path => '\\blah\\spec\\models\\' (windows format)" do
+      it "should return a ModelExampleGroup when given :location => '\\blah\\spec\\models\\' (windows format)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '\\blah\\spec\\models\\blah.rb'
+          "name", :location => '\\blah\\spec\\models\\blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ModelExampleGroup
       end
 
-      it "should return an ActiveSupport::TestCase when given :spec_path => '/blah/spec/foo/' (anything other than controllers, views and helpers)" do
+      it "should return an ActiveSupport::TestCase when given :location => '/blah/spec/foo/' (anything other than controllers, views and helpers)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/foo/blah.rb'
+          "name", :location => '/blah/spec/foo/blah.rb'
         ) {}
         example_group.superclass.should == ActiveSupport::TestCase
       end
 
-      it "should return an ActiveSupport::TestCase when given :spec_path => '\\blah\\spec\\foo\\' (windows format)  (anything other than controllers, views and helpers)" do
+      it "should return an ActiveSupport::TestCase when given :location => '\\blah\\spec\\foo\\' (windows format)  (anything other than controllers, views and helpers)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '\\blah\\spec\\foo\\blah.rb'
+          "name", :location => '\\blah\\spec\\foo\\blah.rb'
         ) {}
         example_group.superclass.should == ActiveSupport::TestCase
       end
@@ -45,16 +45,16 @@ module Spec
         example_group.superclass.should == Spec::Rails::Example::ViewExampleGroup
       end
 
-      it "should return a ViewExampleGroup when given :spec_path => '/blah/spec/views/'" do
+      it "should return a ViewExampleGroup when given :location => '/blah/spec/views/'" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/views/blah.rb'
+          "name", :location => '/blah/spec/views/blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ViewExampleGroup
       end
 
-      it "should return a ModelExampleGroup when given :spec_path => '\\blah\\spec\\views\\' (windows format)" do
+      it "should return a ModelExampleGroup when given :location => '\\blah\\spec\\views\\' (windows format)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '\\blah\\spec\\views\\blah.rb'
+          "name", :location => '\\blah\\spec\\views\\blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ViewExampleGroup
       end
@@ -66,16 +66,16 @@ module Spec
         example_group.superclass.should == Spec::Rails::Example::HelperExampleGroup
       end
 
-      it "should return a HelperExampleGroup when given :spec_path => '/blah/spec/helpers/'" do
+      it "should return a HelperExampleGroup when given :location => '/blah/spec/helpers/'" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/helpers/blah.rb'
+          "name", :location => '/blah/spec/helpers/blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::HelperExampleGroup
       end
 
-      it "should return a ModelExampleGroup when given :spec_path => '\\blah\\spec\\helpers\\' (windows format)" do
+      it "should return a ModelExampleGroup when given :location => '\\blah\\spec\\helpers\\' (windows format)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '\\blah\\spec\\helpers\\blah.rb'
+          "name", :location => '\\blah\\spec\\helpers\\blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::HelperExampleGroup
       end
@@ -87,23 +87,23 @@ module Spec
         example_group.superclass.should == Spec::Rails::Example::ControllerExampleGroup
       end
 
-      it "should return a ControllerExampleGroup when given :spec_path => '/blah/spec/controllers/'" do
+      it "should return a ControllerExampleGroup when given :location => '/blah/spec/controllers/'" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/controllers/blah.rb'
+          "name", :location => '/blah/spec/controllers/blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ControllerExampleGroup
       end
 
-      it "should return a ModelExampleGroup when given :spec_path => '\\blah\\spec\\controllers\\' (windows format)" do
+      it "should return a ModelExampleGroup when given :location => '\\blah\\spec\\controllers\\' (windows format)" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '\\blah\\spec\\controllers\\blah.rb'
+          "name", :location => '\\blah\\spec\\controllers\\blah.rb'
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ControllerExampleGroup
       end
 
-      it "should favor the :type over the :spec_path" do
+      it "should favor the :type over the :location" do
         example_group = Spec::Example::ExampleGroupFactory.create_example_group(
-          "name", :spec_path => '/blah/spec/models/blah.rb', :type => :controller
+          "name", :location => '/blah/spec/models/blah.rb', :type => :controller
         ) {}
         example_group.superclass.should == Spec::Rails::Example::ControllerExampleGroup
       end

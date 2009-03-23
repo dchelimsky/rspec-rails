@@ -61,9 +61,9 @@ module AssertSelectSpecHelpers
   end
   
   def first_non_rspec_line_in_backtrace_of(error)
-    rspec_path = File.join('rspec', 'lib', 'spec')
+    rlocation = File.join('rspec', 'lib', 'spec')
     error.backtrace.reject { |line|
-      line =~ /#{rspec_path}/
+      line =~ /#{rlocation}/
     }.first
   end
 
