@@ -1,4 +1,4 @@
-=== Version 1.2.1 (dev)
+=== Version 1.2.1 / 2009-03-22
 
 IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
 
@@ -18,7 +18,7 @@ IMPORTANT: See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
     Hennemeyer). Closes #717.
   * rake stats no longer hides test directories. Closes #748.
   * fixed regression that was introduced in 1.2 in which controller_name
-    failed to override the controller class passed to describe() (Patches from
+    failed to override the controller class passed to describe() (patches from
     Aaron Gibralter and Zach Dennis). Closes #732.
 
 === Version 1.2.0 / 2009-03-15
