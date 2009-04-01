@@ -1,3 +1,5 @@
+=== Version 1.2.3 (in git)
+
 === Version 1.2.2 / 2009-03-22
 
 No changes in this release, but aligns with the rspec-1.2.2 release.
