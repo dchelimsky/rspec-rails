@@ -44,7 +44,7 @@ describe <%= controller_class_name %>Controller do
       it "assigns a newly created <%= file_name %> as @<%= file_name %>" do
         <%= class_name %>.should_receive(:new).with({'these' => 'params'}).and_return(mock_<%= file_name %>(:save => true))
         post :create, :<%= file_name %> => {:these => 'params'}
-        assigns(:<%= file_name %>).should equal(mock_<%= file_name %>)
+        assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
       end
 
       it "redirects to the created <%= file_name %>" do
@@ -58,7 +58,7 @@ describe <%= controller_class_name %>Controller do
       it "assigns a newly created but unsaved <%= file_name %> as @<%= file_name %>" do
         <%= class_name %>.stub!(:new).with({'these' => 'params'}).and_return(mock_<%= file_name %>(:save => false))
         post :create, :<%= file_name %> => {:these => 'params'}
-        assigns(:<%= file_name %>).should equal(mock_<%= file_name %>)
+        assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
       end
 
       it "re-renders the 'new' template" do
@@ -82,7 +82,7 @@ describe <%= controller_class_name %>Controller do
       it "assigns the requested <%= file_name %> as @<%= file_name %>" do
         <%= class_name %>.stub!(:find).and_return(mock_<%= file_name %>(:update_attributes => true))
         put :update, :id => "1"
-        assigns(:<%= file_name %>).should equal(mock_<%= file_name %>)
+        assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
       end
 
       it "redirects to the <%= file_name %>" do
@@ -102,7 +102,7 @@ describe <%= controller_class_name %>Controller do
       it "assigns the <%= file_name %> as @<%= file_name %>" do
         <%= class_name %>.stub!(:find).and_return(mock_<%= file_name %>(:update_attributes => false))
         put :update, :id => "1"
-        assigns(:<%= file_name %>).should equal(mock_<%= file_name %>)
+        assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
       end
 
       it "re-renders the 'edit' template" do
