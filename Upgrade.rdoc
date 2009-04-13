@@ -1,4 +1,4 @@
-= Upgrade to 1.2
+= Upgrade to 1.2.0-1.2.3
 
 == What's changed
 
@@ -9,7 +9,7 @@ This release supports the following versions of rails:
 * 2.0.5
 * 2.1.2
 * 2.2.2
-* 2.3.1
+* 2.3.2
 
 === update generated files
 
