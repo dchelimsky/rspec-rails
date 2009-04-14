@@ -10,9 +10,14 @@ module Rails
           when :date                        then "Date.today"
           when :string, :text               then "\"value for #{@name}\""
           when :boolean                     then "false"
+          when :belongs_to, :references     then "1"
           else
             ""
-        end      
+        end
+      end
+
+      def name_or_reference
+        reference? ? :"#{name}_id" : name
       end
     end
   end
