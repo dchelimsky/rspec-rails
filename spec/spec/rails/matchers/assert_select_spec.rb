@@ -83,6 +83,12 @@ describe "should have_tag", :type => :controller do
   controller_name :assert_select
   integrate_views
 
+  it "should not care about the XML setting on HTML with unclosed singletons when using a response" do
+    render_html %Q{<table id="1"><tr><td><img src="image.png" alt="image">Hello</td></tr><tr><td></td></tr><tr><td>World</td></tr></table>}
+    response.should have_tag("tr", 3)
+    response.should have_tag("tr", 3, :xml => true)
+  end
+
   it "should find specific numbers of elements" do
     render_html %Q{<div id="1"></div><div id="2"></div>}
     response.should have_tag( "div" )
@@ -706,6 +712,26 @@ describe "string.should have_tag", :type => :helper do
       end
     end.should raise_error(SpecFailed)
   end
+
+  it "should raise when using an HTML string with unclosed singleton tags when using the XML parsing setting" do
+    lambda do
+      %Q{<table id="1"><tr><td><img src="image.png" alt="image">Hello</td></tr><tr><td></td></tr><tr><td>World</td></tr></table>}.
+        should have_tag("tr", 3, :xml => true)
+    end.should raise_error
+  end
+
+  it "should find the specific number of elements regardless of unclosed singletons in a HTML string" do
+    %Q{<table id="1"><tr><td><img src="image.png" alt="image">Hello</td></tr><tr><td></td></tr><tr><td>World</td></tr></table>}.
+      should have_tag("tr", 3)
+  end
+
+  it "should find nested tags in an HTML string regardless unclosed singletons" do
+    %Q{<table id="1"><tr><td><img src="image.png" alt="image">Hello</td></tr><tr><td></td></tr><tr><td>World</td></tr></table>}.
+      should have_tag("table") do
+        with_tag('tr',3)
+    end
+  end
+
 end
 
 describe "have_tag", :type => :controller do
