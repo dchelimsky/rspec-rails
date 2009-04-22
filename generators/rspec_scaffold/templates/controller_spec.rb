@@ -70,7 +70,7 @@ describe <%= controller_class_name %>Controller do
     
   end
 
-  describe "PUT udpate" do
+  describe "PUT update" do
     
     describe "with valid params" do
       it "updates the requested <%= file_name %>" do
