@@ -1,5 +1,9 @@
 === Master (in git)
 
+* enhancements
+  * support :xml and :strict config options for have_tag matcher (patch from
+    Peer Allan and Max Murphy). Closes #783.
+
 * bug fixes
   * Fixed a small typo that makes rake stats fail (José Valim). Closes #802.
 
