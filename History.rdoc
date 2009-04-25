@@ -6,6 +6,8 @@
 
 * bug fixes
   * Fixed a small typo that makes rake stats fail (José Valim). Closes #802.
+  * link_to and friends are available to ViewExampleGroup again
+    (J.B. Rainsberger). Closes #787.
 
 === Version 1.2.4 / 2009-03-13
 
