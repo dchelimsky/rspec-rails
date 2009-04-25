@@ -47,6 +47,7 @@ module Spec
       #     end
       #   end
       class ViewExampleGroup < FunctionalExampleGroup
+        include ActionView::Helpers
         tests ViewExampleGroupController
         class << self
           def inherited(klass) # :nodoc:

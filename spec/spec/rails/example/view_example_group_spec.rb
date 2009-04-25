@@ -333,3 +333,17 @@ describe "bug http://rspec.lighthouseapp.com/projects/5645/tickets/510", :type =
     end
   end
 end
+
+describe "bug https://rspec.lighthouseapp.com/projects/5645/tickets/787", :type => :view do
+  describe "a view example checking a link" do
+    it "should have access to link_to" do
+      render "view_spec/view_helpers"
+      response.body.should include(link_to("edit", "this_is_the_link"))
+    end
+
+    it "should use link_to within have_tag" do
+      render "view_spec/view_helpers"
+      response.body.should have_tag("span", :html => link_to("edit", "this_is_the_link"))
+    end
+  end
+end
