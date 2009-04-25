@@ -5,17 +5,12 @@ module Spec # :nodoc:
     module Matchers
 
       class AssertSelect #:nodoc:
-
         attr_reader :options
 
-        def initialize(assertion, spec_scope, *args, &block)
-
-          extracted = extract_options(args)
-          @options = extracted[:options]
-          @args = extracted[:args]
-
+        def initialize(selector_assertion, spec_scope, *args, &block)
+          @args, @options = args_and_options(args)
           @spec_scope = spec_scope
-          @assertion = assertion
+          @selector_assertion = selector_assertion
           @block = block
         end
         
@@ -27,7 +22,7 @@ module Spec # :nodoc:
           end
 
           begin
-            @spec_scope.__send__(@assertion, *@args, &@block)
+            @spec_scope.__send__(@selector_assertion, *@args, &@block)
             true
           rescue ::Test::Unit::AssertionFailedError => @error
             false
@@ -41,7 +36,7 @@ module Spec # :nodoc:
           {
             :assert_select => "have tag#{format_args(*@args)}",
             :assert_select_email => "send email#{format_args(*@args)}",
-          }[@assertion]
+          }[@selector_assertion]
         end
 
       private
@@ -77,14 +72,14 @@ module Spec # :nodoc:
           end.join(", ")
         end
         
-        def extract_options(args)
+        def args_and_options(args)
           opts = {:xml => false, :strict => false}
           if args.last.is_a?(::Hash)
             opts[:strict] = args.last.delete(:strict) unless args.last[:strict].nil?
-            opts[:xml] = args.last.delete(:xml) unless args.last[:xml].nil?
+            opts[:xml]    = args.last.delete(:xml)    unless args.last[:xml].nil?
             args.pop if args.last.empty?
           end
-          {:args => args, :options => opts}
+          return [args, opts]
         end
         
       end
