@@ -8,7 +8,7 @@ describe <%= controller_class_name %>Controller do
   
   describe "GET index" do
     it "assigns all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
-      <%= class_name %>.should_receive(:find).with(:all).and_return([mock_<%= file_name %>])
+      <%= class_name %>.stub!(:find).with(:all).and_return([mock_<%= file_name %>])
       get :index
       assigns[:<%= table_name %>].should == [mock_<%= file_name %>]
     end
@@ -16,7 +16,7 @@ describe <%= controller_class_name %>Controller do
 
   describe "GET show" do
     it "assigns the requested <%= file_name %> as @<%= file_name %>" do
-      <%= class_name %>.should_receive(:find).with("37").and_return(mock_<%= file_name %>)
+      <%= class_name %>.stub!(:find).with("37").and_return(mock_<%= file_name %>)
       get :show, :id => "37"
       assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
     end
@@ -24,7 +24,7 @@ describe <%= controller_class_name %>Controller do
 
   describe "GET new" do
     it "assigns a new <%= file_name %> as @<%= file_name %>" do
-      <%= class_name %>.should_receive(:new).and_return(mock_<%= file_name %>)
+      <%= class_name %>.stub!(:new).and_return(mock_<%= file_name %>)
       get :new
       assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
     end
@@ -32,7 +32,7 @@ describe <%= controller_class_name %>Controller do
 
   describe "GET edit" do
     it "assigns the requested <%= file_name %> as @<%= file_name %>" do
-      <%= class_name %>.should_receive(:find).with("37").and_return(mock_<%= file_name %>)
+      <%= class_name %>.stub!(:find).with("37").and_return(mock_<%= file_name %>)
       get :edit, :id => "37"
       assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
     end
@@ -42,7 +42,7 @@ describe <%= controller_class_name %>Controller do
     
     describe "with valid params" do
       it "assigns a newly created <%= file_name %> as @<%= file_name %>" do
-        <%= class_name %>.should_receive(:new).with({'these' => 'params'}).and_return(mock_<%= file_name %>(:save => true))
+        <%= class_name %>.stub!(:new).with({'these' => 'params'}).and_return(mock_<%= file_name %>(:save => true))
         post :create, :<%= file_name %> => {:these => 'params'}
         assigns[:<%= file_name %>].should equal(mock_<%= file_name %>)
       end
