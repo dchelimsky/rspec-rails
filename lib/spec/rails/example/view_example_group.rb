@@ -47,7 +47,19 @@ module Spec
       #     end
       #   end
       class ViewExampleGroup < FunctionalExampleGroup
-        include ActionView::Helpers
+        if ActionView::Base.respond_to?(:load_helpers) # Rails 2.0.x
+          ActionView::Helpers.constants.each do |name|
+            const = ActionView::Helpers.const_get(name)
+            include const if name.include?("Helper") && Module === const
+          end
+        elsif ActionView::Base.respond_to?(:helper_modules) # Rails 2.1.x
+          ActionView::Base.helper_modules.each do |helper_module|
+            include helper_module
+          end
+        else # Rails 2.2.x
+          include ActionView::Helpers
+        end
+
         tests ViewExampleGroupController
         class << self
           def inherited(klass) # :nodoc:
