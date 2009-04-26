@@ -8,7 +8,6 @@ TODO.txt
 Upgrade.rdoc
 features/step_definitions/people.rb
 features/support/env.rb
-features/transactions/transactions_should_rollback.feature
 generators/rspec/CHANGES
 generators/rspec/rspec_generator.rb
 generators/rspec/templates/previous_failures.txt
@@ -71,7 +70,6 @@ lib/spec/rails/matchers/redirect_to.rb
 lib/spec/rails/matchers/render_template.rb
 lib/spec/rails/mocks.rb
 lib/spec/rails/spec_server.rb
-lib/spec/rails/story_adapter.rb
 lib/spec/rails/version.rb
 spec/autotest/mappings_spec.rb
 spec/rails_suite.rb
@@ -132,6 +130,7 @@ spec/resources/views/view_spec/should_not_receive.html.erb
 spec/resources/views/view_spec/template_with_partial.html.erb
 spec/resources/views/view_spec/template_with_partial_using_collection.html.erb
 spec/resources/views/view_spec/template_with_partial_with_array.html.erb
+spec/resources/views/view_spec/view_helpers.html.erb
 spec/spec/rails/example/assigns_hash_proxy_spec.rb
 spec/spec/rails/example/configuration_spec.rb
 spec/spec/rails/example/controller_example_group_spec.rb
