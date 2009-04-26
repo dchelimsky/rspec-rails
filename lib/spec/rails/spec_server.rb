@@ -102,7 +102,12 @@ module Spec
           )
         )
 
-        dispatcher.cleanup_application if dispatcher.respond_to?(:cleanup_application)
+        if ::ActionController::Dispatcher.respond_to?(:cleanup_application)
+          ::ActionController::Dispatcher.cleanup_application
+        else
+          dispatcher.cleanup_application
+        end
+        
       end
 
       def in_memory_database?
