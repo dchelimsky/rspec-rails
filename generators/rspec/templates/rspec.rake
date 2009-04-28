@@ -30,10 +30,13 @@ MSG
   end
 end
 
+Rake.application.instance_variable_get('@tasks').delete('default')
+
 spec_prereq = File.exist?(File.join(RAILS_ROOT, 'config', 'database.yml')) ? "db:test:prepare" : :noop
 task :noop do
 end
 
+task :default => :spec
 task :stats => "spec:statsetup"
 
 desc "Run all specs in spec directory (excluding plugin specs)"
