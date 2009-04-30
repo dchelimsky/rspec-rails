@@ -1,4 +1,4 @@
-=== Master (in git)
+=== Version 1.2.5 / 2009-04-29
 
 * enhancements
   * support :xml and :strict config options for have_tag matcher (patch from
