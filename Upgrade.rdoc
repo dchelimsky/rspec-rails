@@ -1,4 +1,4 @@
-= Upgrade to 1.2.0-1.2.3
+= Upgrade to 1.2.0-1.2.6
 
 == What's changed
 
