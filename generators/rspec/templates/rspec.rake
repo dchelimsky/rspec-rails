@@ -1,19 +1,6 @@
 gem 'test-unit', '1.2.3' if RUBY_VERSION.to_f >= 1.9
-rspec_gem_dir = nil
-Dir["#{RAILS_ROOT}/vendor/gems/*"].each do |subdir|
-  rspec_gem_dir = subdir if subdir.gsub("#{RAILS_ROOT}/vendor/gems/","") =~ /^(\w+-)?rspec-(\d+)/ && File.exist?("#{subdir}/lib/spec/rake/spectask.rb")
-end
 rspec_plugin_dir = File.expand_path(File.dirname(__FILE__) + '/../../vendor/plugins/rspec')
-
-if rspec_gem_dir && (test ?d, rspec_plugin_dir)
-  raise "\n#{'*'*50}\nYou have rspec installed in both vendor/gems and vendor/plugins\nPlease pick one and dispose of the other.\n#{'*'*50}\n\n"
-end
-
-if rspec_gem_dir
-  $LOAD_PATH.unshift("#{rspec_gem_dir}/lib")
-elsif File.exist?(rspec_plugin_dir)
-  $LOAD_PATH.unshift("#{rspec_plugin_dir}/lib")
-end
+$LOAD_PATH.unshift("#{rspec_plugin_dir}/lib") if File.exist?(rspec_plugin_dir)
 
 # Don't load rspec if running "rake gems:*"
 unless ARGV.any? {|a| a =~ /^gems/}
