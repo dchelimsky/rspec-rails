@@ -35,7 +35,7 @@ module Spec
           end
         end
         
-        def stub!(*args)
+        def stub(*args)
           if args[0] == :render
             register_verify_after_each
             render_proxy.stub!(:render, :expected_from => caller(1)[0])
@@ -43,6 +43,8 @@ module Spec
             super
           end
         end
+        
+        alias_method :stub!, :stub
 
         def verify_rendered_proc #:nodoc:
           template = self

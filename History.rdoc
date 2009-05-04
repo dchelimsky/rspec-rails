@@ -1,5 +1,9 @@
 === Version 1.2.7 (in git)
 
+* enhancements
+  * alias :stub!, :stub so rspec-rails extensions of rspec stubs can use the
+    same syntax as rspec (core)
+
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
 
