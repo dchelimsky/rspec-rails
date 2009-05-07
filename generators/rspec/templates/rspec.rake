@@ -83,7 +83,7 @@ namespace :spec do
     t.spec_files = FileList['vendor/plugins/**/spec/**/*_spec.rb'].exclude('vendor/plugins/rspec/*')
   end
 
-  [:models, :controllers, :views, :helpers, :lib].each do |sub|
+  [:models, :controllers, :views, :helpers, :lib, :integration].each do |sub|
     desc "Run the code examples in spec/#{sub}"
     Spec::Rake::SpecTask.new(sub => spec_prereq) do |t|
       t.spec_opts = ['--options', "\"#{RAILS_ROOT}/spec/spec.opts\""]
@@ -114,12 +114,14 @@ namespace :spec do
     ::STATS_DIRECTORIES << %w(Helper\ specs spec/helpers) if File.exist?('spec/helpers')
     ::STATS_DIRECTORIES << %w(Library\ specs spec/lib) if File.exist?('spec/lib')
     ::STATS_DIRECTORIES << %w(Routing\ specs spec/routing) if File.exist?('spec/routing')
+    ::STATS_DIRECTORIES << %w(Integration\ specs spec/integration) if File.exist?('spec/integration')
     ::CodeStatistics::TEST_TYPES << "Model specs" if File.exist?('spec/models')
     ::CodeStatistics::TEST_TYPES << "View specs" if File.exist?('spec/views')
     ::CodeStatistics::TEST_TYPES << "Controller specs" if File.exist?('spec/controllers')
     ::CodeStatistics::TEST_TYPES << "Helper specs" if File.exist?('spec/helpers')
     ::CodeStatistics::TEST_TYPES << "Library specs" if File.exist?('spec/lib')
     ::CodeStatistics::TEST_TYPES << "Routing specs" if File.exist?('spec/routing')
+    ::CodeStatistics::TEST_TYPES << "Integration specs" if File.exist?('spec/integration')
   end
 
   namespace :db do
