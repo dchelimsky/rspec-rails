@@ -3,6 +3,7 @@
 * enhancements
   * alias :stub!, :stub so rspec-rails extensions of rspec stubs can use the
     same syntax as rspec (core)
+  * integration specs (Ben Mabey and David Chelimsky)
 
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
