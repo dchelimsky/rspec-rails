@@ -54,8 +54,9 @@ shared_examples_for "script/spec_server file" do
 
   def start_spec_server
     dir = File.dirname(__FILE__)
+    
     Thread.start do
-      system "cd #{RAILS_ROOT}; script/spec_server"
+      system "cd #{RAILS_ROOT}; CACHE_CLASSES=#{(Rails::VERSION::STRING < '2.2')} script/spec_server"
     end
 
     file_content = ""
