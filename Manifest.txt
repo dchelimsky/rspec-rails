@@ -6,8 +6,6 @@ README.rdoc
 Rakefile
 TODO.txt
 Upgrade.rdoc
-features/step_definitions/people.rb
-features/support/env.rb
 generators/rspec/CHANGES
 generators/rspec/rspec_generator.rb
 generators/rspec/templates/previous_failures.txt
@@ -45,6 +43,7 @@ lib/spec/rails/example/controller_example_group.rb
 lib/spec/rails/example/cookies_proxy.rb
 lib/spec/rails/example/functional_example_group.rb
 lib/spec/rails/example/helper_example_group.rb
+lib/spec/rails/example/integration_example_group.rb
 lib/spec/rails/example/model_example_group.rb
 lib/spec/rails/example/render_observer.rb
 lib/spec/rails/example/routing_example_group.rb
