@@ -45,6 +45,30 @@ describe ActionView::Base, "with RSpec extensions:", :type => :view do
         template.render(:partial => "name")
       end
     end
+    
+    describe "#{method}(:helper_method)" do
+      it "should not raise when stubbing and helper_method has been received" do
+        template.send(method, :helper_method).with(:arg => "value")
+        template.helper_method :arg => "value"
+      end
+    
+      it "should not raise when stubbing and helper_method has NOT been received" do
+        template.send(method, :helper_method).with(:arg => "value")
+      end
+    
+      it "SHOULD raise when stubbing and helper_method has been received with different options" do
+        template.send(method, :helper_method).with(:arg => "value")
+        expect { template.helper_method :arg => "other_value" }.
+          to raise_error(NoMethodError)
+      end
+    
+      it "should not raise when stubbing and expecting and helper_method has been received" do
+        template.send(method, :helper_method).with(:arg => "value")
+        template.should_receive(:helper_method).with(:arg => "value")
+        template.helper_method(:arg => "value")
+      end
+    end
+    
   end
 
 end
