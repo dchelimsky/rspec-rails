@@ -4,6 +4,8 @@
   * alias :stub!, :stub so rspec-rails extensions of rspec stubs can use the
     same syntax as rspec (core)
   * integration specs (Ben Mabey and David Chelimsky)
+  * added support for references and belongs_to generated model specs (José
+    Valim). Closes #792.
 
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
@@ -23,7 +25,8 @@
   * Fixed a small typo that makes rake stats fail (José Valim). Closes #802.
   * link_to and friends are available to ViewExampleGroup again
     (J.B. Rainsberger). Closes #787.
-  * spec_server works correctly with rails 2.3 again (Neil Buckley). Closes #759.
+  * spec_server works correctly with rails 2.3 again (Neil Buckley). Closes
+    #759.
 
 === Version 1.2.4 / 2009-03-13
 
@@ -50,7 +53,8 @@ See Upgrade.rdoc for information about upgrading to rspec-rails-1.2.1
   * more cleanup of internals (reducing dependency on rspec-core)
   * don't require config/environments more than once
   * autotest includes spec/routing directory (Matt Peterson). Closes #739.
-  * display helpful messages when installing rspec-rails running script/generate rspec
+  * display helpful messages when installing rspec-rails running
+    script/generate rspec
     * thanks for Dr Nic for the pointers
   * restored require 'rubygems' where needed
     * export NO_RUBYGEMS=true if you don't use rubygems
