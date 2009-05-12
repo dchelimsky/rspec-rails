@@ -17,7 +17,11 @@ module Rails
       end
 
       def name_or_reference
-        reference? ? :"#{name}_id" : name
+        if ::Rails::VERSION::STRING >= '2.2'
+          reference? ? :"#{name}_id" : name
+        else
+          name
+        end
       end
     end
   end
