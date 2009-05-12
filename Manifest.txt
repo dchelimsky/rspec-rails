@@ -6,6 +6,8 @@ README.rdoc
 Rakefile
 TODO.txt
 Upgrade.rdoc
+generators/integration_spec/integration_spec_generator.rb
+generators/integration_spec/templates/integration_spec.rb
 generators/rspec/CHANGES
 generators/rspec/rspec_generator.rb
 generators/rspec/templates/previous_failures.txt
