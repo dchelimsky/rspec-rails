@@ -38,14 +38,25 @@ module Spec
         def stub(*args)
           if args[0] == :render
             register_verify_after_each
-            render_proxy.stub!(:render, :expected_from => caller(1)[0])
+            render_proxy.stub(args.first, :expected_from => caller(1)[0])
           else
             super
           end
         end
         
-        alias_method :stub!, :stub
-
+        # FIXME - for some reason, neither alias nor alias_method are working
+        # as expected in the else branch, so this is a duplicate of stub()
+        # above. Could delegate, but then we'd run into craziness handling
+        # :expected_from. This will have to do for the moment.
+        def stub!(*args)
+          if args[0] == :render
+            register_verify_after_each
+            render_proxy.stub!(args.first, :expected_from => caller(1)[0])
+          else
+            super
+          end
+        end
+        
         def verify_rendered_proc #:nodoc:
           template = self
           @verify_rendered_proc ||= Proc.new do
