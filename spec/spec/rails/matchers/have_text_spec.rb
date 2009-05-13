@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
 describe "have_text" do
-  
 
   it "should have a helpful description" do
     matcher = have_text("foo bar")

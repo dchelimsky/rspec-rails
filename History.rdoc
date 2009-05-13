@@ -9,6 +9,7 @@
 
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
+  * fix bug with have() matcher failure message (Dave Giunta). Closes #818.
 
 === Version 1.2.6 / 2009-04-30
 
