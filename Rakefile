@@ -58,8 +58,6 @@ task :release => [:clean, :package] do |t|
   end
 end
 
-Spec::Rake::SpecTask.new
-
 Cucumber::Rake::Task.new
 
 task :default => [:features]
