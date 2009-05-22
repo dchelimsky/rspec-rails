@@ -20,4 +20,3 @@ describe "/<%= table_name %>/show.<%= default_file_extension %>" do
 <% end -%>
   end
 end
-
