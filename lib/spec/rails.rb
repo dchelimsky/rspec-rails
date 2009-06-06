@@ -1,5 +1,3 @@
-RAILS_ENV ||= "test"
-
 begin
   require_dependency 'application_controller'
 rescue MissingSourceFile
