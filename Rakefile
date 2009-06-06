@@ -1,5 +1,5 @@
 # -*- ruby -*-
-gem 'hoe', '>=1.9.0'
+gem 'hoe', '>=2.0.0'
 require 'hoe'
 require './lib/spec/rails/version'
 require 'cucumber/rake/task'
@@ -8,7 +8,8 @@ $:.unshift(File.join(File.dirname(__FILE__), "/../rspec/lib"))
 
 require 'spec/rake/spectask'
 
-Hoe.new('rspec-rails', Spec::Rails::VERSION::STRING) do |p|
+Hoe.spec('rspec-rails') do |p|
+  p.version = Spec::Rails::VERSION::STRING
   p.summary = Spec::Rails::VERSION::SUMMARY
   p.description = "Behaviour Driven Development for Ruby on Rails."
   p.rubyforge_name = 'rspec'
