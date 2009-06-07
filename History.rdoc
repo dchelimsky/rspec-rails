@@ -6,6 +6,8 @@
   * integration specs (Ben Mabey and David Chelimsky)
   * added support for references and belongs_to generated model specs (José
     Valim). Closes #792.
+  * add discovery for autotest-rails to keep compatible with ZenTest-4.0.0
+    (Ryan Davis). Closes #838.
 
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
