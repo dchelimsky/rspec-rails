@@ -10,14 +10,36 @@ module Spec
 
         attr_reader :request, :response
 
+        # The params hash accessed within a view or helper. Use this before
+        # rendering a view or calling a helper to provide data used by the
+        # view or helper.
+        #
+        # == Examples
+        #   # in a view spec
+        #   params[:name] = "David"
+        #   render
+        #   response.should have_tag("div.name","David")
+        #    
+        #   # in a helper spec
+        #   params[:first_name] = "David"
+        #   params[:last_name] = "Chelimsky"
+        #   helper.full_name.should == "David Chelimsky"
         def params
           request.parameters
         end
 
+        # Provides access to the flash hash. Use this after rendering a
+        # view, calling a helper or calling a controller action.
+        #
+        # == Examples
+        #   post :create
+        #   flash[:notice].should == "Success!"
         def flash
           @controller.__send__ :flash
         end
 
+        # Provides acces to the session hash. Use this before or after
+        # rendering a view, calling a helper or calling a controller action.
         def session
           request.session
         end
