@@ -5,12 +5,6 @@ class ActionController::IntegrationTest
   end
 end
 
-require 'webrat'
-
-Webrat.configure do |config|
-  config.mode = :rails
-end
-
 module Spec
   module Rails
     module Example

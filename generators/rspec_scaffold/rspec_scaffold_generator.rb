@@ -99,7 +99,7 @@ class RspecScaffoldGenerator < Rails::Generator::NamedBase
         File.join('spec/views', controller_class_path, controller_file_name, "show.#{default_file_extension}_spec.rb")
 
       # Integration
-      m.template 'integration_spec:integration_spec.rb', File.join('spec/integration', class_path, "managing_#{table_name}_spec.rb")
+      m.template 'integration_spec:integration_spec.rb', File.join('spec/integration', class_path, "#{table_name}_spec.rb")
 
       unless options[:skip_migration]
         m.migration_template(
