@@ -12,6 +12,10 @@
 * bug fixes
   * allow rspec-rails to work without ActiveRecord. Closes #810.
   * fix bug with have() matcher failure message (Dave Giunta). Closes #818.
+  
+* deprecations
+  * spec_server is now deprecated - use spork instead (gem install spork).
+    Closes #827.
 
 === Version 1.2.6 / 2009-04-30
 

@@ -1,3 +1,14 @@
+= Upgrade to 1.2.7
+
+== What's changed
+
+=== spec_server is deprecated
+
+spec_server is deprecated in favor of Tim Harper's new spork library
+(http://github.com/timcharper/spork). Get it. Use it. Love it.
+
+    gem install spork
+    
 = Upgrade to 1.2.0-1.2.6
 
 == What's changed

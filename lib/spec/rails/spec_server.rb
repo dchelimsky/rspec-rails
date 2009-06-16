@@ -1,3 +1,6 @@
+require 'spec/deprecation'
+Spec.deprecate('spec_server', 'spork (gem install spork)')
+
 if Rails::VERSION::STRING >= '2.2' && Rails.configuration.cache_classes
   raise <<-MESSAGE
 
