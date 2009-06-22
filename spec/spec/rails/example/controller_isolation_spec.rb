@@ -4,10 +4,16 @@ require 'controller_spec_controller'
 describe "a controller spec running in isolation mode", :type => :controller do
   controller_name :controller_spec
 
-  it "should not care if the template doesn't exist" do
+  it "should not care if the specified template doesn't exist" do
     get 'some_action'
     response.should be_success
     response.should render_template("template/that/does/not/actually/exist")
+  end
+
+  it "should not care if the implied template doesn't exist" do
+    get 'some_action_with_implied_template'
+    response.should be_success
+    response.should render_template("some_action_with_implied_template")
   end
 
   it "should not care if the template has errors" do

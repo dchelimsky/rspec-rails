@@ -166,8 +166,15 @@ MESSAGE
           end
           
           def render(*args)
-            return super if Hash === args.last && args.last[:inline]
-            @_rendered ? record_render(args[0]) : super
+            if file = args.last[:file].instance_eval{@template_path}
+              record_render :file => file
+            elsif args.last[:inline]
+              super
+            elsif @_rendered
+              record_render(args[0])
+            else
+              super
+            end
           end
         
         private
@@ -209,6 +216,19 @@ MESSAGE
                 @performed_render = true
               else
                 super
+              end
+            end
+          end
+          
+          # Rails 2.3
+          def default_template(action_name = self.action_name)
+            if integrate_views?
+              super
+            else
+              begin
+                super
+              rescue ActionView::MissingTemplate
+                "#{self.class.name.sub(/Controller$/,'').underscore}/#{action_name}"
               end
             end
           end

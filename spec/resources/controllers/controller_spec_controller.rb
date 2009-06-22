@@ -13,6 +13,9 @@ class ControllerSpecController < ActionController::Base
     render :template => "template/that/does/not/actually/exist"
   end
   
+  def some_action_with_implied_template
+  end
+  
   def action_with_template
     render :template => "controller_spec/action_with_template"
   end
@@ -105,11 +108,11 @@ class ControllerSpecController < ActionController::Base
   end
 
   def rescued_error_action
-    raise RescuedError
+    raise ControllerSpecController::RescuedError
   end
 
   def un_rescued_error_action
-    raise UnRescuedError
+    raise ControllerSpecController::UnRescuedError
   end
 end
 
