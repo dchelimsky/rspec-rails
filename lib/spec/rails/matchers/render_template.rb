@@ -33,7 +33,16 @@ module Spec
           return false if @actual.blank?
           given_controller_path, given_file = path_and_file(@actual)
           expected_controller_path, expected_file = path_and_file(@expected)
-          given_controller_path == expected_controller_path && given_file.match(expected_file)
+          given_controller_path == expected_controller_path && match_files(given_file, expected_file)
+        end
+        
+        def match_files(actual, expected)
+          actual_parts = actual.split('.')
+          expected_parts = expected.split('.')
+          expected_parts.each_with_index do |expected_part, index|
+            return false unless expected_part == actual_parts[index]
+          end
+          true
         end
         
         def failure_message_for_should
