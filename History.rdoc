@@ -1,3 +1,9 @@
+=== Version 1.2.8 (in git)
+
+* removals
+  * spec_server has been removed in favor of spork. You can still use the
+    --drb flag, but you've got to install the spork gem.
+
 === Version 1.2.7 / 2009-06-22
 
 * enhancements

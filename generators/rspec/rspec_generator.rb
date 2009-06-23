@@ -36,7 +36,6 @@ HELPFUL_INSTRUCTIONS
 
       m.file      'script/autospec',               'script/autospec',    script_options
       m.file      'script/spec',                   'script/spec',        script_options
-      m.file      'script/spec_server',            'script/spec_server', script_options
 
       m.directory 'spec'
       m.file      'rcov.opts',                     'spec/rcov.opts'
