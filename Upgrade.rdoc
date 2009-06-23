@@ -1,4 +1,4 @@
-= Upgrade to 1.2.7
+= Upgrade to 1.2.7.rc1
 
 == What's changed
 
