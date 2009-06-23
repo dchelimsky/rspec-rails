@@ -148,7 +148,7 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
       it "should support a Symbol key" do
         get 'action_which_sets_cookie', :value => "cookie value"
         if ::Rails::VERSION::STRING >= "2.3"
-          cookies[:cookie_key].should == "cookie+value"
+          cookies[:cookie_key].should match("cookie[\+ ]value")
         else
           cookies[:cookie_key].should == ["cookie value"]
         end
@@ -157,7 +157,7 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
       it "should support a String key" do
         get 'action_which_sets_cookie', :value => "cookie value"
         if ::Rails::VERSION::STRING >= "2.3"
-          cookies['cookie_key'].should == "cookie+value"
+          cookies['cookie_key'].should match("cookie[\+ ]value")
         else
           cookies['cookie_key'].should == ["cookie value"]
         end
