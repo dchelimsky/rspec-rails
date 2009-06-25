@@ -15,7 +15,6 @@ generators/rspec/templates/rcov.opts
 generators/rspec/templates/rspec.rake
 generators/rspec/templates/script/autospec
 generators/rspec/templates/script/spec
-generators/rspec/templates/script/spec_server
 generators/rspec/templates/spec.opts
 generators/rspec/templates/spec_helper.rb
 generators/rspec_controller/USAGE
@@ -70,7 +69,6 @@ lib/spec/rails/matchers/include_text.rb
 lib/spec/rails/matchers/redirect_to.rb
 lib/spec/rails/matchers/render_template.rb
 lib/spec/rails/mocks.rb
-lib/spec/rails/spec_server.rb
 lib/spec/rails/version.rb
 spec/autotest/mappings_spec.rb
 spec/rails_suite.rb
@@ -161,6 +159,5 @@ spec/spec/rails/mocks/mock_model_spec.rb
 spec/spec/rails/mocks/stub_model_spec.rb
 spec/spec/rails/sample_modified_fixture.rb
 spec/spec/rails/sample_spec.rb
-spec/spec/rails/spec_server_spec.rb
 spec/spec/rails/spec_spec.rb
 spec/spec_helper.rb
