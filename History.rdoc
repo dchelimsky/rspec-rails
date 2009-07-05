@@ -1,8 +1,11 @@
 === Version 1.2.8 (in git)
 
 * removals
-  * spec_server has been removed in favor of spork. You can still use the
-    --drb flag, but you've got to install the spork gem.
+  * spec_server has been removed in favor of spork.
+    * You can still use the --drb flag, but you've got to install the spork
+      gem.
+    * Windows users who cannot use the spork gem can install the spec_server
+      from http://github.com/dchelimsky/spec_server
 
 === Version 1.2.7 / 2009-06-22
 
