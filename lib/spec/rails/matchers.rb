@@ -5,6 +5,7 @@ require 'spec/rails/matchers/change'
 require 'spec/rails/matchers/have_text'
 require 'spec/rails/matchers/include_text'
 require 'spec/rails/matchers/redirect_to'
+require 'spec/rails/matchers/route_to'
 require 'spec/rails/matchers/render_template'
 
 module Spec
