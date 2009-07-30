@@ -1,5 +1,16 @@
 = Upgrade to 1.2.8 (in git)
 
+== What's new
+
+=== route_to and be_routable matchers
+
+Stop using route_for and params_from today! These new matchers from Randy
+Harmon are more expressive and more reliable. Here's how you use them:
+
+    { :put => "/projects/37" }.should route_to(:controller => 'projects', :action => 'update', :id => '37')
+
+    { :get => "/nonexisting_route" }.should_not be_routable
+
 == What's changed
 
 === spec_server has been removed
