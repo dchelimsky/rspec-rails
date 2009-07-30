@@ -215,7 +215,11 @@ MESSAGE
               if matching_stub_exists(options)
                 @performed_render = true
               else
-                super
+                if Rails::VERSION::STRING > '2.1'
+                  super(options, extra_options, &block)
+                else
+                  super(options, &block)
+                end
               end
             end
           end

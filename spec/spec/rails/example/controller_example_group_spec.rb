@@ -188,10 +188,12 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
       }.should_not raise_error
     end
     
-    describe "extending #render on a controller" do
-      it "supports two arguments (as with rails 2.2)" do
-        get 'action_with_two_arg_render'
-        response.body.should =~ /new Effect\.Highlight/
+    if Rails::VERSION::STRING > '2.1'
+      describe "extending #render on a controller" do
+        it "supports two arguments (as with rails 2.1)" do
+          get 'action_with_two_arg_render'
+          response.body.should =~ /new Effect\.Highlight/
+        end
       end
     end
   end
