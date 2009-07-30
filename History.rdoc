@@ -1,5 +1,9 @@
 === Version 1.2.8 (in git)
 
+* bug fixes
+  * pass the correct args to super in controller#render depending on the rails
+    version (Lucas Carlson). Closes #865.
+
 * removals
   * spec_server has been removed in favor of spork.
     * You can still use the --drb flag, but you've got to install the spork
