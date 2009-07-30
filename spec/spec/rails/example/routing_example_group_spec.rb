@@ -5,5 +5,6 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
 describe "Routing Examples", :type => :routing do
   
   include RoutingExampleGroupSpec
-
+  include RouteToExampleGroupSpec
+  include BeRoutableExampleGroupSpec
 end

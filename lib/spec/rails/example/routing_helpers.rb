@@ -19,20 +19,26 @@ module Spec
           def initialize(example, options)
             @example, @options = example, options
           end
-  
+
           def ==(expected)
             if Hash === expected
               path, querystring = expected[:path].split('?')
+              path_string = path
               path = expected.merge(:path => path)
             else
               path, querystring = expected.split('?')
+              path_string = path
+              path = { :path => path, :method => :get }
             end
             params = querystring.blank? ? {} : @example.params_from_querystring(querystring)
-            @example.assert_recognizes(@options, path, params)
-            true
+            begin
+              @example.assert_routing(path, @options, {}, params)
+              true
+            rescue ActionController::RoutingError, ::Test::Unit::AssertionFailedError => e
+              raise e.class, "#{e}\nIf you're expecting this failure, we suggest {:#{path[:method]}=>\"#{path[:path]}\"}.should_not be_routable"
+            end
           end
         end
-
         # Uses ActionController::Routing::Routes to generate
         # the correct route for a given set of options.
         # == Examples
@@ -46,6 +52,8 @@ module Spec
 
         # Uses ActionController::Routing::Routes to parse
         # an incoming path so the parameters it generates can be checked
+        #
+        # Note that this method is obsoleted by the route_to matcher.
         # == Example
         #   params_from(:get, '/registrations/1/edit')
         #     => :controller => 'registrations', :action => 'edit', :id => '1'
