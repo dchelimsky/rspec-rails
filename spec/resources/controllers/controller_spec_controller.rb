@@ -114,6 +114,10 @@ class ControllerSpecController < ActionController::Base
   def un_rescued_error_action
     raise ControllerSpecController::UnRescuedError
   end
+  
+  def action_that_returns_headers
+    render :text => request.headers[params[:header]]
+  end
 end
 
 class ControllerInheritingFromApplicationControllerController < ApplicationController

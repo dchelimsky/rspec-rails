@@ -196,6 +196,12 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
         end
       end
     end
+    
+    it "should access headers" do
+      request.env['ACCEPT'] = "application/json"
+      get 'action_that_returns_headers', :header => 'ACCEPT'
+      response.body.should == "application/json"
+    end
   end
 
   describe "Given a controller spec for RedirectSpecController running in #{mode} mode", :type => :controller do
