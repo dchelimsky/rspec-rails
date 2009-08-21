@@ -6,6 +6,7 @@
 * bug fixes
   * pass the correct args to super in controller#render depending on the rails
     version (Lucas Carlson). Closes #865.
+  * use Rack::Utils.parse_query to convert query strings to hashes. Closes #872.
 
 * removals
   * spec_server has been removed in favor of spork.

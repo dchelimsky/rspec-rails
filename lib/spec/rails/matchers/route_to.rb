@@ -1,3 +1,5 @@
+require 'rack/utils'
+
 module Spec
   module Rails
     module Matchers
@@ -17,8 +19,6 @@ module Spec
       end
 
       class RouteTo #:nodoc:
-        include ::Spec::Rails::Example::RoutingHelpers::ParamsFromQueryString
-
         def initialize(expected, example)
           @route, @example = expected,example
         end
@@ -27,7 +27,7 @@ module Spec
           begin
             @actual = path
             method, path, querystring = PathDecomposer.decompose_path(path)
-            params = querystring.blank? ? {} : params_from_querystring(querystring)
+            params = querystring.blank? ? {} : Rack::Utils.parse_query(querystring).symbolize_keys!
             @example.assert_routing({ :method => method, :path => path }, @route, {}, params)
             true
           rescue ActionController::RoutingError, ::Test::Unit::AssertionFailedError, ActionController::MethodNotAllowed => e

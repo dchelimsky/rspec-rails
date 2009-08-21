@@ -1,21 +1,11 @@
+require 'rack/utils'
+
 module Spec
   module Rails
     module Example
       module RoutingHelpers
         
-        module ParamsFromQueryString # :nodoc:
-          def params_from_querystring(querystring) # :nodoc:
-            params = {}
-            querystring.split('&').each do |piece|
-              key, value = piece.split('=')
-              params[key.to_sym] = value
-            end
-            params
-          end
-        end
-        
         class RouteFor
-          include ::Spec::Rails::Example::RoutingHelpers::ParamsFromQueryString
           def initialize(example, options)
             @example, @options = example, options
           end
@@ -30,7 +20,7 @@ module Spec
               path_string = path
               path = { :path => path, :method => :get }
             end
-            params = querystring.blank? ? {} : @example.params_from_querystring(querystring)
+            params = querystring.blank? ? {} : Rack::Utils.parse_query(querystring).symbolize_keys!
             begin
               @example.assert_routing(path, @options, {}, params)
               true
@@ -61,12 +51,10 @@ module Spec
           ensure_that_routes_are_loaded
           path, querystring = path.split('?')
           params = ActionController::Routing::Routes.recognize_path(path, :method => method)
-          querystring.blank? ? params : params.merge(params_from_querystring(querystring))
+          querystring.blank? ? params : params.merge(Rack::Utils.parse_query(querystring).symbolize_keys!)
         end
 
       private
-
-        include ParamsFromQueryString
 
         def ensure_that_routes_are_loaded
           ActionController::Routing::Routes.reload if ActionController::Routing::Routes.empty?
