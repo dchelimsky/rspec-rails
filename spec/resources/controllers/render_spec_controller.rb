@@ -15,6 +15,10 @@ class RenderSpecController < ApplicationController
   def text_action
     render :text => "this is the text for this action"
   end
+
+  def action_with_redirect
+    redirect_to :action => :some_action
+  end
   
   def action_with_partial
     render :partial => "a_partial"

@@ -69,6 +69,13 @@ require File.dirname(__FILE__) + '/../../../spec_helper'
           should render_template('non_existent_template')
         end.should fail_with(/expected \"non_existent_template\", got \"render_spec\/some_action(\.html\.erb)?\"/)
       end
+
+      it "fails when redirected" do
+        post :action_with_redirect
+        lambda do
+          should render_template(:some_action)
+        end.should fail_with(/expected \"some_action\", got redirected to \"http:\/\/test.host\/render_spec\/some_action\"/)
+      end
     
       it "fails when template is associated with a different controller but controller is not specified" do
         post 'action_which_renders_template_from_other_controller'
