@@ -2,6 +2,8 @@
 
 * enhancements
   * added route_to and be_routable matchers (Randy Harmon). Closes #843.
+  * Provide better failure message for render_template when redirected (Josh
+    Nichols). Closes #885.
 
 * bug fixes
   * pass the correct args to super in controller#render depending on the rails
