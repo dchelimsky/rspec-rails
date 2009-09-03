@@ -99,6 +99,28 @@ share_as :BeRoutableExampleGroupSpec do
       { :put => "/rspec_on_rails_specs/bad_route/37" }.
         should_not be_routable
     end
+    it "passes for a bad route having an arg" do
+      { :put => "/rspec_on_rails_specs/bad_route/37?some_arg=1" }.
+        should_not be_routable
+    end
+    describe "when assert_recognizes throws exceptions:" do
+      [ ActionController::RoutingError, ActionController::MethodNotAllowed ].each do |e|
+        it "passes on #{e}" do
+          self.stub!( :assert_recognizes ).and_return { raise e, "stubbed exception" }
+          { :get => "/rspec_on_rails_spec/bad_route/37" }.should_not be_routable
+        end
+        it "should be_routable on usual Test::Unit::AssertionFailedError" do
+          # <{}> is predictable because of the way we call assert_recognizes during be_routable().
+          self.stub!( :assert_recognizes ).and_return { raise Test::Unit::AssertionFailedError, "<{a}> did not match <{}>" }
+          { :get => "/rspec_on_rails_spec/arguably_bad_route" }.should be_routable
+        end
+        it "should re-raise on unusual Test::Unit::AssertionFailedError" do
+          self.stub!( :assert_recognizes ).and_return { raise Test::Unit::AssertionFailedError, "some other message" }
+          expect { { :get => "/rspec_on_rails_spec/weird_case_route/" }.should be_routable }.
+            to raise_error
+        end
+      end
+    end
     it "test should be_routable" do
       { :get => "/custom_route" }.
         should be_routable

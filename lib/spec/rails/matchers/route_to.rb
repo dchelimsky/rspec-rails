@@ -97,9 +97,10 @@ module Spec
             method, path = PathDecomposer.decompose_path(path)
             @example.assert_recognizes({}, { :method => method, :path => path }, {} )
             true
-          rescue ActionController::RoutingError
+          rescue ActionController::RoutingError, ActionController::MethodNotAllowed
             false
           rescue ::Test::Unit::AssertionFailedError => e
+            # the second thingy will always be "<{}>" becaues of the way we called assert_recognizes({}...) above.
             e.to_s =~ /<(.*)> did not match <\{\}>/ and @actual_place = $1 or raise
             true
           end
