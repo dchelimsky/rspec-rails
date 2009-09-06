@@ -68,7 +68,6 @@ lib/spec/rails/matchers/assert_select.rb
 lib/spec/rails/matchers/change.rb
 lib/spec/rails/matchers/have_text.rb
 lib/spec/rails/matchers/include_text.rb
-lib/spec/rails/matchers/route_to.rb
 lib/spec/rails/matchers/redirect_to.rb
 lib/spec/rails/matchers/render_template.rb
 lib/spec/rails/matchers/route_to.rb
