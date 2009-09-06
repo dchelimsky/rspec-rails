@@ -1,45 +1,19 @@
 require File.dirname(__FILE__) + '/../../../spec_helper'
 
 describe "be_valid" do
-  class CanBeValid
-    def initialize(valid)
-      @valid = valid
-    end
-    def valid?; @valid end
-  end
-
-  it "should behave like normal be_valid matcher" do
-    CanBeValid.new(true).should be_valid
-    CanBeValid.new(false).should_not be_valid
-  end
-
-  describe CanBeValid do
-    subject { CanBeValid.new(true) }
-    it { subject.should be_valid }
-  end
-
-  describe CanBeValid do
-    subject { CanBeValid.new(false) }
-    it { subject.should_not be_valid }
-  end
-
-  class CanHaveErrors
-    def initialize(errors)
-      @valid = !errors
-      @errors = ActiveRecord::Errors.new self
-      @errors.add :name, "is too short"
-    end
-    attr_reader :errors
-    def valid?; @valid end
-
-    def self.human_attribute_name(ignore)
-      "Name"
+  context "with valid attributes" do
+    it "returns true" do
+      be_valid.matches?(Thing.new(:name => 'thing')).should == true
     end
   end
-
-  it "should show errors in the output if they're available" do
-    lambda { 
-      CanHaveErrors.new(true).should be_valid
-    }.should fail_with(/Name is too short/)
+  
+  context "with invalid attributes" do
+    it "returns false" do
+      be_valid.matches?(Thing.new).should == false
+    end
+    
+    it "adds errors to the errors " do
+      expect { Thing.new.should be_valid }.to raise_error(/can't be blank/)
+    end
   end
 end
