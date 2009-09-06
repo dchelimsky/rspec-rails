@@ -54,7 +54,7 @@ share_as :RoutingExampleGroupSpec do
         lambda {
           route_for(:controller => "rspec_on_rails_specs", :action => "nonexistent", :id => "37") ==
             {:path => "/rspec_on_rails_specs/37", :method => :put}
-        }.should raise_error( Test::Unit::AssertionFailedError, /suggest.*should_not be_routable/ )
+        }.should raise_error( ::Test::Unit::AssertionFailedError, /suggest.*should_not be_routable/ )
       end
     end
 
@@ -111,11 +111,11 @@ share_as :BeRoutableExampleGroupSpec do
         end
         it "should be_routable on usual Test::Unit::AssertionFailedError" do
           # <{}> is predictable because of the way we call assert_recognizes during be_routable().
-          self.stub!( :assert_recognizes ).and_return { raise Test::Unit::AssertionFailedError, "<{a}> did not match <{}>" }
+          self.stub!( :assert_recognizes ).and_return { raise ::Test::Unit::AssertionFailedError, "<{a}> did not match <{}>" }
           { :get => "/rspec_on_rails_spec/arguably_bad_route" }.should be_routable
         end
         it "should re-raise on unusual Test::Unit::AssertionFailedError" do
-          self.stub!( :assert_recognizes ).and_return { raise Test::Unit::AssertionFailedError, "some other message" }
+          self.stub!( :assert_recognizes ).and_return { raise ::Test::Unit::AssertionFailedError, "some other message" }
           expect { { :get => "/rspec_on_rails_spec/weird_case_route/" }.should be_routable }.
             to raise_error
         end
@@ -206,7 +206,7 @@ share_as :RouteToExampleGroupSpec do
         lambda {
           { :put => "/rspec_on_rails_specs/37" }.
             should route_to(:controller => "rspec_on_rails_specs", :action => "nonexistent", :id => "37")
-        }.should raise_error( Test::Unit::AssertionFailedError, /suggest.*rspec_on_rails_specs\/37.*should_not be_routable/ )
+        }.should raise_error( ::Test::Unit::AssertionFailedError, /suggest.*rspec_on_rails_specs\/37.*should_not be_routable/ )
       end
     end
     
