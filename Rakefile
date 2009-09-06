@@ -9,18 +9,18 @@ require 'spec/rails/version'
 require 'spec/rake/spectask'
 require 'cucumber/rake/task'
 
-Hoe.spec('rspec-rails') do |p|
-  p.version = Spec::Rails::VERSION::STRING
-  p.summary = Spec::Rails::VERSION::SUMMARY
-  p.description = "Behaviour Driven Development for Ruby on Rails."
-  p.rubyforge_name = 'rspec'
-  p.developer('RSpec Development Team', 'rspec-devel@rubyforge.org')
-  p.extra_deps = [["rspec",">=1.2.8"],["rack",">=0.4.0"]]
-  p.extra_dev_deps = [["cucumber",">= 0.3.11"]]
-  p.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
-  p.history_file = 'History.rdoc'
-  p.readme_file  = 'README.rdoc'
-  p.post_install_message = <<-POST_INSTALL_MESSAGE
+Hoe.spec 'rspec-rails' do
+  self.version = Spec::Rails::VERSION::STRING
+  self.summary = Spec::Rails::VERSION::SUMMARY
+  self.description = "Behaviour Driven Development for Ruby on Rails."
+  self.rubyforge_name = 'rspec'
+  self.developer 'RSpec Development Team', 'rspec-devel@rubyforge.org'
+  self.extra_deps = [["rspec",">=1.2.8"],["rack",">=0.4.0"]]
+  self.extra_dev_deps = [["cucumber",">= 0.3.11"]]
+  self.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
+  self.history_file = 'History.rdoc'
+  self.readme_file  = 'README.rdoc'
+  self.post_install_message = <<-POST_INSTALL_MESSAGE
 #{'*'*50}
 
   Thank you for installing rspec-rails-#{Spec::Rails::VERSION::STRING}
