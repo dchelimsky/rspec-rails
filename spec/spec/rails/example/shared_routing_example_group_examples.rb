@@ -134,10 +134,14 @@ share_as :BeRoutableExampleGroupSpec do
     end
 
     it "shows actual route that was generated on failure with should_not()" do
-      lambda {
-        { :get => "/custom_route" }.
-          should_not be_routable
-      }.should raise_error( /"action"=>"custom_route", "controller"=>"custom_route_spec"/ )
+      begin
+        { :get => "/custom_route" }.should_not be_routable
+      rescue Exception => e
+      ensure
+        # Different versions of ruby order these differently
+        e.message.should =~ /"action"=>"custom_route"/
+        e.message.should =~ /"controller"=>"custom_route_spec"/
+      end
     end
 
     it "works with routeable (alternate spelling)" do
