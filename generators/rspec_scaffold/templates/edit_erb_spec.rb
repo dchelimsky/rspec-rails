@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '<%= '/..' * class_nesting_depth %>/../../spec_helper')
+require 'spec/spec_helper'
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
 describe "/<%= table_name %>/edit.<%= default_file_extension %>" do

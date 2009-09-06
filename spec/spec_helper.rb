@@ -1,36 +1,35 @@
-dir = File.dirname(__FILE__)
-$LOAD_PATH.unshift(File.expand_path("#{dir}/../rspec/lib"))
-$LOAD_PATH.unshift(File.expand_path("#{dir}/resources/controllers"))
-$LOAD_PATH.unshift(File.expand_path("#{dir}/resources/helpers"))
-require File.expand_path("#{dir}/../../../../spec/spec_helper")
-require File.expand_path("#{dir}/resources/controllers/application")
-require File.expand_path("#{dir}/resources/controllers/render_spec_controller")
-require File.expand_path("#{dir}/resources/controllers/controller_spec_controller")
-require File.expand_path("#{dir}/resources/controllers/rjs_spec_controller")
-require File.expand_path("#{dir}/resources/controllers/redirect_spec_controller")
-require File.expand_path("#{dir}/resources/controllers/action_view_base_spec_controller")
-require File.expand_path("#{dir}/resources/helpers/addition_helper")
-require File.expand_path("#{dir}/resources/helpers/explicit_helper")
-require File.expand_path("#{dir}/resources/helpers/more_explicit_helper")
-require File.expand_path("#{dir}/resources/helpers/view_spec_helper")
-require File.expand_path("#{dir}/resources/helpers/plugin_application_helper")
+$LOAD_PATH.unshift '../rspec/lib'
+$LOAD_PATH.unshift '../../../'
+$LOAD_PATH.unshift 'spec/resources/controllers'
+$LOAD_PATH.unshift 'spec/resources/helpers'
 
-require File.expand_path("#{dir}/resources/models/animal")
-require File.expand_path("#{dir}/resources/models/person")
-require File.expand_path("#{dir}/resources/models/thing")
+require '../../../spec/spec_helper'
 
-extra_controller_paths = File.expand_path("#{dir}/resources/controllers")
+require 'spec/resources/controllers/application'
+require 'spec/resources/controllers/render_spec_controller'
+require 'spec/resources/controllers/controller_spec_controller'
+require 'spec/resources/controllers/rjs_spec_controller'
+require 'spec/resources/controllers/redirect_spec_controller'
+require 'spec/resources/controllers/action_view_base_spec_controller'
+require 'spec/resources/helpers/addition_helper'
+require 'spec/resources/helpers/explicit_helper'
+require 'spec/resources/helpers/more_explicit_helper'
+require 'spec/resources/helpers/view_spec_helper'
+require 'spec/resources/helpers/plugin_application_helper'
+require 'spec/resources/models/animal'
+require 'spec/resources/models/person'
+require 'spec/resources/models/thing'
 
-unless ActionController::Routing.controller_paths.include?(extra_controller_paths)
+unless ActionController::Routing.controller_paths.include?('spec/resources/controllers')
   ActionController::Routing.instance_eval {@possible_controllers = nil}
-  ActionController::Routing.controller_paths << extra_controller_paths
+  ActionController::Routing.controller_paths << 'spec/resources/controllers'
 end
 
 module Spec
   module Rails
     module Example
       class ViewExampleGroupController
-        prepend_view_path File.join(File.dirname(__FILE__), "..", "spec", "resources", "views")
+        prepend_view_path 'spec/resources/views'
       end
     end
   end
@@ -56,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :rspec_on_rails_specs
   map.custom_route 'custom_route', :controller => 'custom_route_spec', :action => 'custom_route'
-  map.connect ":controller/:action/:id"
+  map.connect ':controller/:action/:id'
 end
 
 module HelperMethods

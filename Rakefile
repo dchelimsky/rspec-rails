@@ -1,12 +1,13 @@
 # -*- ruby -*-
 gem 'hoe', '>=2.0.0'
 require 'hoe'
-require './lib/spec/rails/version'
-require 'cucumber/rake/task'
 
 $:.unshift(File.join(File.dirname(__FILE__), "/../rspec/lib"))
+$:.unshift(File.join(File.dirname(__FILE__), "/lib"))
 
+require 'spec/rails/version'
 require 'spec/rake/spectask'
+require 'cucumber/rake/task'
 
 Hoe.spec('rspec-rails') do |p|
   p.version = Spec::Rails::VERSION::STRING

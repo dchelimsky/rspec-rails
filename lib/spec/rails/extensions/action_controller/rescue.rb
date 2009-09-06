@@ -9,7 +9,7 @@ rspec-rails.
 Use rescue_action_in_public!, which is defined directly in
 rails' testing framework, instead.
 WARNING
-      if Rails::VERSION::STRING =~ /^2\.0/
+      if ::Rails::VERSION::STRING =~ /^2\.0/
         @use_rails_error_handling = true
       else
         # anything but 0.0.0.0 - borrowed from rails own rescue_action_in_public!
@@ -23,7 +23,7 @@ WARNING
 
   protected
   
-    if Rails::VERSION::STRING =~ /^2\.0/
+    if ::Rails::VERSION::STRING =~ /^2\.0/
       def rescue_action_in_public?
         request.respond_to?(:rescue_action_in_public?) and request.rescue_action_in_public?
       end
