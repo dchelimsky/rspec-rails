@@ -165,7 +165,14 @@ MESSAGE
             PickedTemplate.new
           end
           
+          def __action_exists?(params)
+            controller.respond_to? params[:action]
+          end
+          
           def render(*args)
+            if ::Rails::VERSION::STRING >= "2.1"
+              return super unless __action_exists?(params) 
+            end
             if file = args.last[:file].instance_eval{@template_path}
               record_render :file => file
             elsif args.last[:inline]
