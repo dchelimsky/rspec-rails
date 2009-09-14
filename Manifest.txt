@@ -22,7 +22,6 @@ generators/rspec_controller/USAGE
 generators/rspec_controller/rspec_controller_generator.rb
 generators/rspec_controller/templates/controller_spec.rb
 generators/rspec_controller/templates/helper_spec.rb
-generators/rspec_controller/templates/routing_spec.rb
 generators/rspec_controller/templates/view_spec.rb
 generators/rspec_default_values.rb
 generators/rspec_model/USAGE
