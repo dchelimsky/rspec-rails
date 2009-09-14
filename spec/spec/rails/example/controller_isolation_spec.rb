@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../../spec_helper'
+require 'spec_helper'
 require 'controller_spec_controller'
 
 describe "a controller spec running in isolation mode", :type => :controller do

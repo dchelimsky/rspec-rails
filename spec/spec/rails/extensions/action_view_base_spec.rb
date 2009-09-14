@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../../spec_helper'
+require 'spec_helper'
 require 'spec/mocks/errors'
 
 describe ActionView::Base, "with RSpec extensions:", :type => :view do 

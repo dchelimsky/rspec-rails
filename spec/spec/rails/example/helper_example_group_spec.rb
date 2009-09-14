@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../../spec_helper'
+require 'spec_helper'
 Spec::Runner.configuration.global_fixtures = :people
 
 describe ExplicitHelper, :type => :helper do

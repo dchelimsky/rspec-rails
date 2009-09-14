@@ -1,4 +1,4 @@
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe "/<%= class_name.underscore %>/<%= action %>" do
   before(:each) do

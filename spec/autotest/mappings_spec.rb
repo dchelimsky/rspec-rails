@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 require File.dirname(__FILE__) + '/../../lib/autotest/rails_rspec'
 require File.dirname(__FILE__) + '/../../../rspec/spec/autotest/autotest_matchers'
 

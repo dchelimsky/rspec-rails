@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../../spec_helper'
+require 'spec_helper'
 
 
 if ActiveSupport.const_defined?(:Callbacks) && Test::Unit::TestCase.include?(ActiveSupport::Callbacks)
