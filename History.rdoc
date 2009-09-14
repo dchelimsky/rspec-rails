@@ -10,6 +10,11 @@
   * pass the correct args to super in controller#render depending on the rails
     version (Lucas Carlson). Closes #865.
   * use Rack::Utils.parse_query to convert query strings to hashes. Closes #872.
+  * errors correctly bubble up when a controller spec in isolation mode
+    requests a non-existent action/template
+    * no error if either action or template exist
+    * error if neither exist
+    * Closes #888.
 
 * removals
   * spec_server has been removed in favor of spork.
