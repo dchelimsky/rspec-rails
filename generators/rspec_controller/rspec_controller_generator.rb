@@ -12,7 +12,6 @@ class RspecControllerGenerator < ControllerGenerator
       m.directory File.join('app/helpers', class_path)
       m.directory File.join('app/views', class_path, file_name)
       m.directory File.join('spec/controllers', class_path)
-      m.directory File.join('spec/routing', controller_class_path)
       m.directory File.join('spec/helpers', class_path)
       m.directory File.join('spec/views', class_path, file_name)
 
@@ -21,9 +20,6 @@ class RspecControllerGenerator < ControllerGenerator
       # Controller spec, class, and helper.
       m.template 'controller_spec.rb',
         File.join('spec/controllers', class_path, "#{file_name}_controller_spec.rb")
-
-      m.template 'rspec_scaffold:routing_spec.rb',
-        File.join('spec/routing', class_path, "#{file_name}_routing_spec.rb")
 
       m.template 'helper_spec.rb',
         File.join('spec/helpers', class_path, "#{file_name}_helper_spec.rb")
