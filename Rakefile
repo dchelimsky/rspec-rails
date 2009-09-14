@@ -2,8 +2,8 @@
 gem 'hoe', '>=2.0.0'
 require 'hoe'
 
-$:.unshift(File.join(File.dirname(__FILE__), "/../rspec/lib"))
-$:.unshift(File.join(File.dirname(__FILE__), "/lib"))
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__),"..","rspec","lib")))
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__),"lib")))
 
 require 'spec/rails/version'
 require 'spec/rake/spectask'
@@ -15,8 +15,8 @@ Hoe.spec 'rspec-rails' do
   self.description = "Behaviour Driven Development for Ruby on Rails."
   self.rubyforge_name = 'rspec'
   self.developer 'RSpec Development Team', 'rspec-devel@rubyforge.org'
-  self.extra_deps = [["rspec",">=1.2.8"],["rack",">=0.4.0"]]
-  self.extra_dev_deps = [["cucumber",">= 0.3.11"]]
+  self.extra_deps = [["rspec",">=1.2.9"],["rack",">=0.4.0"]]
+  self.extra_dev_deps = [["cucumber",">= 0.3.99"]]
   self.remote_rdoc_dir = "rspec-rails/#{Spec::Rails::VERSION::STRING}"
   self.history_file = 'History.rdoc'
   self.readme_file  = 'README.rdoc'

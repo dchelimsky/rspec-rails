@@ -4,7 +4,7 @@ module Spec # :nodoc:
       unless defined? MAJOR
         MAJOR       = 1
         MINOR       = 2
-        TINY        = 8
+        TINY        = 9
         REALLY_TINY = nil
       
         STRING = [MAJOR, MINOR, TINY, REALLY_TINY].compact.join('.')

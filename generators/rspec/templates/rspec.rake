@@ -27,7 +27,7 @@ rescue MissingSourceFile
         def initialize(name)
           task name do
             # if rspec-rails is a configured gem, this will output helpful material and exit ...
-            require File.expand_path(File.dirname(__FILE__) + "/../../config/environment")
+            require File.expand_path(File.join(File.dirname(__FILE__),"..","..","config","environment"))
 
             # ... otherwise, do this:
             raise <<-MSG
