@@ -6,7 +6,7 @@ module Spec
       # Model examples use Spec::Rails::Example::ModelExampleGroup, which
       # provides support for fixtures and some custom expectations via extensions
       # to ActiveRecord::Base.
-      class ModelExampleGroup < ActiveSupport::TestCase
+      class ModelExampleGroup < ActiveRecord::TestCase
         Spec::Example::ExampleGroupFactory.register(:model, self)
       end
     end
