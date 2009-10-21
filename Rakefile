@@ -3,6 +3,7 @@ gem 'hoe', '>=2.0.0'
 require 'hoe'
 
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__),"..","rspec","lib")))
+$:.unshift(File.expand_path(File.join(File.dirname(__FILE__),"lib")))
 
 require 'spec/rails/version'
 require 'spec/rake/spectask'
