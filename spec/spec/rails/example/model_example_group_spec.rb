@@ -6,9 +6,16 @@ module Spec
       describe ModelExampleGroup do
         accesses_configured_helper_methods
         
-        it "derives from ActiveRecord::TestCase" do
-          group = describe("foo", :type => :model) do; end
-          group.ancestors.should include(ActiveRecord::TestCase)
+        if defined?(ActiveRecord::TestCase)
+          it "derives from ActiveRecord::TestCase" do
+            group = describe("foo", :type => :model) do; end
+            group.ancestors.should include(ActiveRecord::TestCase)
+          end
+        else
+          it "derives from ActiveSupport::TestCase" do
+            group = describe("foo", :type => :model) do; end
+            group.ancestors.should include(ActiveSupport::TestCase)
+          end
         end
         
         it "clears its name from the description" do
