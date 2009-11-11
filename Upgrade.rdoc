@@ -1,4 +1,4 @@
-= Upgrade to 1.2.8 (in git)
+= Upgrade to 1.2.8/1.2.9
 
 == What's new
 
