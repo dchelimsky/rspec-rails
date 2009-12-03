@@ -24,6 +24,9 @@ describe "mock_model" do
     it "should not say it instance_of? if it isn't, even if it's ancestor is" do
       @model.instance_of?(MockableModel).should be(false)
     end
+    it "should say it is not destroyed" do
+      @model.destroyed?(SubMockableModel).should be(false)
+    end
   end
 
   describe "with params" do

@@ -20,6 +20,7 @@
     * no error if either action or template exist
     * error if neither exist
     * Closes #888.
+  * mock_model stubs destroyed? to return false
 
 * removals
   * spec_server has been removed in favor of spork.
