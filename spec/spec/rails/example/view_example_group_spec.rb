@@ -176,38 +176,35 @@ describe "A view", :type => :view do
     session[:key] = "session"
     params[:key] = "params"
     flash[:key] = "flash"
+    flash.now[:now_key] = "flash.now"
     render "view_spec/accessor"
   end
 
-  it "should use the template as the implicit subject" do
+  it "uses the template as the implicit subject" do
     subject.should == template
   end
 
-  describe "with a specified subject" do
-    subject { 'specified' }
-
-    it "should use the specified subject" do
-      subject.should == 'specified'
-    end
-  end
-
-  it "should have access to session data" do
+  it "has access to session data" do
     response.should have_tag("div#session", "session")
   end
 
-  specify "should have access to params data" do
+  it "has access to params data" do
     response.should have_tag("div#params", "params")
   end
 
-  it "should have access to flash data" do
+  it "has access to flash" do
     response.should have_tag("div#flash", "flash")
   end
 
-  it "should have a controller param" do
+  it "has access to flash.now" do
+    response.should have_tag("div#flash_now", "flash.now")
+  end
+
+  it "has a controller param" do
     response.should have_tag("div#controller", "view_spec")
   end
   
-  it "should have an action param" do
+  it "has an action param" do
     response.should have_tag("div#action", "accessor")
   end
 end
