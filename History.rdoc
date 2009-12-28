@@ -1,7 +1,8 @@
-=== Version 1.2.10 (in git)
+=== development (in git)
 
 * enhancements
   * use stub() instead of stub!() in generators
+  * generate gem config in test.rb with 'script/generate rspec'
 
 === Version 1.2.9 / 2009-10-05
 

@@ -24,6 +24,24 @@ file so that it can be updated and you can manually restore your changes.
 HELPFUL_INSTRUCTIONS
     end
     Dir.mkdir('lib/tasks') unless File.directory?('lib/tasks')
+    
+    test_env = 'config/environments/test.rb'
+    contents = File.read(test_env)
+    unless contents =~ /config\.gem\s+(\"|\')rspec/m
+      puts "Configuring rspec and rspec-rails gems in #{test_env} ..."
+      puts
+      require File.expand_path('../../../lib/spec/rails/version.rb', __FILE__)
+      config_code = <<-EOF
+config.gem 'rspec',       :version => '>= #{Spec::Rails::VERSION::STRING}', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec'))
+config.gem 'rspec-rails', :version => '>= #{Spec::Rails::VERSION::STRING}', :lib => false unless File.directory?(File.join(Rails.root, 'vendor/plugins/rspec-rails'))
+EOF
+      File.open(test_env, "wb") do |f|
+        f.puts contents
+        f.puts
+        f.puts config_code
+      end
+    end
+
     super
   end
 
