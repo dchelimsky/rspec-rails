@@ -38,7 +38,7 @@ module Spec
           @controller.__send__ :flash
         end
 
-        # Provides acces to the session hash. Use this before or after
+        # Provides access to the session hash. Use this before or after
         # rendering a view, calling a helper or calling a controller action.
         def session
           request.session
