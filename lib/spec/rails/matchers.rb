@@ -1,12 +1,4 @@
 dir = File.dirname(__FILE__)
-require 'spec/rails/matchers/ar_be_valid'
-require 'spec/rails/matchers/assert_select'
-require 'spec/rails/matchers/change'
-require 'spec/rails/matchers/have_text'
-require 'spec/rails/matchers/include_text'
-require 'spec/rails/matchers/redirect_to'
-require 'spec/rails/matchers/route_to'
-require 'spec/rails/matchers/render_template'
 
 module Spec
   module Rails
@@ -31,3 +23,12 @@ module Spec
     end
   end
 end
+
+require 'spec/rails/matchers/ar_be_valid'
+require 'spec/rails/matchers/assert_select'
+require 'spec/rails/matchers/change'
+require 'spec/rails/matchers/have_text'
+require 'spec/rails/matchers/include_text'
+require 'spec/rails/matchers/redirect_to'
+require 'spec/rails/matchers/route_to'
+require 'spec/rails/matchers/render_template'
