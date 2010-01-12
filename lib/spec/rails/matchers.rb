@@ -1,5 +1,3 @@
-dir = File.dirname(__FILE__)
-
 module Spec
   module Rails
     # Spec::Rails::Expectations::Matchers provides several expectation matchers
