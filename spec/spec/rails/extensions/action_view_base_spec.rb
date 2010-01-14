@@ -9,6 +9,11 @@ describe ActionView::Base, "with RSpec extensions:", :type => :view do
       template.render :partial => "name"
     end
   
+    it "should not raise when render with local assignments has been received" do
+      template.should_receive(:render).with('name', :param => 1)
+      template.render 'name', :param => 1
+    end
+    
     it "should raise when render has NOT been received" do
       template.should_receive(:render).with(:partial => "name")
       lambda {
