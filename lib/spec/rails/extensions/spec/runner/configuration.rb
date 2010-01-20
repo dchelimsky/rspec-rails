@@ -30,6 +30,7 @@ if defined?(ActiveRecord::Base)
         end
         def fixture_path=(path)
           ActiveSupport::TestCase.fixture_path = path
+          ActionController::IntegrationTest.fixture_path = path
         end
 
         def global_fixtures
