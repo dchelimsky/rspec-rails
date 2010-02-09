@@ -1,8 +1,10 @@
-=== Maintenance (in git)
+=== Version 1.3.3 / 
 
 * bug fix
   * support message expectation on template.render with locals (Sergey
     Nebolsin). Closes #941.
+  * helper instance variable no longer persists across examples
+    (alex rothenberg). Closes #627.
 
 === Version 1.3.2 / 2010-01-13
 
