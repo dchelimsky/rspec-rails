@@ -56,7 +56,7 @@ module Spec
           end
           
           def helper
-            @helper_object ||= returning HelperObject.new do |helper_object|
+            returning HelperObject.new do |helper_object|
               if @helper_being_described.nil?
                 if described_type.class == Module
                   helper_object.extend described_type
@@ -87,11 +87,7 @@ module Spec
         #   end
         #
         def helper
-          self.class.helper
-        end
-        
-        def reset_helper_object
-          self.class.instance_variable_set(:@helper_object,nil)
+          @helper ||= self.class.helper
         end
         
         def orig_assigns
@@ -114,8 +110,6 @@ module Spec
           @output_buffer = ""
           @template = helper
           ActionView::Helpers::AssetTagHelper::reset_javascript_include_default
-
-          reset_helper_object
 
           helper.session = session
           helper.request = @request
