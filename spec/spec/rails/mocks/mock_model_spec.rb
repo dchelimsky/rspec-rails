@@ -27,6 +27,9 @@ describe "mock_model" do
     it "should say it is not destroyed" do
       @model.destroyed?(SubMockableModel).should be(false)
     end
+    it "should say it is not marked_for_destruction" do
+      @model.marked_for_destruction?.should be(false)
+    end
   end
 
   describe "with params" do
