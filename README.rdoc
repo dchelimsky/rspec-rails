@@ -13,6 +13,9 @@ Behaviour Driven Development for Ruby on Rails.
 rspec-rails is an RSpec extension that allows you to drive the development of
 Ruby on Rails applications with RSpec.
 
+This is the repository for rspec-rails-1.x. If you're looking
+for rspec-rails-2 for rails-3, see http://github.com/rspec/rspec-rails.
+
 == FEATURES:
 
 * Use RSpec to independently specify Rails Models, Views, Controllers and Helpers
