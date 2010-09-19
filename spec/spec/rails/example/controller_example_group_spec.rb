@@ -8,7 +8,7 @@ require File.join(File.dirname(__FILE__), "/shared_routing_example_group_example
     integrate_views if mode == 'integration'
 
     accesses_configured_helper_methods
-    include RoutingExampleGroupSpec
+    it_should_behave_like "a routing example"
 
     describe "with an implicit subject" do
       it "uses the controller" do

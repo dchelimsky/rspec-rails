@@ -1,7 +1,7 @@
 class CustomRouteSpecController < ActionController::Base; end
 class RspecOnRailsSpecsController < ActionController::Base; end
 
-share_as :RoutingExampleGroupSpec do
+shared_examples_for "a routing example" do
   describe "using backward compatible route_for()" do
     it "translates GET-only paths to be explicit" do
       self.should_receive(:assert_routing).with(hash_including(:method => :get), anything, {}, anything)
@@ -93,7 +93,7 @@ share_as :RoutingExampleGroupSpec do
   end
 end
 
-share_as :BeRoutableExampleGroupSpec do
+shared_examples_for "a be routable spec" do
   describe "using should_not be_routable()" do
     it "passes for a bad route" do
       { :put => "/rspec_on_rails_specs/bad_route/37" }.
@@ -151,7 +151,7 @@ share_as :BeRoutableExampleGroupSpec do
   end
 end
 
-share_as :RouteToExampleGroupSpec do
+shared_examples_for "a route to spec" do
   describe "using should[_not] route_to()" do
     it "supports existing routes" do
       { :get => "/controller_spec/some_action" }.
