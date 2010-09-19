@@ -56,7 +56,7 @@ module Spec
           end
           
           def helper
-            returning HelperObject.new do |helper_object|
+            HelperObject.new.tap do |helper_object|
               if @helper_being_described.nil?
                 if described_type.class == Module
                   helper_object.extend described_type

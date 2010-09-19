@@ -1,6 +1,9 @@
 === Version 1.3.3 / (in git)
 
-* bug fix
+* enhancements
+  * replace use of 'returning' with 'tap'
+
+* bug fixes
   * support message expectation on template.render with locals (Sergey
     Nebolsin). Closes #941.
   * helper instance variable no longer persists across examples

@@ -98,7 +98,7 @@ module Spec
       #   end
       def stub_model(model_class, stubs={})
         stubs = {:id => next_id}.merge(stubs)
-        returning model_class.new do |model|
+        model_class.new.tap do |model|
           model.id = stubs.delete(:id)
           model.extend ModelStubber
           stubs.each do |k,v|
