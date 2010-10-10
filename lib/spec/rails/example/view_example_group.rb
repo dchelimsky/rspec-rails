@@ -72,6 +72,10 @@ module Spec
         after  {ensure_that_base_view_path_is_not_set_across_example_groups}
 
         def ensure_that_flash_and_session_work_properly #:nodoc:
+          # For some reason which I do not yet understand, when running
+          # examples with rake on ruby-1.9.2, the @controller is not defined.
+          @controller ||= ViewExampleGroupController.new
+
           @controller.class.__send__ :public, :flash
           @controller.__send__ :initialize_template_class, @response
           @controller.__send__ :assign_shortcuts, @request, @response
