@@ -1,3 +1,10 @@
+=== Version 1.3.4 / 2011-04-11
+
+* No new code
+* Depends on rspec ~> 1.3.2
+  * rspec-rails 1.3.3 depended on rspec-1.3.1 explicitly, so this
+    release allows you to upgrade to rspec-1.3.2 with rspec-rails.
+
 === Version 1.3.3 / 2010-10-09
 
 * enhancements
