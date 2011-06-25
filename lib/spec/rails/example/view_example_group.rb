@@ -128,8 +128,8 @@ module Spec
         # == Examples
         #
         #   render('/people/list')
-        #   render('/people/list', :helper => MyHelper)
-        #   render('/people/list', :helpers => [MyHelper, MyOtherHelper])
+        #   render('/people/list', :helper => My)
+        #   render('/people/list', :helpers => [My, MyOther])
         #   render(:partial => '/people/_address')
         #   render(:inline => "<% custom_helper 'argument', 'another argument' %>")
         #
