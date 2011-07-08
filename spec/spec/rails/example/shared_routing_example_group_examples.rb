@@ -114,6 +114,10 @@ shared_examples_for "a be routable spec" do
           self.stub!( :assert_recognizes ).and_return { raise ::Test::Unit::AssertionFailedError, "<{a}> did not match <{}>" }
           { :get => "/rspec_on_rails_spec/arguably_bad_route" }.should be_routable
         end
+        it "should be_routable even when Test::Unit::AssertionFailedError has line breaks in the message" do
+          self.stub!( :assert_recognizes ).and_return { raise ::Test::Unit::AssertionFailedError, "<{a => b,\nc => d}> did not match <{}>" }
+          { :get => "/rspec_on_rails_spec/arguably_bad_route" }.should be_routable
+        end
         it "should re-raise on unusual Test::Unit::AssertionFailedError" do
           self.stub!( :assert_recognizes ).and_return { raise ::Test::Unit::AssertionFailedError, "some other message" }
           expect { { :get => "/rspec_on_rails_spec/weird_case_route/" }.should be_routable }.
