@@ -101,7 +101,7 @@ module Spec
             false
           rescue ::Test::Unit::AssertionFailedError => e
             # the second thingy will always be "<{}>" becaues of the way we called assert_recognizes({}...) above.
-            e.to_s =~ /<(.*)> did not match <\{\}>/ and @actual_place = $1 or raise
+            e.to_s =~ /<(.*)> did not match <\{\}>/m and @actual_place = $1 or raise
             true
           end
         end
