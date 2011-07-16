@@ -3,7 +3,7 @@ $LOAD_PATH.unshift '../../../'
 $LOAD_PATH.unshift 'spec/resources/controllers'
 $LOAD_PATH.unshift 'spec/resources/helpers'
 
-require '../../../spec/spec_helper'
+require File.expand_path('../../../../../spec/spec_helper', __FILE__)
 
 require 'spec/resources/controllers/application'
 require 'spec/resources/controllers/render_spec_controller'

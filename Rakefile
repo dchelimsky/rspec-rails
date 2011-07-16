@@ -10,5 +10,6 @@ require 'cucumber/rake/task'
 
 Cucumber::Rake::Task.new
 
-task :default => [:features]
+Spec::Rake::SpecTask.new
 
+task :default => [:features]

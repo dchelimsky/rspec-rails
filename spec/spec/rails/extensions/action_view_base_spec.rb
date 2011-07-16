@@ -64,7 +64,7 @@ describe ActionView::Base, "with RSpec extensions:", :type => :view do
       it "SHOULD raise when stubbing and helper_method has been received with different options" do
         template.send(method, :helper_method).with(:arg => "value")
         expect { template.helper_method :arg => "other_value" }.
-          to raise_error(/undefined .* `helper_method'/)
+          to raise_error(/received :helper_method with unexpected arguments/)
       end
     
       it "should not raise when stubbing and expecting and helper_method has been received" do
