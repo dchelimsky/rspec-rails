@@ -24,9 +24,7 @@ rescue MissingSourceFile
   module Spec
     module Rake
       class SpecTask
-        if defined?(::Rake::DSL)
-          include ::Rake::DSL
-        end
+        include ::Rake::DSL if defined?(::Rake::DSL)
 
         def initialize(name)
           task name do
