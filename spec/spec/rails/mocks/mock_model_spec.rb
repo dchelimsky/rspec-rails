@@ -30,6 +30,9 @@ describe "mock_model" do
     it "should say it is not marked_for_destruction" do
       @model.marked_for_destruction?.should be(false)
     end
+    it "should say if it is valid" do
+      @model.valid?.should be(true)
+    end
   end
 
   describe "with params" do
