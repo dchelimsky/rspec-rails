@@ -195,6 +195,7 @@ MESSAGE
           def record_render(opts)
             return unless @_rendered
             @_rendered[:template] ||= opts[:file] if opts[:file]
+            @_rendered[:template] ||= opts[:file_in_view_path] if opts[:file_in_view_path]
             @_rendered[:partials][opts[:partial]] += 1 if opts[:partial]
           end
 
