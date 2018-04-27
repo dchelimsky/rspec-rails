@@ -1,3 +1,12 @@
+= rspec-rails 1.x for Rails 2.3 LTS
+
+This is a maintenance fork of `rspec-rails` 1.x to be used with {Rails 2.3 LTS}[https://railslts.com].
+
+There is also a {maintenance fork of `rspec-rails` 2.x}[https://github.com/makandra/rspec-rails/tree/2-14-lts] to be used with {Rails 3.2 LTS}(https://railslts.com).
+
+If you are looking for modern versions of this gem, see http://github.com/rspec/rspec-rails.
+
+
 = Spec::Rails
 
 * http://rspec.info
@@ -12,9 +21,6 @@ Behaviour Driven Development for Ruby on Rails.
 
 rspec-rails is an RSpec extension that allows you to drive the development of
 Ruby on Rails applications with RSpec.
-
-This is the repository for rspec-rails-1.x. If you're looking
-for rspec-rails-2 for rails-3, see http://github.com/rspec/rspec-rails.
 
 == FEATURES:
 
